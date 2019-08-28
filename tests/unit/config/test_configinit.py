@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
-# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.config.configinit."""
+"""Tests for glimpsebrowser.config.configinit."""
 
 import os
 import sys
@@ -25,10 +25,10 @@ import unittest.mock
 
 import pytest
 
-from qutebrowser import qutebrowser
-from qutebrowser.config import (config, configexc, configfiles, configinit,
+from glimpsebrowser import glimpsebrowser
+from glimpsebrowser.config import (config, configexc, configfiles, configinit,
                                 configdata, configtypes)
-from qutebrowser.utils import objreg, usertypes
+from glimpsebrowser.utils import objreg, usertypes
 from helpers import utils
 
 
@@ -231,7 +231,7 @@ class TestEarlyInit:
         # Only fonts.monospace customized
         ([('fonts.monospace', '"Comic Sans MS"')], 10, 'Comic Sans MS'),
         # fonts.monospace and font settings customized
-        # https://github.com/qutebrowser/qutebrowser/issues/3096
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/3096
         ([('fonts.monospace', '"Comic Sans MS"'),
           ('fonts.tabs', '12pt monospace'),
           ('fonts.keyhint', '12pt monospace')], 12, 'Comic Sans MS'),
@@ -241,7 +241,7 @@ class TestEarlyInit:
                                   method, settings, size, family):
         """Ensure setting fonts.monospace at init works properly.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/2973
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/2973
         """
         if method == 'temp':
             args.temp_settings = settings
@@ -269,7 +269,7 @@ class TestEarlyInit:
     def test_monospace_fonts_later(self, init_patch, args):
         """Ensure setting fonts.monospace after init works properly.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/2973
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/2973
         """
         configinit.early_init(args)
         changed_options = []
@@ -288,7 +288,7 @@ class TestEarlyInit:
     def test_setting_monospace_fonts_family(self, init_patch, args):
         """Make sure setting fonts.monospace after a family works.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/3130
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/3130
         """
         configinit.early_init(args)
         config.instance.set_str('fonts.web.family.standard', '')
@@ -333,7 +333,7 @@ def test_late_init(init_patch, monkeypatch, fake_save_manager, args,
         err = configexc.ConfigErrorDesc("Error text", Exception("Exception"))
         errs = configexc.ConfigFileErrors("config.py", [err])
         monkeypatch.setattr(configinit, '_init_errors', errs)
-    msgbox_mock = mocker.patch('qutebrowser.config.configinit.msgbox.msgbox',
+    msgbox_mock = mocker.patch('glimpsebrowser.config.configinit.msgbox.msgbox',
                                autospec=True)
 
     configinit.late_init(fake_save_manager)
@@ -360,7 +360,7 @@ class TestQtArgs:
 
         Monkey-patches .exit() of the argparser so it doesn't exit on errors.
         """
-        parser = qutebrowser.get_argparser()
+        parser = glimpsebrowser.get_argparser()
         mocker.patch.object(parser, 'exit', side_effect=Exception)
         return parser
 

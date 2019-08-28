@@ -1,44 +1,44 @@
 Tab API
 =======
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractTab()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractTab()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractAction()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractAction()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractPrinting()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractPrinting()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractSearch()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractSearch()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractZoom()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractZoom()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractCaret()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractCaret()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractScroller()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractScroller()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractHistory()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractHistory()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractElements()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractElements()
    :members:
 
-.. autoclass:: qutebrowser.browser.browsertab.AbstractAudio()
+.. autoclass:: glimpsebrowser.browser.browsertab.AbstractAudio()
    :members:
 
 Web element API
 ===============
 
-.. autoclass:: qutebrowser.browser.webelem.AbstractWebElement
+.. autoclass:: glimpsebrowser.browser.webelem.AbstractWebElement
    :members:
 
-.. autoclass:: qutebrowser.browser.webelem.Error
+.. autoclass:: glimpsebrowser.browser.webelem.Error
    :members:
 
-.. autoclass:: qutebrowser.browser.webelem.OrphanedError
+.. autoclass:: glimpsebrowser.browser.webelem.OrphanedError
    :members:

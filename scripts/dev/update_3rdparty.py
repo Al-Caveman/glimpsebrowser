@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2015 Daniel Schadt
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Update all third-party-modules."""
 
@@ -32,7 +32,7 @@ import sys
 sys.path.insert(
     0, os.path.join(os.path.dirname(__file__), os.pardir, os.pardir))
 from scripts import dictcli
-from qutebrowser.config import configdata
+from glimpsebrowser.config import configdata
 
 
 def download_nsis_plugins():
@@ -103,7 +103,7 @@ def update_pdfjs(target_version=None):
 
     os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           '..', '..'))
-    target_path = os.path.join('qutebrowser', '3rdparty', 'pdfjs')
+    target_path = os.path.join('glimpsebrowser', '3rdparty', 'pdfjs')
     print("=> Downloading pdf.js {}".format(version))
     try:
         (archive_path, _headers) = urllib.request.urlretrieve(url)

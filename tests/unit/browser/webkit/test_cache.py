@@ -1,29 +1,29 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2015-2018 lamarpavel
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import pytest
 from PyQt5.QtCore import QUrl, QDateTime
 from PyQt5.QtNetwork import QNetworkDiskCache, QNetworkCacheMetaData
 
-from qutebrowser.browser.webkit import cache
-from qutebrowser.utils import qtutils
+from glimpsebrowser.browser.webkit import cache
+from glimpsebrowser.utils import qtutils
 
 
 pytestmark = pytest.mark.skipif(
@@ -68,7 +68,7 @@ def test_cache_size_leq_max_cache_size(config_stub, tmpdir):
     assert disk_cache.maximumCacheSize() == limit
 
     preload_cache(disk_cache, 'http://www.example.com/')
-    preload_cache(disk_cache, 'http://qutebrowser.org')
+    preload_cache(disk_cache, 'http://glimpsebrowser.org')
     preload_cache(disk_cache, 'http://foo.xxx')
     preload_cache(disk_cache, 'http://bar.net')
     assert disk_cache.expire() < limit
@@ -78,7 +78,7 @@ def test_cache_size_leq_max_cache_size(config_stub, tmpdir):
 
 def test_cache_existing_metadata_file(tmpdir, disk_cache):
     """Test querying existing meta data file from activated cache."""
-    url = 'http://qutebrowser.org'
+    url = 'http://glimpsebrowser.org'
     content = b'foobar'
 
     metadata = QNetworkCacheMetaData()
@@ -104,14 +104,14 @@ def test_cache_nonexistent_metadata_file(disk_cache):
 
 def test_cache_get_nonexistent_data(disk_cache):
     """Test querying some data that was never inserted."""
-    preload_cache(disk_cache, 'https://qutebrowser.org')
+    preload_cache(disk_cache, 'https://glimpsebrowser.org')
 
-    assert disk_cache.data(QUrl('http://qutebrowser.org')) is None
+    assert disk_cache.data(QUrl('http://glimpsebrowser.org')) is None
 
 
 def test_cache_insert_data(disk_cache):
     """Test if entries inserted into the cache are actually there."""
-    url = 'http://qutebrowser.org'
+    url = 'http://glimpsebrowser.org'
     content = b'foobar'
     assert disk_cache.cacheSize() == 0
 
@@ -123,7 +123,7 @@ def test_cache_insert_data(disk_cache):
 
 def test_cache_remove_data(disk_cache):
     """Test if a previously inserted entry can be removed from the cache."""
-    url = 'http://qutebrowser.org'
+    url = 'http://glimpsebrowser.org'
     preload_cache(disk_cache, url)
     assert disk_cache.cacheSize() > 0
 
@@ -144,7 +144,7 @@ def test_cache_clear_activated(disk_cache):
 
 def test_cache_metadata(disk_cache):
     """Ensure that DiskCache.metaData() returns exactly what was inserted."""
-    url = 'http://qutebrowser.org'
+    url = 'http://glimpsebrowser.org'
     metadata = QNetworkCacheMetaData()
     metadata.setUrl(QUrl(url))
     assert metadata.isValid()
@@ -157,7 +157,7 @@ def test_cache_metadata(disk_cache):
 
 def test_cache_update_metadata(disk_cache):
     """Test updating the meta data for an existing cache entry."""
-    url = 'http://qutebrowser.org'
+    url = 'http://glimpsebrowser.org'
     preload_cache(disk_cache, url, b'foo')
     assert disk_cache.cacheSize() > 0
 
@@ -173,10 +173,10 @@ def test_cache_full(tmpdir):
     disk_cache = QNetworkDiskCache()
     disk_cache.setCacheDirectory(str(tmpdir))
 
-    url = 'http://qutebrowser.org'
+    url = 'http://glimpsebrowser.org'
     content = b'cutebowser'
     preload_cache(disk_cache, url, content)
-    url2 = 'https://qutebrowser.org'
+    url2 = 'https://glimpsebrowser.org'
     content2 = b'ohmycert'
     preload_cache(disk_cache, url2, content2)
 

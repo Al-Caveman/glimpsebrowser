@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test mhtml downloads based on sample files."""
 
@@ -26,7 +26,7 @@ import collections
 
 import pytest
 
-from qutebrowser.utils import qtutils
+from glimpsebrowser.utils import qtutils
 
 
 def collect_tests():
@@ -38,10 +38,10 @@ def collect_tests():
 
 def normalize_line(line):
     line = line.rstrip('\n')
-    line = re.sub('boundary="-+(=_qute|MultipartBoundary)-[0-9a-zA-Z-]+"',
-                  'boundary="---=_qute-UUID"', line)
-    line = re.sub('^-+(=_qute|MultipartBoundary)-[0-9a-zA-Z-]+$',
-                  '-----=_qute-UUID', line)
+    line = re.sub('boundary="-+(=_glimpse|MultipartBoundary)-[0-9a-zA-Z-]+"',
+                  'boundary="---=_glimpse-UUID"', line)
+    line = re.sub('^-+(=_glimpse|MultipartBoundary)-[0-9a-zA-Z-]+$',
+                  '-----=_glimpse-UUID', line)
     line = re.sub(r'localhost:\d{1,5}', 'localhost:(port)', line)
     if line.startswith('Date: '):
         line = 'Date: today'
@@ -67,7 +67,7 @@ def normalize_line(line):
 
 def normalize_whole(s, webengine):
     if qtutils.version_check('5.12', compiled=False) and webengine:
-        s = s.replace('\n\n-----=_qute-UUID', '\n-----=_qute-UUID')
+        s = s.replace('\n\n-----=_glimpse-UUID', '\n-----=_glimpse-UUID')
     return s
 
 
@@ -126,16 +126,16 @@ def _test_mhtml_requests(test_dir, test_path, server):
 
 
 @pytest.mark.parametrize('test_name', collect_tests())
-def test_mhtml(request, test_name, download_dir, quteproc, server):
-    quteproc.set_setting('downloads.location.directory', download_dir.location)
-    quteproc.set_setting('downloads.location.prompt', 'false')
+def test_mhtml(request, test_name, download_dir, glimpseproc, server):
+    glimpseproc.set_setting('downloads.location.directory', download_dir.location)
+    glimpseproc.set_setting('downloads.location.prompt', 'false')
 
     test_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                             'data', 'downloads', 'mhtml', test_name)
     test_path = 'data/downloads/mhtml/{}'.format(test_name)
 
     url_path = '{}/{}.html'.format(test_path, test_name)
-    quteproc.open_path(url_path)
+    glimpseproc.open_path(url_path)
 
     download_dest = os.path.join(download_dir.location,
                                  '{}-downloaded.mht'.format(test_name))
@@ -146,8 +146,8 @@ def test_mhtml(request, test_name, download_dir, quteproc, server):
 
     # Discard all requests that were necessary to display the page
     server.clear_data()
-    quteproc.send_cmd(':download --mhtml --dest "{}"'.format(download_dest))
-    quteproc.wait_for(category='downloads',
+    glimpseproc.send_cmd(':download --mhtml --dest "{}"'.format(download_dest))
+    glimpseproc.wait_for(category='downloads',
                       message='File successfully written.')
 
     suffix = '-webengine' if request.config.webengine else ''

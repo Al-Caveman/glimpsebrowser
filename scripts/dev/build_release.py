@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Build a new release."""
 
@@ -42,7 +42,7 @@ except ImportError:
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir,
                                 os.pardir))
 
-import qutebrowser
+import glimpsebrowser
 from scripts import utils
 from scripts.dev import update_3rdparty
 
@@ -100,14 +100,14 @@ def _filter_whitelisted(output, patterns):
 
 
 def smoke_test(executable):
-    """Try starting the given qutebrowser executable."""
+    """Try starting the given glimpsebrowser executable."""
     stdout_whitelist = []
     stderr_whitelist = [
         # PyInstaller debug output
         r'\[.*\] PyInstaller Bootloader .*',
         r'\[.*\] LOADER: .*',
 
-        # https://github.com/qutebrowser/qutebrowser/issues/4919
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/4919
         (r'objc\[.*\]: .* One of the two will be used\. '
          r'Which one is undefined\.'),
         (r'QCoreApplication::applicationDirPath: Please instantiate the '
@@ -127,7 +127,7 @@ def smoke_test(executable):
 
 def patch_mac_app():
     """Patch .app to use our Info.plist and save some space."""
-    app_path = os.path.join('dist', 'qutebrowser.app')
+    app_path = os.path.join('dist', 'glimpsebrowser.app')
 
     # Patch Info.plist - pyinstaller's options are too limiting
     plist_path = os.path.join(app_path, 'Contents', 'Info.plist')
@@ -158,8 +158,8 @@ def patch_mac_app():
 
 
 INFO_PLIST_UPDATES = {
-    'CFBundleVersion': qutebrowser.__version__,
-    'CFBundleShortVersionString': qutebrowser.__version__,
+    'CFBundleVersion': glimpsebrowser.__version__,
+    'CFBundleShortVersionString': glimpsebrowser.__version__,
     'NSSupportsAutomaticGraphicsSwitching': True,
     'NSHighResolutionCapable': True,
     'CFBundleURLTypes': [{
@@ -203,8 +203,8 @@ def build_mac():
     utils.print_title("Building .dmg")
     subprocess.run(['make', '-f', 'scripts/dev/Makefile-dmg'], check=True)
 
-    dmg_name = 'qutebrowser-{}.dmg'.format(qutebrowser.__version__)
-    os.rename('qutebrowser.dmg', dmg_name)
+    dmg_name = 'glimpsebrowser-{}.dmg'.format(glimpsebrowser.__version__)
+    os.rename('glimpsebrowser.dmg', dmg_name)
 
     utils.print_title("Running smoke test")
 
@@ -213,8 +213,8 @@ def build_mac():
             subprocess.run(['hdiutil', 'attach', dmg_name,
                             '-mountpoint', tmpdir], check=True)
             try:
-                binary = os.path.join(tmpdir, 'qutebrowser.app', 'Contents',
-                                      'MacOS', 'qutebrowser')
+                binary = os.path.join(tmpdir, 'glimpsebrowser.app', 'Contents',
+                                      'MacOS', 'glimpsebrowser')
                 smoke_test(binary)
             finally:
                 time.sleep(5)
@@ -271,11 +271,11 @@ def build_windows():
     python_x64 = _get_windows_python_path(x64=True)
     python_x86 = _get_windows_python_path(x64=False)
 
-    out_pyinstaller = os.path.join('dist', 'qutebrowser')
+    out_pyinstaller = os.path.join('dist', 'glimpsebrowser')
     out_32 = os.path.join('dist',
-                          'qutebrowser-{}-x86'.format(qutebrowser.__version__))
+                          'glimpsebrowser-{}-x86'.format(glimpsebrowser.__version__))
     out_64 = os.path.join('dist',
-                          'qutebrowser-{}-x64'.format(qutebrowser.__version__))
+                          'glimpsebrowser-{}-x64'.format(glimpsebrowser.__version__))
 
     artifacts = []
 
@@ -296,21 +296,21 @@ def build_windows():
     patch_windows(out_64, x64=True)
 
     utils.print_title("Running 32bit smoke test")
-    smoke_test(os.path.join(out_32, 'qutebrowser.exe'))
+    smoke_test(os.path.join(out_32, 'glimpsebrowser.exe'))
     utils.print_title("Running 64bit smoke test")
-    smoke_test(os.path.join(out_64, 'qutebrowser.exe'))
+    smoke_test(os.path.join(out_64, 'glimpsebrowser.exe'))
 
     utils.print_title("Building installers")
     subprocess.run(['makensis.exe',
-                    '/DVERSION={}'.format(qutebrowser.__version__),
-                    'misc/nsis/qutebrowser.nsi'], check=True)
+                    '/DVERSION={}'.format(glimpsebrowser.__version__),
+                    'misc/nsis/glimpsebrowser.nsi'], check=True)
     subprocess.run(['makensis.exe',
                     '/DX86',
-                    '/DVERSION={}'.format(qutebrowser.__version__),
-                    'misc/nsis/qutebrowser.nsi'], check=True)
+                    '/DVERSION={}'.format(glimpsebrowser.__version__),
+                    'misc/nsis/glimpsebrowser.nsi'], check=True)
 
-    name_32 = 'qutebrowser-{}-win32.exe'.format(qutebrowser.__version__)
-    name_64 = 'qutebrowser-{}-amd64.exe'.format(qutebrowser.__version__)
+    name_32 = 'glimpsebrowser-{}-win32.exe'.format(glimpsebrowser.__version__)
+    name_64 = 'glimpsebrowser-{}-amd64.exe'.format(glimpsebrowser.__version__)
 
     artifacts += [
         (os.path.join('dist', name_32),
@@ -322,16 +322,16 @@ def build_windows():
     ]
 
     utils.print_title("Zipping 32bit standalone...")
-    name = 'qutebrowser-{}-windows-standalone-win32'.format(
-        qutebrowser.__version__)
+    name = 'glimpsebrowser-{}-windows-standalone-win32'.format(
+        glimpsebrowser.__version__)
     shutil.make_archive(name, 'zip', 'dist', os.path.basename(out_32))
     artifacts.append(('{}.zip'.format(name),
                       'application/zip',
                       'Windows 32bit standalone'))
 
     utils.print_title("Zipping 64bit standalone...")
-    name = 'qutebrowser-{}-windows-standalone-amd64'.format(
-        qutebrowser.__version__)
+    name = 'glimpsebrowser-{}-windows-standalone-amd64'.format(
+        glimpsebrowser.__version__)
     shutil.make_archive(name, 'zip', 'dist', os.path.basename(out_64))
     artifacts.append(('{}.zip'.format(name),
                       'application/zip',
@@ -371,7 +371,7 @@ def build_sdist():
         utils.print_subtitle(ext)
         print('\n'.join(files))
 
-    filename = 'qutebrowser-{}.tar.gz'.format(qutebrowser.__version__)
+    filename = 'glimpsebrowser-{}.tar.gz'.format(glimpsebrowser.__version__)
     artifacts = [
         (os.path.join('dist', filename), 'application/gzip', 'Source release'),
         (os.path.join('dist', filename + '.asc'), 'application/pgp-signature',
@@ -409,7 +409,7 @@ def github_upload(artifacts, tag):
 
     token = read_github_token()
     gh = github3.login(token=token)
-    repo = gh.repository('qutebrowser', 'qutebrowser')
+    repo = gh.repository('glimpsebrowser', 'glimpsebrowser')
 
     release = None  # to satisfy pylint
     for release in repo.releases():
@@ -461,7 +461,7 @@ def main():
         read_github_token()
 
     if args.no_asciidoc:
-        os.makedirs(os.path.join('qutebrowser', 'html', 'doc'), exist_ok=True)
+        os.makedirs(os.path.join('glimpsebrowser', 'html', 'doc'), exist_ok=True)
     else:
         run_asciidoc2html(args)
 
@@ -479,7 +479,7 @@ def main():
         utils.print_title("Press enter to release...")
         input()
 
-        version_tag = "v" + qutebrowser.__version__
+        version_tag = "v" + glimpsebrowser.__version__
 
         github_upload(artifacts, version_tag)
         if upload_to_pypi:

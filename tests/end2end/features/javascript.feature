@@ -35,7 +35,7 @@ Feature: Javascript stuff
         And the following tabs should be open:
             - data/javascript/window_open.html (active)
 
-    # https://github.com/qutebrowser/qutebrowser/issues/906
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/906
 
     @qtwebengine_skip
     Scenario: Closing a JS window twice (issue 906) - qtwebkit
@@ -86,7 +86,7 @@ Feature: Javascript stuff
 
     ## webelement issues (mostly with QtWebEngine)
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2569
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2569
     Scenario: Clicking on form element with tagName child
         When I open data/issue2569.html
         And I run :click-element id tagnameform
@@ -121,11 +121,11 @@ Feature: Javascript stuff
     # when it's hidden.
     # Then, "the window sizes should be the same" uses :jseval to set the size
     # when it's shown, and compares the two.
-    # https://github.com/qutebrowser/qutebrowser/issues/1190
-    # https://github.com/qutebrowser/qutebrowser/issues/2495
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1190
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2495
 
     # Currently broken on Windows and on Qt 5.12
-    # https://github.com/qutebrowser/qutebrowser/issues/4230
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/4230
     @posix @qt<5.12
     Scenario: Checking visible/invisible window size
         When I run :tab-only

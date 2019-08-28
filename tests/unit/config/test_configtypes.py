@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.config.configtypes."""
+"""Tests for glimpsebrowser.config.configtypes."""
 
 import re
 import json
@@ -33,11 +33,11 @@ from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtNetwork import QNetworkProxy
 
-from qutebrowser.misc import objects
-from qutebrowser.config import configtypes, configexc, configutils
-from qutebrowser.utils import debug, utils, qtutils, urlmatch
-from qutebrowser.browser.network import pac
-from qutebrowser.keyinput import keyutils
+from glimpsebrowser.misc import objects
+from glimpsebrowser.config import configtypes, configexc, configutils
+from glimpsebrowser.utils import debug, utils, qtutils, urlmatch
+from glimpsebrowser.browser.network import pac
+from glimpsebrowser.keyinput import keyutils
 from helpers import utils as testutils
 
 
@@ -97,7 +97,7 @@ class RegexEq:
 @pytest.fixture
 def os_mock(mocker):
     """Fixture that mocks and returns os from the configtypes module."""
-    m = mocker.patch('qutebrowser.config.configtypes.os', autospec=True)
+    m = mocker.patch('glimpsebrowser.config.configtypes.os', autospec=True)
     m.path.expandvars.side_effect = lambda x: x.replace('$HOME', '/home/foo')
     m.path.expanduser.side_effect = lambda x: x.replace('~', '/home/foo')
     m.path.join.side_effect = lambda *parts: '/'.join(parts)
@@ -145,9 +145,9 @@ class TestValidValues:
         assert 'baz' not in vv.descriptions
 
     @pytest.mark.parametrize('args, expected', [
-        (['a', 'b'], "<qutebrowser.config.configtypes.ValidValues "
+        (['a', 'b'], "<glimpsebrowser.config.configtypes.ValidValues "
                      "descriptions={} values=['a', 'b']>"),
-        ([('val', 'desc')], "<qutebrowser.config.configtypes.ValidValues "
+        ([('val', 'desc')], "<glimpsebrowser.config.configtypes.ValidValues "
                             "descriptions={'val': 'desc'} values=['val']>"),
     ])
     def test_repr(self, klass, args, expected):
@@ -1524,7 +1524,7 @@ class TestRegex:
         The warning should be passed.
         """
         regex = klass()
-        m = mocker.patch('qutebrowser.config.configtypes.re')
+        m = mocker.patch('glimpsebrowser.config.configtypes.re')
         m.compile.side_effect = lambda *args: warnings.warn(warning)
         m.error = re.error
         with pytest.raises(type(warning)):
@@ -1537,7 +1537,7 @@ class TestRegex:
         better coverage.
         """
         regex = klass()
-        m = mocker.patch('qutebrowser.config.configtypes.re')
+        m = mocker.patch('glimpsebrowser.config.configtypes.re')
         m.compile.side_effect = lambda *args: warnings.warn(r'bad escape \C',
                                                             DeprecationWarning)
         m.error = re.error
@@ -1752,7 +1752,7 @@ class TestFile:
     def test_to_py_exists_rel(self, klass, os_mock, monkeypatch):
         """Test to_py with a relative path to an existing file."""
         monkeypatch.setattr(
-            'qutebrowser.config.configtypes.standarddir.config',
+            'glimpsebrowser.config.configtypes.standarddir.config',
             lambda: '/home/foo/.config')
         os_mock.path.isfile.return_value = True
         os_mock.path.isabs.return_value = False
@@ -2023,7 +2023,7 @@ class TestEncoding:
 class TestUrl:
 
     TESTS = {
-        'http://qutebrowser.org/': QUrl('http://qutebrowser.org/'),
+        'http://glimpsebrowser.org/': QUrl('http://glimpsebrowser.org/'),
         'http://heise.de/': QUrl('http://heise.de/'),
     }
 

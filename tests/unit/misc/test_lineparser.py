@@ -1,30 +1,30 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.misc.lineparser."""
+"""Tests for glimpsebrowser.misc.lineparser."""
 
 import os
 from unittest import mock
 
 import pytest
 
-from qutebrowser.misc import lineparser as lineparsermod
+from glimpsebrowser.misc import lineparser as lineparsermod
 
 
 class TestBaseLineParser:
@@ -39,7 +39,7 @@ class TestBaseLineParser:
 
     def test_prepare_save_missing(self, mocker, lineparser):
         """Test if _prepare_save does what it's supposed to do."""
-        os_mock = mocker.patch('qutebrowser.misc.lineparser.os')
+        os_mock = mocker.patch('glimpsebrowser.misc.lineparser.os')
         lineparser._prepare_save()
         os_mock.makedirs.assert_called_with(self.CONFDIR, 0o755, exist_ok=True)
 

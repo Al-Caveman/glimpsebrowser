@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Profile qutebrowser."""
+"""Profile glimpsebrowser."""
 
 import sys
 import cProfile
@@ -33,7 +33,7 @@ import shlex
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir,
                                 os.pardir))
 
-import qutebrowser.qutebrowser
+import glimpsebrowser.glimpsebrowser
 
 
 def parse_args():
@@ -51,7 +51,7 @@ def parse_args():
     parser.add_argument('--profile-file', metavar='FILE', action='store',
                         help="The filename to use with --profile-tool=none")
     parser.add_argument('--profile-test', action='store_true',
-                        help="Run pytest instead of qutebrowser")
+                        help="Run pytest instead of glimpsebrowser")
     return parser.parse_known_args()
 
 
@@ -72,9 +72,9 @@ def main():
         import pytest
         profiler.runcall(pytest.main)
     else:
-        profiler.runcall(qutebrowser.qutebrowser.main)
+        profiler.runcall(glimpsebrowser.glimpsebrowser.main)
 
-    # If we have an exception after here, we don't want the qutebrowser
+    # If we have an exception after here, we don't want the glimpsebrowser
     # exception hook to take over.
     sys.excepthook = sys.__excepthook__
     profiler.dump_stats(profilefile)

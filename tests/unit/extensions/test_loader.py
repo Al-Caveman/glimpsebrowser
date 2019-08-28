@@ -1,28 +1,28 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import types
 
 import pytest
 
-from qutebrowser.extensions import loader
-from qutebrowser.misc import objects
+from glimpsebrowser.extensions import loader
+from glimpsebrowser.misc import objects
 
 
 pytestmark = pytest.mark.usefixtures('data_tmpdir', 'config_tmpdir',
@@ -36,7 +36,7 @@ def test_on_walk_error():
 
 def test_walk_normal():
     names = [info.name for info in loader._walk_normal()]
-    assert 'qutebrowser.components.scrollcommands' in names
+    assert 'glimpsebrowser.components.scrollcommands' in names
 
 
 def test_walk_pyinstaller():
@@ -48,7 +48,7 @@ def test_walk_pyinstaller():
 def test_load_component(monkeypatch):
     monkeypatch.setattr(objects, 'commands', {})
 
-    info = loader.ExtensionInfo(name='qutebrowser.components.scrollcommands')
+    info = loader.ExtensionInfo(name='glimpsebrowser.components.scrollcommands')
     mod = loader._load_component(info, skip_hooks=True)
 
     assert hasattr(mod, 'scroll_to_perc')
@@ -78,10 +78,10 @@ def test_add_module_info():
     # pylint: disable=no-member
     mod = types.ModuleType('testmodule')
     info1 = loader.add_module_info(mod)
-    assert mod.__qute_module_info is info1
+    assert mod.__glimpse_module_info is info1
 
     info2 = loader.add_module_info(mod)
-    assert mod.__qute_module_info is info1
+    assert mod.__glimpse_module_info is info1
     assert info2 is info1
 
 

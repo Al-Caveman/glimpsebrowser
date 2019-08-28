@@ -25,7 +25,7 @@ hg+https://bitbucket.org/jendrikseipp/vulture
 git+https://github.com/pallets/werkzeug.git
 
 
-## qutebrowser dependencies
+## glimpsebrowser dependencies
 
 git+https://github.com/tartley/colorama.git
 hg+https://bitbucket.org/cthedot/cssutils

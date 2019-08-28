@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Both standalone script and qutebrowser userscript that opens a rofi menu with
+# Both standalone script and glimpsebrowser userscript that opens a rofi menu with
 # all files from the download directory and opens the selected file. It works
 # both as a userscript and a standalone script that is called from outside of
-# qutebrowser.
+# glimpsebrowser.
 #
 # Suggested keybinding (for "show downloads"):
-# spawn --userscript ~/.config/qutebrowser/open_download
+# spawn --userscript ~/.config/glimpsebrowser/open_download
 #     sd
 #
 # Requirements:
 #  - rofi (in a recent version)
 #  - xdg-open and xdg-mime
-#  - You should configure qutebrowser to download files to a single directory
+#  - You should configure glimpsebrowser to download files to a single directory
 #  - It comes in handy if you enable downloads.remove_finished. If you want to
 #    see the recent downloads, just press "sd".
 #

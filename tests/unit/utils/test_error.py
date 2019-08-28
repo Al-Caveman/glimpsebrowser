@@ -1,22 +1,22 @@
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.error."""
+"""Tests for glimpsebrowser.utils.error."""
 
 import logging
 
@@ -24,8 +24,8 @@ import pytest
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QMessageBox
 
-from qutebrowser.utils import error, utils
-from qutebrowser.misc import ipc
+from glimpsebrowser.utils import error, utils
+from glimpsebrowser.misc import ipc
 
 
 class Error(Exception):
@@ -37,7 +37,7 @@ class Error(Exception):
     # "builtins." stripped
     (ValueError('exception'), 'ValueError', 'exception'),
     (ValueError, 'ValueError', 'none'),
-    # "qutebrowser." stripped
+    # "glimpsebrowser." stripped
     (ipc.Error, 'misc.ipc.Error', 'none'),
     (Error, 'test_error.Error', 'none'),
 ])
@@ -63,7 +63,7 @@ def test_no_err_windows(caplog, exc, name, exc_text, fake_args):
 
 
 # This happens on Xvfb for some reason
-# See https://github.com/qutebrowser/qutebrowser/issues/984
+# See https://github.com/glimpsebrowser/glimpsebrowser/issues/984
 @pytest.mark.qt_log_ignore(r'^QXcbConnection: XCB error: 8 \(BadMatch\), '
                            r'sequence: \d+, resource id: \d+, major code: 42 '
                            r'\(SetInputFocus\), minor code: 0$',

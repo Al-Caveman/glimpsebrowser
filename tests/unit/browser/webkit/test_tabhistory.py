@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Tests for webelement.tabhistory."""
 
@@ -23,9 +23,9 @@ import attr
 from PyQt5.QtCore import QUrl, QPoint
 import pytest
 
-tabhistory = pytest.importorskip('qutebrowser.browser.webkit.tabhistory')
-from qutebrowser.misc.sessions import TabHistoryItem as Item
-from qutebrowser.utils import qtutils
+tabhistory = pytest.importorskip('glimpsebrowser.browser.webkit.tabhistory')
+from glimpsebrowser.misc.sessions import TabHistoryItem as Item
+from glimpsebrowser.utils import qtutils
 
 
 pytestmark = pytest.mark.qt_log_ignore('QIODevice::read.*: device not open')

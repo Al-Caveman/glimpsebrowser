@@ -2,20 +2,20 @@
 
 # Copyright 2016-2019 Ryan Roden-Corrent (rcorre) <ryan@rcorre.net>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Tests for the Completer Object."""
 
@@ -25,9 +25,9 @@ import pytest
 from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QStandardItemModel
 
-from qutebrowser.completion import completer
-from qutebrowser.commands import command
-from qutebrowser.api import cmdutils
+from glimpsebrowser.completion import completer
+from glimpsebrowser.commands import command
+from glimpsebrowser.api import cmdutils
 
 
 class FakeCompletionModel(QStandardItemModel):
@@ -78,7 +78,7 @@ def miscmodels_patch(mocker):
     one module is easier and sufficient for mocking. The only one referenced
     directly by Completer is miscmodels.command.
     """
-    m = mocker.patch('qutebrowser.completion.completer.miscmodels',
+    m = mocker.patch('glimpsebrowser.completion.completer.miscmodels',
                      autospec=True)
 
     def func(name):

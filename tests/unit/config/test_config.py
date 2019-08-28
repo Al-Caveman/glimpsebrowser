@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.config.config."""
+"""Tests for glimpsebrowser.config.config."""
 
 import types
 import unittest.mock
@@ -26,10 +26,10 @@ import pytest
 from PyQt5.QtCore import QObject, QUrl
 from PyQt5.QtGui import QColor
 
-from qutebrowser.config import config, configdata, configexc, configutils
-from qutebrowser.utils import usertypes, urlmatch
-from qutebrowser.misc import objects
-from qutebrowser.keyinput import keyutils
+from glimpsebrowser.config import config, configdata, configexc, configutils
+from glimpsebrowser.utils import usertypes, urlmatch
+from glimpsebrowser.misc import objects
+from glimpsebrowser.keyinput import keyutils
 
 
 @pytest.fixture(autouse=True)
@@ -219,7 +219,7 @@ class TestKeyConfig:
     @pytest.mark.parametrize('mode', ['normal', 'caret'])
     @pytest.mark.parametrize('command', [
         'message-info foo',
-        'nop ;; wq',  # https://github.com/qutebrowser/qutebrowser/issues/3002
+        'nop ;; wq',  # https://github.com/glimpsebrowser/glimpsebrowser/issues/3002
     ])
     def test_bind(self, key_config_stub, config_stub, qtbot, no_bindings,
                   mode, command):
@@ -238,7 +238,7 @@ class TestKeyConfig:
                                 no_bindings):
         """Make sure we can bind to a command which changes the mode.
 
-        https://github.com/qutebrowser/qutebrowser/issues/2989
+        https://github.com/glimpsebrowser/glimpsebrowser/issues/2989
         """
         config_stub.val.bindings.default = no_bindings
         config_stub.val.bindings.commands = no_bindings
@@ -329,7 +329,7 @@ class TestKeyConfig:
         For custom-bound keys (in bindings.commands), it's okay to display an
         error, as this isn't something you'd do in e.g a config.py anyways.
 
-        https://github.com/qutebrowser/qutebrowser/issues/3162
+        https://github.com/glimpsebrowser/glimpsebrowser/issues/3162
         """
         config_stub.val.bindings.default = {'normal': {'a': 'nop'}}
         config_stub.val.bindings.commands = no_bindings
@@ -347,7 +347,7 @@ class TestKeyConfig:
         We used to normalize keys differently, so we can have <ctrl+q> in the
         config.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/3699
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/3699
         """
         bindings = {'normal': {'<ctrl+q>': 'nop'}}
         yaml_config_stub.set_obj('bindings.commands', bindings)

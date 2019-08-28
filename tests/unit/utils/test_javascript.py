@@ -1,29 +1,29 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.javascript."""
+"""Tests for glimpsebrowser.utils.javascript."""
 
 import pytest
 import hypothesis
 import hypothesis.strategies
 
-from qutebrowser.utils import javascript
+from glimpsebrowser.utils import javascript
 
 
 class TestStringEscape:
@@ -49,7 +49,7 @@ class TestStringEscape:
 
     # Once there was this warning here:
     #   load glyph failed err=6 face=0x2680ba0, glyph=1912
-    # http://qutebrowser.org:8010/builders/debian-jessie/builds/765/steps/unittests/
+    # http://glimpsebrowser.org:8010/builders/debian-jessie/builds/765/steps/unittests/
     # Should that be ignored?
 
     @pytest.mark.parametrize('before, after', sorted(TESTS.items()), ids=repr)
@@ -96,7 +96,7 @@ def test_to_js(arg, expected):
 
 @pytest.mark.parametrize('base, expected_base', [
     ('window', 'window'),
-    ('foo', 'window._qutebrowser.foo'),
+    ('foo', 'window._glimpsebrowser.foo'),
 ])
 def test_assemble(base, expected_base):
     expected = '"use strict";\n{}.func(23);'.format(expected_base)
@@ -107,6 +107,6 @@ def test_wrap_global():
     source = javascript.wrap_global('name',
                                     'console.log("foo");',
                                     'console.log("bar");')
-    assert 'window._qutebrowser.initialized["name"]' in source
+    assert 'window._glimpsebrowser.initialized["name"]' in source
     assert 'console.log("foo");' in source
     assert 'console.log("bar");' in source

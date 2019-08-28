@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.misc.ipc."""
+"""Tests for glimpsebrowser.misc.ipc."""
 
 import os
 import getpass
@@ -32,9 +32,9 @@ from PyQt5.QtCore import pyqtSignal, QObject
 from PyQt5.QtNetwork import QLocalServer, QLocalSocket, QAbstractSocket
 from PyQt5.QtTest import QSignalSpy
 
-import qutebrowser
-from qutebrowser.misc import ipc
-from qutebrowser.utils import standarddir, utils
+import glimpsebrowser
+from glimpsebrowser.misc import ipc
+from glimpsebrowser.utils import standarddir, utils
 from helpers import stubs
 
 
@@ -51,7 +51,7 @@ def shutdown_server():
 
 @pytest.fixture
 def ipc_server(qapp, qtbot):
-    server = ipc.IPCServer('qute-test')
+    server = ipc.IPCServer('glimpse-test')
     yield server
     if (server._socket is not None and
             server._socket.state() != QLocalSocket.UnconnectedState):
@@ -178,8 +178,8 @@ def md5(inp):
 class TestSocketName:
 
     WINDOWS_TESTS = [
-        (None, 'qutebrowser-testusername'),
-        ('/x', 'qutebrowser-testusername-{}'.format(md5('/x'))),
+        (None, 'glimpsebrowser-testusername'),
+        ('/x', 'glimpsebrowser-testusername-{}'.format(md5('/x'))),
     ]
 
     @pytest.fixture(autouse=True)
@@ -205,7 +205,7 @@ class TestSocketName:
     def test_mac(self, basedir, expected):
         socketname = ipc._get_socketname(basedir)
         parts = socketname.split(os.sep)
-        assert parts[-2] == 'qutebrowser'
+        assert parts[-2] == 'glimpsebrowser'
         assert parts[-1] == expected
 
     @pytest.mark.linux
@@ -215,7 +215,7 @@ class TestSocketName:
     ])
     def test_linux(self, basedir, fake_runtime_dir, expected):
         socketname = ipc._get_socketname(basedir)
-        expected_path = str(fake_runtime_dir / 'qutebrowser' / expected)
+        expected_path = str(fake_runtime_dir / 'glimpsebrowser' / expected)
         assert socketname == expected_path
 
     def test_other_unix(self):
@@ -281,7 +281,7 @@ class TestListen:
     def test_in_use(self, qlocalserver, ipc_server, monkeypatch):
         monkeypatch.setattr(ipc.QLocalServer, 'removeServer',
                             lambda self: True)
-        qlocalserver.listen('qute-test')
+        qlocalserver.listen('glimpse-test')
         with pytest.raises(ipc.AddressInUseError):
             ipc_server.listen()
 
@@ -425,10 +425,10 @@ class TestHandleConnection:
 def connected_socket(qtbot, qlocalsocket, ipc_server):
     if utils.is_mac:
         pytest.skip("Skipping connected_socket test - "
-                    "https://github.com/qutebrowser/qutebrowser/issues/1045")
+                    "https://github.com/glimpsebrowser/glimpsebrowser/issues/1045")
     ipc_server.listen()
     with qtbot.waitSignal(ipc_server._server.newConnection):
-        qlocalsocket.connectToServer('qute-test')
+        qlocalsocket.connectToServer('glimpse-test')
     yield qlocalsocket
     qlocalsocket.disconnectFromServer()
 
@@ -498,7 +498,7 @@ def test_multiline(qtbot, ipc_server, connected_socket):
 class TestSendToRunningInstance:
 
     def test_no_server(self, caplog):
-        sent = ipc.send_to_running_instance('qute-test', [], None)
+        sent = ipc.send_to_running_instance('glimpse-test', [], None)
         assert not sent
         assert caplog.messages[-1] == "No existing instance present (error 2)"
 
@@ -514,10 +514,10 @@ class TestSendToRunningInstance:
                                       timeout=5000) as raw_blocker:
                     with tmpdir.as_cwd():
                         if not has_cwd:
-                            m = mocker.patch('qutebrowser.misc.ipc.os')
+                            m = mocker.patch('glimpsebrowser.misc.ipc.os')
                             m.getcwd.side_effect = OSError
                         sent = ipc.send_to_running_instance(
-                            'qute-test', ['foo'], None)
+                            'glimpse-test', ['foo'], None)
 
         assert sent
 
@@ -526,7 +526,7 @@ class TestSendToRunningInstance:
         assert blocker.args == [['foo'], '', expected_cwd]
 
         raw_expected = {'args': ['foo'], 'target_arg': None,
-                        'version': qutebrowser.__version__,
+                        'version': glimpsebrowser.__version__,
                         'protocol_version': ipc.PROTOCOL_VERSION}
         if has_cwd:
             raw_expected['cwd'] = str(tmpdir)
@@ -539,28 +539,28 @@ class TestSendToRunningInstance:
         socket = FakeSocket(error=QLocalSocket.ConnectionError)
         with pytest.raises(ipc.Error, match=r"Error while writing to running "
                            r"instance: Error string \(error 7\)"):
-            ipc.send_to_running_instance('qute-test', [], None, socket=socket)
+            ipc.send_to_running_instance('glimpse-test', [], None, socket=socket)
 
     def test_not_disconnected_immediately(self):
         socket = FakeSocket()
-        ipc.send_to_running_instance('qute-test', [], None, socket=socket)
+        ipc.send_to_running_instance('glimpse-test', [], None, socket=socket)
 
     def test_socket_error_no_server(self):
         socket = FakeSocket(error=QLocalSocket.ConnectionError,
                             connect_successful=False)
         with pytest.raises(ipc.Error, match=r"Error while connecting to "
                            r"running instance: Error string \(error 7\)"):
-            ipc.send_to_running_instance('qute-test', [], None, socket=socket)
+            ipc.send_to_running_instance('glimpse-test', [], None, socket=socket)
 
 
-@pytest.mark.not_mac(reason="https://github.com/qutebrowser/qutebrowser/"
+@pytest.mark.not_mac(reason="https://github.com/glimpsebrowser/glimpsebrowser/"
                             "issues/975")
 def test_timeout(qtbot, caplog, qlocalsocket, ipc_server):
     ipc_server._timer.setInterval(100)
     ipc_server.listen()
 
     with qtbot.waitSignal(ipc_server._server.newConnection):
-        qlocalsocket.connectToServer('qute-test')
+        qlocalsocket.connectToServer('glimpse-test')
 
     with caplog.at_level(logging.ERROR):
         with qtbot.waitSignal(qlocalsocket.disconnected, timeout=5000):
@@ -603,14 +603,14 @@ class TestSendOrListen:
 
     @pytest.fixture
     def qlocalserver_mock(self, mocker):
-        m = mocker.patch('qutebrowser.misc.ipc.QLocalServer', autospec=True)
+        m = mocker.patch('glimpsebrowser.misc.ipc.QLocalServer', autospec=True)
         m().errorString.return_value = "Error string"
         m().newConnection = stubs.FakeSignal()
         return m
 
     @pytest.fixture
     def qlocalsocket_mock(self, mocker):
-        m = mocker.patch('qutebrowser.misc.ipc.QLocalSocket', autospec=True)
+        m = mocker.patch('glimpsebrowser.misc.ipc.QLocalSocket', autospec=True)
         m().errorString.return_value = "Error string"
         for name in ['UnknownSocketError', 'UnconnectedState',
                      'ConnectionRefusedError', 'ServerNotFoundError',
@@ -736,7 +736,7 @@ class TestSendOrListen:
 @pytest.mark.windows
 @pytest.mark.mac
 def test_long_username(monkeypatch):
-    """See https://github.com/qutebrowser/qutebrowser/issues/888."""
+    """See https://github.com/glimpsebrowser/glimpsebrowser/issues/888."""
     username = 'alexandercogneau'
     basedir = '/this_is_a_long_basedir'
     monkeypatch.setattr('getpass.getuser', lambda: username)
@@ -756,7 +756,7 @@ def test_connect_inexistent(qlocalsocket):
     If this test fails, our connection logic checking for the old naming scheme
     would not work properly.
     """
-    qlocalsocket.connectToServer('qute-test-inexistent')
+    qlocalsocket.connectToServer('glimpse-test-inexistent')
     assert qlocalsocket.error() == QLocalSocket.ServerNotFoundError
 
 

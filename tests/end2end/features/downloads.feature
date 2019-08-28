@@ -31,10 +31,10 @@ Feature: Downloading things from a website.
 
     Scenario: Using :download with no URL on an image
         When I set downloads.location.prompt to false
-        And I open data/downloads/qutebrowser.png
+        And I open data/downloads/glimpsebrowser.png
         And I run :download
         And I wait until the download is finished
-        Then the downloaded file qutebrowser.png should exist
+        Then the downloaded file glimpsebrowser.png should exist
 
     Scenario: Using hints
         When I set downloads.location.prompt to false
@@ -79,16 +79,16 @@ Feature: Downloading things from a website.
         And I set downloads.location.prompt to true
         And I open data/downloads/issue1243.html
         And I hint with args "links download" and follow a
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='qutebrowser-download' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
-        Then the error "Download error: No handler found for qute://" should be shown
-        And "NotFoundError while handling qute://* URL" should be logged
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='glimpsebrowser-download' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
+        Then the error "Download error: No handler found for glimpse://" should be shown
+        And "NotFoundError while handling glimpse://* URL" should be logged
 
     Scenario: Downloading a data: link (issue 1214)
         When I set downloads.location.suggestion to filename
         And I set downloads.location.prompt to true
         And I open data/data_link.html
         And I hint with args "links download" and follow a
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='binary blob' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='binary blob' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
         And I run :leave-mode
         Then no crash should happen
 
@@ -96,12 +96,12 @@ Feature: Downloading things from a website.
         When I set downloads.location.suggestion to filename
         And I set downloads.location.prompt to true
         And I open data/downloads/download.bin in a new window without waiting
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> *" in the log
         And I run :window-only
         And I run :leave-mode
         Then no crash should happen
 
-    # https://github.com/qutebrowser/qutebrowser/issues/4240
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/4240
     @qt<5.11.2
     Scenario: Downloading with SSL errors (issue 1413)
         When SSL is supported
@@ -130,9 +130,9 @@ Feature: Downloading things from a website.
         And I open data/downloads/download.bin without waiting
         And I wait until the download is finished
         And I run :close
-        Then qutebrowser should quit
+        Then glimpsebrowser should quit
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2134
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2134
     @qtwebengine_skip
     Scenario: Downloading, then closing a tab
         When I set downloads.location.prompt to false
@@ -178,7 +178,7 @@ Feature: Downloading things from a website.
     Scenario: Downloading a file to a reserved path
         When I set downloads.location.prompt to true
         And I open data/downloads/download.bin without waiting
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/downloads/download.bin</b>' title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/downloads/download.bin</b>' title='Save file to:'>, *" in the log
         And I run :prompt-accept COM1
         And I run :leave-mode
         Then the error "Invalid filename" should be shown
@@ -187,7 +187,7 @@ Feature: Downloading things from a website.
     Scenario: Downloading a file to a drive-relative working directory
         When I set downloads.location.prompt to true
         And I open data/downloads/download.bin without waiting
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/downloads/download.bin</b>' title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/downloads/download.bin</b>' title='Save file to:'>, *" in the log
         And I run :prompt-accept C:foobar
         And I run :leave-mode
         Then the error "Invalid filename" should be shown
@@ -279,14 +279,14 @@ Feature: Downloading things from a website.
 
     Scenario: :download with a filename and directory which doesn't exist
         When I run :download --dest (tmpdir)(dirsep)downloads(dirsep)somedir(dirsep)file http://localhost:(port)/data/downloads/download.bin
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default=None mode=<PromptMode.yesno: 1> option=None text='<b>*</b> does not exist. Create it?' title='Create directory?'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default=None mode=<PromptMode.yesno: 1> option=None text='<b>*</b> does not exist. Create it?' title='Create directory?'>, *" in the log
         And I run :prompt-accept yes
         And I wait until the download is finished
         Then the downloaded file somedir/file should exist
 
     Scenario: :download with a directory which doesn't exist
         When I run :download --dest (tmpdir)(dirsep)downloads(dirsep)somedir(dirsep) http://localhost:(port)/data/downloads/download.bin
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default=None mode=<PromptMode.yesno: 1> option=None text='<b>*</b> does not exist. Create it?' title='Create directory?'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default=None mode=<PromptMode.yesno: 1> option=None text='<b>*</b> does not exist. Create it?' title='Create directory?'>, *" in the log
         And I run :prompt-accept yes
         And I wait until the download is finished
         Then the downloaded file somedir/download.bin should exist
@@ -306,18 +306,18 @@ Feature: Downloading things from a website.
         And I wait for "File successfully written." in the log
         Then the downloaded file mhtml-response-headers.mhtml should exist
 
-    @qtwebengine_skip: https://github.com/qutebrowser/qutebrowser/issues/2288
+    @qtwebengine_skip: https://github.com/glimpsebrowser/glimpsebrowser/issues/2288
     Scenario: Overwriting existing mhtml file
         When I set downloads.location.prompt to true
         And I open data/title.html
         And I run :download --mhtml
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/title.html</b>' title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/title.html</b>' title='Save file to:'>, *" in the log
         And I run :prompt-accept
         And I wait for "File successfully written." in the log
         And I run :download --mhtml
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/title.html</b>' title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text='Please enter a location for <b>http://localhost:*/data/title.html</b>' title='Save file to:'>, *" in the log
         And I run :prompt-accept
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default=None mode=<PromptMode.yesno: 1> option=None text='<b>*</b> already exists. Overwrite?' title='Overwrite existing file?'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default=None mode=<PromptMode.yesno: 1> option=None text='<b>*</b> already exists. Overwrite?' title='Overwrite existing file?'>, *" in the log
         And I run :prompt-accept yes
         And I wait for "File successfully written." in the log
         Then the downloaded file Test title.mhtml should exist
@@ -364,7 +364,7 @@ Feature: Downloading things from a website.
         Then "cancelled" should be logged
         And "cancelled" should be logged
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1535
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1535
     @qtwebengine_todo: :download --mhtml is not implemented yet
     Scenario: Cancelling an MHTML download (issue 1535)
         When I open data/downloads/issue1535.html
@@ -486,7 +486,7 @@ Feature: Downloading things from a website.
         And I wait until the download is finished
         Then "Opening *download.bin* with [*python*]" should be logged
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1728
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1728
 
     Scenario: Cancelling a download that should be opened
         When I set downloads.location.prompt to true
@@ -496,7 +496,7 @@ Feature: Downloading things from a website.
         And I run :download-cancel
         Then "* finished but not successful, not opening!" should be logged
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1725
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1725
 
     Scenario: Directly open a download with a very long filename
         When I set downloads.location.prompt to true
@@ -560,7 +560,7 @@ Feature: Downloading things from a website.
         And I open data/downloads/download2.bin without waiting
         Then the download prompt should be shown with "(tmpdir)/downloads/download2.bin"
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2173
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2173
 
     Scenario: Remembering the temporary download directory (issue 2173)
         When I set downloads.location.prompt to true
@@ -679,9 +679,9 @@ Feature: Downloading things from a website.
     Scenario: Answering a question for a cancelled download (#415)
         When I set downloads.location.prompt to true
         And I run :download http://localhost:(port)/data/downloads/download.bin
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
         And I run :download http://localhost:(port)/data/downloads/download2.bin
-        And I wait for "Asking question <qutebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
+        And I wait for "Asking question <glimpsebrowser.utils.usertypes.Question default='*' mode=<PromptMode.download: 5> option=None text=* title='Save file to:'>, *" in the log
         And I run :download-cancel with count 2
         And I run :prompt-accept
         And I wait until the download is finished

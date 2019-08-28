@@ -21,7 +21,7 @@ Feature: Using completion
         And I open data/numbers/9.txt
         And I open data/numbers/10.txt
         And I run :set-cmd-text :open a                             b
-        # Make sure qutebrowser doesn't hang
+        # Make sure glimpsebrowser doesn't hang
         And I run :message-info "Still alive!"
         Then the message "Still alive!" should be shown
 

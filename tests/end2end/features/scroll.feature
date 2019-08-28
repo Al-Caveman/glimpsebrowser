@@ -236,7 +236,7 @@ Feature: Scrolling
         When I run :scroll-to-perc 0 with count 50
         Then the page should be scrolled vertically
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1821
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1821
     @issue3572
     Scenario: :scroll-to-perc without doctype
         When I open data/scroll/no_doctype.html

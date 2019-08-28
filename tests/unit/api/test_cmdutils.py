@@ -1,25 +1,25 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 # pylint: disable=unused-variable
 
-"""Tests for qutebrowser.api.cmdutils."""
+"""Tests for glimpsebrowser.api.cmdutils."""
 
 import sys
 import logging
@@ -29,10 +29,10 @@ import enum
 
 import pytest
 
-from qutebrowser.misc import objects
-from qutebrowser.commands import cmdexc, argparser, command
-from qutebrowser.api import cmdutils
-from qutebrowser.utils import usertypes
+from glimpsebrowser.misc import objects
+from glimpsebrowser.commands import cmdexc, argparser, command
+from glimpsebrowser.api import cmdutils
+from glimpsebrowser.utils import usertypes
 
 
 @pytest.fixture(autouse=True)
@@ -311,7 +311,7 @@ class TestRegister:
             fun(*args, **kwargs)
 
     def test_choices_no_annotation(self):
-        # https://github.com/qutebrowser/qutebrowser/issues/1871
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/1871
         @cmdutils.register()
         @cmdutils.argument('arg', choices=['foo', 'bar'])
         def fun(arg):
@@ -324,7 +324,7 @@ class TestRegister:
             cmd._get_call_args(win_id=0)
 
     def test_choices_no_annotation_kwonly(self):
-        # https://github.com/qutebrowser/qutebrowser/issues/1871
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/1871
         @cmdutils.register()
         @cmdutils.argument('arg', choices=['foo', 'bar'])
         def fun(*, arg='foo'):
@@ -351,7 +351,7 @@ class TestRegister:
             cmd.get_pos_arg_info(2)
 
     def test_keyword_only_without_default(self):
-        # https://github.com/qutebrowser/qutebrowser/issues/1872
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/1872
         def fun(*, target):
             """Blah."""
 
@@ -360,7 +360,7 @@ class TestRegister:
             fun = cmdutils.register()(fun)
 
     def test_typed_keyword_only_without_default(self):
-        # https://github.com/qutebrowser/qutebrowser/issues/1872
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/1872
         def fun(*, target: int):
             """Blah."""
 
@@ -388,7 +388,7 @@ class TestArgument:
             'foo': command.ArgInfo(flag='x'),
             'bar': command.ArgInfo(flag='y')
         }
-        assert fun.qute_args == expected
+        assert fun.glimpse_args == expected
 
     def test_arginfo_boolean(self):
         @cmdutils.argument('special1', value=cmdutils.Value.count)
@@ -397,9 +397,9 @@ class TestArgument:
         def fun(special1, special2, normal):
             """Blah."""
 
-        assert fun.qute_args['special1'].value
-        assert fun.qute_args['special2'].value
-        assert not fun.qute_args['normal'].value
+        assert fun.glimpse_args['special1'].value
+        assert fun.glimpse_args['special2'].value
+        assert not fun.glimpse_args['normal'].value
 
     def test_wrong_order(self):
         """When @cmdutils.argument is used above (after) @register, fail."""

@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Enforce perfect coverage on some files."""
 
@@ -33,7 +33,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir,
                                 os.pardir))
 
 from scripts import utils as scriptutils
-from qutebrowser.utils import utils
+from glimpsebrowser.utils import utils
 
 
 @attr.s
@@ -226,7 +226,7 @@ def _get_filename(filename):
         common_path = os.path.commonprefix([basedir, filename])
         if common_path:
             filename = filename[len(common_path):].lstrip('/')
-    if filename.startswith('qutebrowser/'):
+    if filename.startswith('glimpsebrowser/'):
         filename = filename.split('/', maxsplit=1)[1]
 
     return filename
@@ -303,13 +303,13 @@ def main_check():
         for msg in messages:
             print(msg.text)
         print()
-        filters = ','.join('qutebrowser/' + msg.filename for msg in messages)
+        filters = ','.join('glimpsebrowser/' + msg.filename for msg in messages)
         subprocess.run([sys.executable, '-m', 'coverage', 'report',
                         '--show-missing', '--include', filters], check=True)
         print()
         print("To debug this, run 'tox -e py36-pyqt59-cov' "
               "(or py35-pyqt59-cov) locally and check htmlcov/index.html")
-        print("or check https://codecov.io/github/qutebrowser/qutebrowser")
+        print("or check https://codecov.io/github/glimpsebrowser/glimpsebrowser")
         print()
 
     if 'CI' in os.environ:
@@ -332,7 +332,7 @@ def main_check_all():
         if test_file is None:
             continue
         subprocess.run(
-            [sys.executable, '-m', 'pytest', '--cov', 'qutebrowser',
+            [sys.executable, '-m', 'pytest', '--cov', 'glimpsebrowser',
              '--cov-report', 'xml', test_file], check=True)
         with open('coverage.xml', encoding='utf-8') as f:
             messages = check(f, [(test_file, src_file)])

@@ -12,7 +12,7 @@
 |Setting|Description
 |<<aliases,aliases>>|Aliases for commands.
 |<<auto_save.interval,auto_save.interval>>|Time interval (in milliseconds) between auto-saves of config/cookies/etc.
-|<<auto_save.session,auto_save.session>>|Always restore open sites when qutebrowser is reopened.
+|<<auto_save.session,auto_save.session>>|Always restore open sites when glimpsebrowser is reopened.
 |<<backend,backend>>|Backend to use to display websites.
 |<<bindings.commands,bindings.commands>>|Keybindings mapping keys to commands in different modes.
 |<<bindings.default,bindings.default>>|Default keybindings. If you want to add bindings, modify `bindings.commands` instead.
@@ -133,7 +133,7 @@
 |<<content.frame_flattening,content.frame_flattening>>|Expand each subframe to its contents.
 |<<content.geolocation,content.geolocation>>|Allow websites to request geolocations.
 |<<content.headers.accept_language,content.headers.accept_language>>|Value to send in the `Accept-Language` header.
-|<<content.headers.custom,content.headers.custom>>|Custom headers for qutebrowser HTTP requests.
+|<<content.headers.custom,content.headers.custom>>|Custom headers for glimpsebrowser HTTP requests.
 |<<content.headers.do_not_track,content.headers.do_not_track>>|Value to send in the `DNT` header.
 |<<content.headers.referer,content.headers.referer>>|When to send the Referer header.
 |<<content.headers.user_agent,content.headers.user_agent>>|User agent to send. Unset to send the default.
@@ -325,7 +325,7 @@ Default: +pass:[15000]+
 
 [[auto_save.session]]
 === auto_save.session
-Always restore open sites when qutebrowser is reopened.
+Always restore open sites when glimpsebrowser is reopened.
 
 Type: <<types,Bool>>
 
@@ -334,9 +334,9 @@ Default: +pass:[false]+
 [[backend]]
 === backend
 Backend to use to display websites.
-qutebrowser supports two different web rendering engines / backends, QtWebKit and QtWebEngine.
-QtWebKit was discontinued by the Qt project with Qt 5.6, but picked up as a well maintained fork: https://github.com/annulen/webkit/wiki - qutebrowser only supports the fork.
-QtWebEngine is Qt's official successor to QtWebKit. It's slightly more resource hungry than QtWebKit and has a couple of missing features in qutebrowser, but is generally the preferred choice.
+glimpsebrowser supports two different web rendering engines / backends, QtWebKit and QtWebEngine.
+QtWebKit was discontinued by the Qt project with Qt 5.6, but picked up as a well maintained fork: https://github.com/annulen/webkit/wiki - glimpsebrowser only supports the fork.
+QtWebEngine is Qt's official successor to QtWebKit. It's slightly more resource hungry than QtWebKit and has a couple of missing features in glimpsebrowser, but is generally the preferred choice.
 This setting requires a restart.
 
 Type: <<types,String>>
@@ -396,7 +396,7 @@ The following modes are available:
 * caret: Entered when pressing the `v` mode, used to select text using the
   keyboard.
 
-* register: Entered when qutebrowser is waiting for a register name/key for
+* register: Entered when glimpsebrowser is waiting for a register name/key for
   commands like `:set-mark`.
 
 Type: <<types,Dict>>
@@ -567,10 +567,10 @@ Default:
 * +pass:[PP]+: +pass:[open -t -- {primary}]+
 * +pass:[Pp]+: +pass:[open -t -- {clipboard}]+
 * +pass:[R]+: +pass:[reload -f]+
-* +pass:[Sb]+: +pass:[open qute://bookmarks#bookmarks]+
-* +pass:[Sh]+: +pass:[open qute://history]+
-* +pass:[Sq]+: +pass:[open qute://bookmarks]+
-* +pass:[Ss]+: +pass:[open qute://settings]+
+* +pass:[Sb]+: +pass:[open glimpse://bookmarks#bookmarks]+
+* +pass:[Sh]+: +pass:[open glimpse://history]+
+* +pass:[Sq]+: +pass:[open glimpse://bookmarks]+
+* +pass:[Ss]+: +pass:[open glimpse://settings]+
 * +pass:[T]+: +pass:[tab-focus]+
 * +pass:[ZQ]+: +pass:[quit]+
 * +pass:[ZZ]+: +pass:[quit --save]+
@@ -1578,7 +1578,7 @@ Default: +pass:[false]+
 [[completion.web_history.exclude]]
 === completion.web_history.exclude
 A list of patterns which should not be shown in the history.
-This only affects the completion. Matching URLs are still saved in the history (and visible on the qute://history page), but hidden in the completion.
+This only affects the completion. Matching URLs are still saved in the history (and visible on the glimpse://history page), but hidden in the completion.
 Changing this setting will cause the completion history to be regenerated on the next start, which will take a short while.
 This setting requires a restart.
 
@@ -1779,7 +1779,7 @@ Default: +pass:[en-US,en]+
 
 [[content.headers.custom]]
 === content.headers.custom
-Custom headers for qutebrowser HTTP requests.
+Custom headers for glimpsebrowser HTTP requests.
 
 This setting supports URL patterns.
 
@@ -1790,7 +1790,7 @@ Default: empty
 [[content.headers.do_not_track]]
 === content.headers.do_not_track
 Value to send in the `DNT` header.
-When this is set to true, qutebrowser asks websites to not track your identity. If set to null, the DNT header is not sent at all.
+When this is set to true, glimpsebrowser asks websites to not track your identity. If set to null, the DNT header is not sent at all.
 
 This setting supports URL patterns.
 
@@ -1850,7 +1850,7 @@ The file can be in one of the following formats:
 It's also possible to add a local file or directory via a `file://` URL. In
 case of a directory, all files in the directory are read as adblock lists.
 
-The file `~/.config/qutebrowser/blocked-hosts` is always read if it exists.
+The file `~/.config/glimpsebrowser/blocked-hosts` is always read if it exists.
 
 
 Type: <<types,List of Url>>
@@ -1945,7 +1945,7 @@ Default: +pass:[true]+
 [[content.javascript.log]]
 === content.javascript.log
 Log levels to use for JavaScript console logging messages.
-When a JavaScript message with the level given in the dictionary key is logged, the corresponding dictionary value selects the qutebrowser logger to use.
+When a JavaScript message with the level given in the dictionary key is logged, the corresponding dictionary value selects the glimpsebrowser logger to use.
 On QtWebKit, the "unknown" setting is always used.
 
 Type: <<types,Dict>>
@@ -3617,7 +3617,7 @@ Default: +pass:[false]+
 === url.searchengines
 Search engines which can be used via the address bar.
 Maps a search engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}` placeholder. The placeholder will be replaced by the search term, use `{{` and `}}` for literal `{`/`}` signs.
-The search engine named `DEFAULT` is used when `url.auto_search` is turned on and something else than a URL was entered to be opened. Other search engines can be used by prepending the search engine name to the search term, e.g.  `:open google qutebrowser`.
+The search engine named `DEFAULT` is used when `url.auto_search` is turned on and something else than a URL was entered to be opened. Other search engines can be used by prepending the search engine name to the search term, e.g.  `:open google glimpsebrowser`.
 
 Type: <<types,Dict>>
 
@@ -3667,7 +3667,7 @@ Format to use for the window title. The same placeholders like for
 
 Type: <<types,FormatString>>
 
-Default: +pass:[{perc}{current_title}{title_sep}qutebrowser]+
+Default: +pass:[{perc}{current_title}{title_sep}glimpsebrowser]+
 
 [[zoom.default]]
 === zoom.default
@@ -3732,7 +3732,7 @@ This setting is only available with the QtWebKit backend.
 When setting from a string, `1`, `yes`, `on` and `true` count as true, while `0`, `no`, `off` and `false` count as false (case-insensitive).
 |BoolAsk|Like `Bool`, but `ask` is allowed as additional value.
 |ColorSystem|The color system to use for color interpolation.
-|Command|A qutebrowser command with arguments.
+|Command|A glimpsebrowser command with arguments.
 |ConfirmQuit|Whether to display a confirmation when the window is closed.
 |Dict|A dictionary of values.
 

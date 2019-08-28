@@ -1,22 +1,22 @@
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.misc.checkpyver."""
+"""Tests for glimpsebrowser.misc.checkpyver."""
 
 import re
 import sys
@@ -25,10 +25,10 @@ import unittest.mock
 
 import pytest
 
-from qutebrowser.misc import checkpyver
+from glimpsebrowser.misc import checkpyver
 
 
-TEXT = (r"At least Python 3.5 is required to run qutebrowser, but it's "
+TEXT = (r"At least Python 3.5 is required to run glimpsebrowser, but it's "
         r"running with \d+\.\d+\.\d+.\n")
 
 
@@ -75,13 +75,13 @@ def test_patched_errwindow(capfd, mocker, monkeypatch):
     try:
         import tkinter  # pylint: disable=unused-import
     except ImportError:
-        tk_mock = mocker.patch('qutebrowser.misc.checkpyver.Tk',
+        tk_mock = mocker.patch('glimpsebrowser.misc.checkpyver.Tk',
                                spec=['withdraw'], new_callable=mocker.Mock)
-        msgbox_mock = mocker.patch('qutebrowser.misc.checkpyver.messagebox',
+        msgbox_mock = mocker.patch('glimpsebrowser.misc.checkpyver.messagebox',
                                    spec=['showerror'])
     else:
-        tk_mock = mocker.patch('qutebrowser.misc.checkpyver.Tk', autospec=True)
-        msgbox_mock = mocker.patch('qutebrowser.misc.checkpyver.messagebox',
+        tk_mock = mocker.patch('glimpsebrowser.misc.checkpyver.Tk', autospec=True)
+        msgbox_mock = mocker.patch('glimpsebrowser.misc.checkpyver.messagebox',
                                    autospec=True)
 
     checkpyver.check_python_version()
@@ -90,5 +90,5 @@ def test_patched_errwindow(capfd, mocker, monkeypatch):
     assert not stderr
     tk_mock.assert_called_with()
     tk_mock().withdraw.assert_called_with()
-    msgbox_mock.showerror.assert_called_with("qutebrowser: Fatal error!",
+    msgbox_mock.showerror.assert_called_with("glimpsebrowser: Fatal error!",
                                              unittest.mock.ANY)

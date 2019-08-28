@@ -7,8 +7,8 @@ window._keys = "";
 document.onkeypress = function(evt) {
   var e = evt || window.event;
   window._keys += String.fromCharCode(e.charCode);
-  if (window._keys.endsWith("qute")) {
-    alert("It's just a qute browser!");
+  if (window._keys.endsWith("glimpse")) {
+    alert("It's just a glimpse browser!");
     window._keys = "";
   }
 }

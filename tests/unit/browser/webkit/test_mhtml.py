@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2015-2018 Daniel Schadt
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import io
 import textwrap
@@ -24,7 +24,7 @@ import re
 
 import pytest
 
-mhtml = pytest.importorskip('qutebrowser.browser.webkit.mhtml')
+mhtml = pytest.importorskip('glimpsebrowser.browser.webkit.mhtml')
 
 
 try:
@@ -79,17 +79,17 @@ def test_quoted_printable_umlauts(checker):
                                content_type='text/plain')
     writer.write_to(checker.fp)
     checker.expect("""
-        Content-Type: multipart/related; boundary="---=_qute-UUID"
+        Content-Type: multipart/related; boundary="---=_glimpse-UUID"
         MIME-Version: 1.0
 
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: localhost
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         Die s=FC=DFe H=FCndin l=E4uft in die H=F6hle des B=E4ren
-        -----=_qute-UUID--
+        -----=_glimpse-UUID--
         """)
 
 
@@ -119,17 +119,17 @@ def test_file_encoded_as_base64(checker):
                     transfer_encoding=mhtml.E_BASE64)
     writer.write_to(checker.fp)
     checker.expect("""
-        Content-Type: multipart/related; boundary="---=_qute-UUID"
+        Content-Type: multipart/related; boundary="---=_glimpse-UUID"
         MIME-Version: 1.0
 
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://example.com
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         Image file attached
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://a.example.com/image.png
         MIME-Version: 1.0
         Content-Type: image/png
@@ -137,7 +137,7 @@ def test_file_encoded_as_base64(checker):
 
         8J+YgSBpbWFnZSBkYXRh
 
-        -----=_qute-UUID--
+        -----=_glimpse-UUID--
         """)
 
 
@@ -167,66 +167,66 @@ def test_files_appear_sorted(checker):
                         transfer_encoding=mhtml.E_QUOPRI)
     writer.write_to(checker.fp)
     checker.expect("""
-        Content-Type: multipart/related; boundary="---=_qute-UUID"
+        Content-Type: multipart/related; boundary="---=_glimpse-UUID"
         MIME-Version: 1.0
 
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://www.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         root file
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://a.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file a
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://b.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file b
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://g.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file g
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://h.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file h
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://i.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file i
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://t.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file t
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://z.example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
         file z
-        -----=_qute-UUID--
+        -----=_glimpse-UUID--
         """)
 
 
@@ -237,23 +237,23 @@ def test_empty_content_type(checker):
     writer.add_file('http://example.com/file', b'file content')
     writer.write_to(checker.fp)
     checker.expect("""
-        Content-Type: multipart/related; boundary="---=_qute-UUID"
+        Content-Type: multipart/related; boundary="---=_glimpse-UUID"
         MIME-Version: 1.0
 
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: http://example.com/
         MIME-Version: 1.0
         Content-Type: text/plain
         Content-Transfer-Encoding: quoted-printable
 
 
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         MIME-Version: 1.0
         Content-Location: http://example.com/file
         Content-Transfer-Encoding: quoted-printable
 
         file content
-        -----=_qute-UUID--
+        -----=_glimpse-UUID--
         """)
 
 
@@ -296,10 +296,10 @@ def test_quoted_printable_spaces(checker):
                                content_type='text/plain')
     writer.write_to(checker.fp)
     checker.expect("""
-        Content-Type: multipart/related; boundary="---=_qute-UUID"
+        Content-Type: multipart/related; boundary="---=_glimpse-UUID"
         MIME-Version: 1.0
 
-        -----=_qute-UUID
+        -----=_glimpse-UUID
         Content-Location: localhost
         MIME-Version: 1.0
         Content-Type: text/plain
@@ -307,7 +307,7 @@ def test_quoted_printable_spaces(checker):
 
         {}=
         {}=20
-        -----=_qute-UUID--
+        -----=_glimpse-UUID--
         """.format(' ' * 75, ' ' * 24))
 
 

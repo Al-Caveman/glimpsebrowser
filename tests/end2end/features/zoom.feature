@@ -22,19 +22,19 @@ Feature: Zooming in and out
         Then the message "Zoom level: 120%" should be shown
         And the zoom should be 120%
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1118
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1118
     Scenario: Zooming in with very big count
         When I run :zoom-in with count 99999999999
         Then the message "Zoom level: 120%" should be shown
         And the zoom should be 120%
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1118
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1118
     Scenario: Zooming out with very big count
         When I run :zoom-out with count 99999999999
         Then the message "Zoom level: 50%" should be shown
         And the zoom should be 50%
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1118
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1118
     Scenario: Zooming in with very big count and snapping in
         When I run :zoom-in with count 99999999999
         And I run :zoom-out
@@ -81,9 +81,9 @@ Feature: Zooming in and out
         Then the message "Zoom level: 60%" should be shown
         And the zoom should be 60%
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2507
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2507
     # Using 127.0.0.1 because separate domain is required to reproduce
-    Scenario: Qutebrowser enforces correct zoom level
+    Scenario: Glimpsebrowser enforces correct zoom level
         When I run :zoom 150%
         And I open data/search.html
         And I run :open http://127.0.0.1:(port)/data/long_load.html
@@ -104,7 +104,7 @@ Feature: Zooming in and out
         Then the message "Zoom level: 120%" should be shown
         And the zoom should be 120%
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2183
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2183
     @qtwebengine_flaky
     Scenario: Setting a default zoom
         When I set zoom.default to 200%

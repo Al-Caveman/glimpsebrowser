@@ -1,19 +1,19 @@
-# Copyright 2018 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2018 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 # NSIS uninstaller header. Uses NsisMultiUser plugin and contains portions of
 # its demo code, copyright 2017 Richard Drizin, Alex Mitev.
@@ -139,7 +139,7 @@ SectionEnd
 ; Modern install component descriptions
 !insertmacro MUI_UNFUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SectionGroupRemoveUserFiles} \
-    "Remove quterbowser files of user $UserName."
+    "Remove glimpserbowser files of user $UserName."
   !insertmacro MUI_DESCRIPTION_TEXT ${SectionUninstallProgram} \
     "Remove ${PRODUCT_NAME} application files."
   !insertmacro MUI_DESCRIPTION_TEXT ${SectionRemoveSettings} \

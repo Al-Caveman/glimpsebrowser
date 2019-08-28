@@ -2,24 +2,24 @@
 
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""setuptools installer script for qutebrowser."""
+"""setuptools installer script for glimpsebrowser."""
 
 import re
 import ast
@@ -44,9 +44,9 @@ def read_file(name):
 
 
 def _get_constant(name):
-    """Read a __magic__ constant from qutebrowser/__init__.py.
+    """Read a __magic__ constant from glimpsebrowser/__init__.py.
 
-    We don't import qutebrowser here because it can go wrong for multiple
+    We don't import glimpsebrowser here because it can go wrong for multiple
     reasons. Instead we use re/ast to get the value directly from the source
     file.
 
@@ -57,7 +57,7 @@ def _get_constant(name):
         The value of the argument.
     """
     field_re = re.compile(r'__{}__\s+=\s+(.*)'.format(re.escape(name)))
-    path = os.path.join(BASEDIR, 'qutebrowser', '__init__.py')
+    path = os.path.join(BASEDIR, 'glimpsebrowser', '__init__.py')
     line = field_re.search(read_file(path)).group(1)
     value = ast.literal_eval(line)
     return value
@@ -69,16 +69,16 @@ try:
         packages=setuptools.find_packages(exclude=['scripts', 'scripts.*']),
         include_package_data=True,
         entry_points={'gui_scripts':
-                      ['qutebrowser = qutebrowser.qutebrowser:main']},
+                      ['glimpsebrowser = glimpsebrowser.glimpsebrowser:main']},
         zip_safe=True,
         install_requires=['pypeg2', 'jinja2', 'pygments', 'PyYAML', 'attrs'],
         python_requires='>=3.5',
-        name='qutebrowser',
+        name='glimpsebrowser',
         version=_get_constant('version'),
         description=_get_constant('description'),
         long_description=read_file('README.asciidoc'),
         long_description_content_type='text/plain',
-        url='https://www.qutebrowser.org/',
+        url='https://www.glimpsebrowser.org/',
         author=_get_constant('author'),
         author_email=_get_constant('email'),
         license=_get_constant('license'),
@@ -105,6 +105,6 @@ try:
     )
 finally:
     if BASEDIR is not None:
-        path = os.path.join(BASEDIR, 'qutebrowser', 'git-commit-id')
+        path = os.path.join(BASEDIR, 'glimpsebrowser', 'git-commit-id')
         if os.path.exists(path):
             os.remove(path)

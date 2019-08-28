@@ -2,20 +2,20 @@
 
 # Copyright 2016-2019 Ryan Roden-Corrent (rcorre) <ryan@rcorre.net>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Tests for completion models."""
 
@@ -27,11 +27,11 @@ from datetime import datetime
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.misc import objects
-from qutebrowser.completion import completer
-from qutebrowser.completion.models import miscmodels, urlmodel, configmodel
-from qutebrowser.config import configdata, configtypes
-from qutebrowser.utils import usertypes
+from glimpsebrowser.misc import objects
+from glimpsebrowser.completion import completer
+from glimpsebrowser.completion.models import miscmodels, urlmodel, configmodel
+from glimpsebrowser.config import configdata, configtypes
+from glimpsebrowser.utils import usertypes
 
 
 def _check_completions(model, expected):
@@ -67,7 +67,7 @@ def _check_completions(model, expected):
 def cmdutils_stub(monkeypatch, stubs):
     """Patch the cmdutils module to provide fake commands."""
     return monkeypatch.setattr(objects, 'commands', {
-        'quit': stubs.FakeCommand(name='quit', desc='quit qutebrowser'),
+        'quit': stubs.FakeCommand(name='quit', desc='quit glimpsebrowser'),
         'open': stubs.FakeCommand(name='open', desc='open a url'),
         'prompt-yes': stubs.FakeCommand(name='prompt-yes', deprecated=True),
         'scroll': stubs.FakeCommand(
@@ -180,7 +180,7 @@ def bookmarks(bookmark_manager_stub):
     bookmark_manager_stub.marks = collections.OrderedDict([
         ('https://github.com', 'GitHub'),
         ('https://python.org', 'Welcome to Python.org'),
-        ('http://qutebrowser.org', 'qutebrowser | qutebrowser'),
+        ('http://glimpsebrowser.org', 'glimpsebrowser | glimpsebrowser'),
     ])
     return bookmark_manager_stub
 
@@ -189,8 +189,8 @@ def bookmarks(bookmark_manager_stub):
 def web_history_populated(web_history):
     """Pre-populate the web-history database."""
     web_history.add_url(
-        url=QUrl('http://qutebrowser.org'),
-        title='qutebrowser',
+        url=QUrl('http://glimpsebrowser.org'),
+        title='glimpsebrowser',
         atime=datetime(2015, 9, 5).timestamp()
     )
     web_history.add_url(
@@ -231,7 +231,7 @@ def test_command_completion(qtmodeltester, cmdutils_stub, configdata_stub,
         "Commands": [
             ('open', 'open a url', ''),
             ('q', "Alias for 'quit'", ''),
-            ('quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            ('quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             ('tab-close', 'Close the current tab.', ''),
         ]
     })
@@ -255,7 +255,7 @@ def test_help_completion(qtmodeltester, cmdutils_stub, key_config_stub,
     _check_completions(model, {
         "Commands": [
             (':open', 'open a url', ''),
-            (':quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            (':quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             (':scroll', 'Scroll the current tab in the given direction.', ''),
             (':tab-close', 'Close the current tab.', ''),
         ],
@@ -305,12 +305,12 @@ def test_open_categories(qtmodeltester, config_stub, web_history_populated,
         "Bookmarks": [
             ('https://github.com', 'GitHub', None),
             ('https://python.org', 'Welcome to Python.org', None),
-            ('http://qutebrowser.org', 'qutebrowser | qutebrowser', None),
+            ('http://glimpsebrowser.org', 'glimpsebrowser | glimpsebrowser', None),
         ],
         "History": [
             ('https://github.com', 'https://github.com', '2016-05-01'),
             ('https://python.org', 'Welcome to Python.org', '2016-03-08'),
-            ('http://qutebrowser.org', 'qutebrowser', '2015-09-05'),
+            ('http://glimpsebrowser.org', 'glimpsebrowser', '2015-09-05'),
         ],
     })
 
@@ -355,7 +355,7 @@ def test_open_categories_remove_one(qtmodeltester, config_stub, web_history_popu
         "History": [
             ('https://github.com', 'https://github.com', '2016-05-01'),
             ('https://python.org', 'Welcome to Python.org', '2016-03-08'),
-            ('http://qutebrowser.org', 'qutebrowser', '2015-09-05'),
+            ('http://glimpsebrowser.org', 'glimpsebrowser', '2015-09-05'),
         ],
     })
 
@@ -405,7 +405,7 @@ def test_bookmark_completion(qtmodeltester, bookmarks):
         "Bookmarks": [
             ('https://github.com', 'GitHub', None),
             ('https://python.org', 'Welcome to Python.org', None),
-            ('http://qutebrowser.org', 'qutebrowser | qutebrowser', None),
+            ('http://glimpsebrowser.org', 'glimpsebrowser | glimpsebrowser', None),
         ]
     })
 
@@ -413,7 +413,7 @@ def test_bookmark_completion(qtmodeltester, bookmarks):
 @pytest.mark.parametrize('row, removed', [
     (0, 'https://github.com'),
     (1, 'https://python.org'),
-    (2, 'http://qutebrowser.org'),
+    (2, 'http://glimpsebrowser.org'),
 ])
 def test_bookmark_completion_delete(qtmodeltester, bookmarks, row, removed):
     """Test deleting a quickmark from the quickmark completion model."""
@@ -472,12 +472,12 @@ def test_url_completion(qtmodeltester, config_stub, web_history_populated,
         "Bookmarks": [
             ('https://github.com', 'GitHub', None),
             ('https://python.org', 'Welcome to Python.org', None),
-            ('http://qutebrowser.org', 'qutebrowser | qutebrowser', None),
+            ('http://glimpsebrowser.org', 'glimpsebrowser | glimpsebrowser', None),
         ],
         "History": [
             ('https://github.com', 'https://github.com', '2016-05-01'),
             ('https://python.org', 'Welcome to Python.org', '2016-03-08'),
-            ('http://qutebrowser.org', 'qutebrowser', '2015-09-05'),
+            ('http://glimpsebrowser.org', 'glimpsebrowser', '2015-09-05'),
         ],
     })
 
@@ -507,12 +507,12 @@ def test_search_only_default(qtmodeltester, config_stub, web_history_populated,
         "Bookmarks": [
             ('https://github.com', 'GitHub', None),
             ('https://python.org', 'Welcome to Python.org', None),
-            ('http://qutebrowser.org', 'qutebrowser | qutebrowser', None),
+            ('http://glimpsebrowser.org', 'glimpsebrowser | glimpsebrowser', None),
         ],
         "History": [
             ('https://github.com', 'https://github.com', '2016-05-01'),
             ('https://python.org', 'Welcome to Python.org', '2016-03-08'),
-            ('http://qutebrowser.org', 'qutebrowser', '2015-09-05'),
+            ('http://glimpsebrowser.org', 'glimpsebrowser', '2015-09-05'),
         ],
     })
 
@@ -528,12 +528,12 @@ def test_url_completion_no_quickmarks(qtmodeltester, web_history_populated,
         "Bookmarks": [
             ('https://github.com', 'GitHub', None),
             ('https://python.org', 'Welcome to Python.org', None),
-            ('http://qutebrowser.org', 'qutebrowser | qutebrowser', None),
+            ('http://glimpsebrowser.org', 'glimpsebrowser | glimpsebrowser', None),
         ],
         "History": [
             ('https://github.com', 'https://github.com', '2016-05-01'),
             ('https://python.org', 'Welcome to Python.org', '2016-03-08'),
-            ('http://qutebrowser.org', 'qutebrowser', '2015-09-05'),
+            ('http://glimpsebrowser.org', 'glimpsebrowser', '2015-09-05'),
         ],
     })
 
@@ -554,7 +554,7 @@ def test_url_completion_no_bookmarks(qtmodeltester, web_history_populated,
         "History": [
             ('https://github.com', 'https://github.com', '2016-05-01'),
             ('https://python.org', 'Welcome to Python.org', '2016-03-08'),
-            ('http://qutebrowser.org', 'qutebrowser', '2015-09-05'),
+            ('http://glimpsebrowser.org', 'glimpsebrowser', '2015-09-05'),
         ],
     })
 
@@ -828,7 +828,7 @@ def test_window_completion(qtmodeltester, fake_web_tab, tabbed_browser_stubs,
 
     _check_completions(model, {
         'Windows': [
-            ('0', 'window title - qutebrowser',
+            ('0', 'window title - glimpsebrowser',
              'GitHub, Wikipedia, DuckDuckGo'),
         ]
     })
@@ -996,12 +996,12 @@ def test_bind_completion(qtmodeltester, cmdutils_stub, config_stub,
 
     _check_completions(model, {
         "Current/Default": [
-            ('quit', '(Current) quit qutebrowser', 'ZQ'),
+            ('quit', '(Current) quit glimpsebrowser', 'ZQ'),
         ],
         "Commands": [
             ('open', 'open a url', ''),
             ('q', "Alias for 'quit'", ''),
-            ('quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            ('quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             ('scroll', 'Scroll the current tab in the given direction.', ''),
             ('tab-close', 'Close the current tab.', ''),
         ],
@@ -1021,7 +1021,7 @@ def test_bind_completion_invalid(cmdutils_stub, config_stub, key_config_stub,
         "Commands": [
             ('open', 'open a url', ''),
             ('q', "Alias for 'quit'", ''),
-            ('quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            ('quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             ('scroll', 'Scroll the current tab in the given direction.', ''),
             ('tab-close', 'Close the current tab.', ''),
         ],
@@ -1042,7 +1042,7 @@ def test_bind_completion_invalid_binding(cmdutils_stub, config_stub,
         "Commands": [
             ('open', 'open a url', ''),
             ('q', "Alias for 'quit'", ''),
-            ('quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            ('quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             ('scroll', 'Scroll the current tab in the given direction.', ''),
             ('tab-close', 'Close the current tab.', ''),
         ],
@@ -1060,7 +1060,7 @@ def test_bind_completion_no_binding(qtmodeltester, cmdutils_stub, config_stub,
         "Commands": [
             ('open', 'open a url', ''),
             ('q', "Alias for 'quit'", ''),
-            ('quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            ('quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             ('scroll', 'Scroll the current tab in the given direction.', ''),
             ('tab-close', 'Close the current tab.', ''),
         ],
@@ -1082,7 +1082,7 @@ def test_bind_completion_changed(cmdutils_stub, config_stub, key_config_stub,
         "Commands": [
             ('open', 'open a url', ''),
             ('q', "Alias for 'quit'", ''),
-            ('quit', 'quit qutebrowser', 'ZQ, <Ctrl+q>'),
+            ('quit', 'quit glimpsebrowser', 'ZQ, <Ctrl+q>'),
             ('scroll', 'Scroll the current tab in the given direction.', ''),
             ('tab-close', 'Close the current tab.', ''),
         ],

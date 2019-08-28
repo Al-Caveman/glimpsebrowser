@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.utils."""
+"""Tests for glimpsebrowser.utils.utils."""
 
 import sys
 import enum
@@ -37,9 +37,9 @@ import pytest
 import hypothesis
 from hypothesis import strategies
 
-import qutebrowser
-import qutebrowser.utils  # for test_qualname
-from qutebrowser.utils import utils, qtutils
+import glimpsebrowser
+import glimpsebrowser.utils  # for test_qualname
+from glimpsebrowser.utils import utils, qtutils
 
 
 ELLIPSIS = '\u2026'
@@ -120,7 +120,7 @@ class TestElidingFilenames:
 def freezer(request, monkeypatch):
     if request.param and not getattr(sys, 'frozen', False):
         monkeypatch.setattr(sys, 'frozen', True, raising=False)
-        monkeypatch.setattr(sys, 'executable', qutebrowser.__file__)
+        monkeypatch.setattr(sys, 'executable', glimpsebrowser.__file__)
     elif not request.param and getattr(sys, 'frozen', False):
         # Want to test unfrozen tests, but we are frozen
         pytest.skip("Can't run with sys.frozen = True!")
@@ -545,9 +545,9 @@ QUALNAME_OBJ = QualnameObj()
     pytest.param(qualname_func, 'test_utils.qualname_func', id='function'),
     pytest.param(functools.partial(qualname_func, True),
                  'test_utils.qualname_func', id='partial'),
-    pytest.param(qutebrowser, 'qutebrowser', id='module'),
-    pytest.param(qutebrowser.utils, 'qutebrowser.utils', id='submodule'),
-    pytest.param(utils, 'qutebrowser.utils.utils', id='from-import'),
+    pytest.param(glimpsebrowser, 'glimpsebrowser', id='module'),
+    pytest.param(glimpsebrowser.utils, 'glimpsebrowser.utils', id='submodule'),
+    pytest.param(utils, 'glimpsebrowser.utils.utils', id='from-import'),
 ])
 def test_qualname(obj, expected):
     assert utils.qualname(obj) == expected
@@ -647,11 +647,11 @@ class TestGetSetClipboard:
 
     @pytest.fixture(autouse=True)
     def clipboard_mock(self, mocker):
-        m = mocker.patch('qutebrowser.utils.utils.QApplication.clipboard',
+        m = mocker.patch('glimpsebrowser.utils.utils.QApplication.clipboard',
                          autospec=True)
         clipboard = m()
         clipboard.text.return_value = 'mocked clipboard text'
-        mocker.patch('qutebrowser.utils.utils.fake_clipboard', None)
+        mocker.patch('glimpsebrowser.utils.utils.fake_clipboard', None)
         return clipboard
 
     def test_set(self, clipboard_mock, caplog):

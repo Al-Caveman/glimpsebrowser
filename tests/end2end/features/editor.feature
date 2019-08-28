@@ -97,23 +97,23 @@ Feature: Opening external editors
     Scenario: Spawning an editor successfully
         When I set up a fake editor returning "foobar"
         And I open data/editor.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :open-editor
         And I wait for "Read back: foobar" in the log
-        And I run :click-element id qute-button
+        And I run :click-element id glimpse-button
         Then the javascript message "text: foobar" should be logged
 
     Scenario: Spawning an editor in normal mode
         When I set up a fake editor returning "foobar"
         And I open data/editor.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :leave-mode
         And I wait for "Leaving mode KeyMode.insert (reason: leave current)" in the log
         And I run :open-editor
         And I wait for "Read back: foobar" in the log
-        And I run :click-element id qute-button
+        And I run :click-element id glimpse-button
         Then the javascript message "text: foobar" should be logged
 
     # Could not get signals working on Windows
@@ -122,7 +122,7 @@ Feature: Opening external editors
     Scenario: Spawning an editor and closing the tab
         When I set up a fake editor that writes "foobar" on save
         And I open data/editor.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :open-editor
         And I set tabs.last_close to blank
@@ -136,18 +136,18 @@ Feature: Opening external editors
     Scenario: Spawning an editor and saving
         When I set up a fake editor that writes "foobar" on save
         And I open data/editor.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :open-editor
         And I save without exiting the editor
         And I wait for "Read back: foobar" in the log
-        And I run :click-element id qute-button
+        And I run :click-element id glimpse-button
         Then the javascript message "text: foobar" should be logged
 
     Scenario: Spawning an editor in caret mode
         When I set up a fake editor returning "foobar"
         And I open data/editor.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :leave-mode
         And I wait for "Leaving mode KeyMode.insert (reason: leave current)" in the log
@@ -155,19 +155,19 @@ Feature: Opening external editors
         And I wait for "Entering mode KeyMode.caret (reason: command)" in the log
         And I run :open-editor
         And I wait for "Read back: foobar" in the log
-        And I run :click-element id qute-button
+        And I run :click-element id glimpse-button
         Then the javascript message "text: foobar" should be logged
 
     Scenario: Spawning an editor with existing text
         When I set up a fake editor replacing "foo" by "bar"
         And I open data/editor.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :insert-text foo
         And I wait for "Inserting text into element *" in the log
         And I run :open-editor
         And I wait for "Read back: bar" in the log
-        And I run :click-element id qute-button
+        And I run :click-element id glimpse-button
         Then the javascript message "text: bar" should be logged
 
     ## :edit-command

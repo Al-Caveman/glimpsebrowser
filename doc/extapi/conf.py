@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'qutebrowser extensions'
+project = 'glimpsebrowser extensions'
 copyright = '2018-2019, Florian Bruhin'
 author = 'Florian Bruhin'
 
@@ -104,7 +104,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'qutebrowserextensionsdoc'
+htmlhelp_basename = 'glimpsebrowserextensionsdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -131,7 +131,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'qutebrowserextensions.tex', 'qutebrowser extensions Documentation',
+    (master_doc, 'glimpsebrowserextensions.tex', 'glimpsebrowser extensions Documentation',
      'Florian Bruhin', 'manual'),
 ]
 
@@ -141,7 +141,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'qutebrowserextensions', 'qutebrowser extensions Documentation',
+    (master_doc, 'glimpsebrowserextensions', 'glimpsebrowser extensions Documentation',
      [author], 1)
 ]
 
@@ -152,8 +152,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'qutebrowserextensions', 'qutebrowser extensions Documentation',
-     author, 'qutebrowserextensions', 'One line description of project.',
+    (master_doc, 'glimpsebrowserextensions', 'glimpsebrowser extensions Documentation',
+     author, 'glimpsebrowserextensions', 'One line description of project.',
      'Miscellaneous'),
 ]
 

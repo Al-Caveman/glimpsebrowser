@@ -1,4 +1,4 @@
-qutebrowser help
+glimpsebrowser help
 ================
 
 Documentation
@@ -10,21 +10,21 @@ The following help pages are currently available:
 * link:../faq{outfilesuffix}[Frequently asked questions]
 * link:../changelog{outfilesuffix}[Change Log]
 * link:commands{outfilesuffix}[Documentation of commands]
-* link:configuring{outfilesuffix}[Configuring qutebrowser]
+* link:configuring{outfilesuffix}[Configuring glimpsebrowser]
 * link:settings{outfilesuffix}[Documentation of settings]
 * link:../userscripts{outfilesuffix}[How to write userscripts]
-* link:../contributing{outfilesuffix}[Contributing to qutebrowser]
+* link:../contributing{outfilesuffix}[Contributing to glimpsebrowser]
 
 Getting help
 ------------
 
 You can get help in the IRC channel
-irc://irc.freenode.org/#qutebrowser[`#qutebrowser`] on
+irc://irc.freenode.org/#glimpsebrowser[`#glimpsebrowser`] on
 http://freenode.net/[Freenode]
-(https://webchat.freenode.net/?channels=#qutebrowser[webchat]), or by writing a
+(https://webchat.freenode.net/?channels=#glimpsebrowser[webchat]), or by writing a
 message to the
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser[mailinglist] at
-mailto:qutebrowser@lists.qutebrowser.org[].
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser[mailinglist] at
+mailto:glimpsebrowser@lists.glimpsebrowser.org[].
 
 Bugs
 ----
@@ -35,8 +35,8 @@ ways:
 * Use the built-in `:report` command or the automatic crash dialog.
 * Open an issue in the Github issue tracker.
 * Write a mail to the
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser[mailinglist] at
-mailto:qutebrowser@lists.qutebrowser.org[].
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser[mailinglist] at
+mailto:glimpsebrowser@lists.glimpsebrowser.org[].
 
 License
 -------

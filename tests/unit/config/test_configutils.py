@@ -1,28 +1,28 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import pytest
 
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.config import configutils, configdata, configtypes
-from qutebrowser.utils import urlmatch
+from glimpsebrowser.config import configutils, configdata, configtypes
+from glimpsebrowser.utils import urlmatch
 
 
 def test_unset_object_identity():
@@ -65,9 +65,9 @@ def empty_values(opt):
 
 
 def test_repr(opt, values):
-    expected = ("qutebrowser.config.configutils.Values(opt={!r}, "
+    expected = ("glimpsebrowser.config.configutils.Values(opt={!r}, "
                 "values=[ScopedValue(value='global value', pattern=None), "
-                "ScopedValue(value='example value', pattern=qutebrowser.utils."
+                "ScopedValue(value='example value', pattern=glimpsebrowser.utils."
                 "urlmatch.UrlPattern(pattern='*://www.example.com/'))])"
                 .format(opt))
     assert repr(values) == expected

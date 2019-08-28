@@ -2,20 +2,20 @@
 
 # Copyright 2016-2019 Clayton Craft (craftyguy) <craftyguy@gmail.com>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """Test Statusbar url."""
@@ -24,8 +24,8 @@ import pytest
 
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.utils import usertypes, urlutils
-from qutebrowser.mainwindow.statusbar import url
+from glimpsebrowser.utils import usertypes, urlutils
+from glimpsebrowser.mainwindow.statusbar import url
 from helpers import utils
 
 
@@ -135,7 +135,7 @@ def test_on_tab_changed(url_widget, fake_web_tab, load_status, qurl):
         url.UrlType.success_https
     ),
     (
-        QUrl('http://www.qutebrowser.org/CONTRIBUTING.html'),
+        QUrl('http://www.glimpsebrowser.org/CONTRIBUTING.html'),
         usertypes.LoadStatus.loading,
         url.UrlType.normal
     ),

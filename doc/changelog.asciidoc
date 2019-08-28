@@ -30,8 +30,8 @@ Changed
   running it as root if doing so would result in a wrong installation path.
 - The Makefile now can also run `setup.py build` when invoked without a target.
 - Changes to userscripts:
-  * qute-pass: Don't run `pass` if only a username is requested.
-  * qute-pass: Support private domains like `myrouter.local`.
+  * glimpse-pass: Don't run `pass` if only a username is requested.
+  * glimpse-pass: Support private domains like `myrouter.local`.
   * readability: Improved CSS styling
 - Various performance improvements:
   * When loading config files
@@ -46,7 +46,7 @@ Fixed
   of `config.bind(..., None)`) when unbinding a default keybinding.
 - Prevent repeat keyup events for JavaScript when a key is held down.
 - The Makefile now rebuilds the manpage correctly.
-- `~/.config/qutebrowser/blocked-hosts` can now also contain /etc/hosts-like
+- `~/.config/glimpsebrowser/blocked-hosts` can now also contain /etc/hosts-like
   lines, not just simple hostnames.
 - Restored compatibility with Jinja2 2.8 (e.g. used on Debian Stretch or Ubuntu
   16.04 LTS).
@@ -100,12 +100,12 @@ Changed
    - OpenSSL 1.1.1
    - Note: This release includes Qt 5.12.4 instead of Qt 5.13.0 due to
      https://bugreports.qt.io/browse/QTBUG-76913[QTBUG-76913] causing frequent
-     segfaults with Qt 5.13. After Qt 5.13.1 is released, qutebrowser v1.8.0
+     segfaults with Qt 5.13. After Qt 5.13.1 is released, glimpsebrowser v1.8.0
      will be released with an updated Qt.
 - Completely revamped Windows installer which allows installing without admin
-  permissions and allows setting qutebrowser as default browser.
-- The desktop file `qutebrowser.desktop` is now renamed to
-  `org.qutebrowser.qutebrowser.desktop`.
+  permissions and allows setting glimpsebrowser as default browser.
+- The desktop file `glimpsebrowser.desktop` is now renamed to
+  `org.glimpsebrowser.glimpsebrowser.desktop`.
 - Pinned tabs now always show a favicon (even if the site doesn't provide one)
   when shrinking.
 - Setting `downloads.location.directory` now changes the directory displayed in
@@ -183,7 +183,7 @@ Fixed
 - Crash on redirects with Qt 5.13.
 - Hide bogus `AA_ShareOpenGLContexts` warning with Qt 5.12.4.
 - Workaround for renderer process crashes with Qt 5.12.4.
-  If you're unable to update, you can remove `~/.cache/qutebrowser` for the
+  If you're unable to update, you can remove `~/.cache/glimpsebrowser` for the
   same result.
 
 v1.6.2 (2019-05-06)
@@ -219,7 +219,7 @@ Fixed
 ~~~~~
 
 - Crash when using `:config-{dict,list}-{add,remove}` with an invalid setting.
-- Functionality like hinting on pages with an element with ID `_qutebrowser` (such as qutebrowser.org) on Qt 5.12.
+- Functionality like hinting on pages with an element with ID `_glimpsebrowser` (such as glimpsebrowser.org) on Qt 5.12.
 - The .desktop file in v1.6.0 was missing the "Actions" key, which is now fixed.
 - The SVG icon now has a size of 256x256px set to comply with freedesktop standards.
 - Setting `colors.statusbar.*.bg` to a gradient now has the expected effect of
@@ -265,9 +265,9 @@ Changed
   * macOS: Support for OS X 10.11 El Capitan was dropped, requiring macOS 10.12
     Sierra or newer.
   * macOS: The IPC socket path used to communicate with existing instances
-    changed due to changes in Qt 5.12. Please make sure to quit qutebrowser
+    changed due to changes in Qt 5.12. Please make sure to quit glimpsebrowser
     before upgrading.
-- `:q` now closes the current window instead of quitting qutebrowser completely
+- `:q` now closes the current window instead of quitting glimpsebrowser completely
   (`:close`), while `:qa` quits (`:quit`). The behavior of `:wq` remains
   unchanged (`:quit --save`), as closing a window while saving the session
   doesn't make sense.
@@ -285,15 +285,15 @@ Changed
 - The JavaScript `console` object is now available in PAC files.
 - PAC proxies currently don't work properly on QtWebEngine (and never did), so
   an error is now shown when trying to configure a PAC proxy.
-- The metainfo file `qutebrowser.appdata.xml` is now renamed to
-  `org.qutebrowser.qutebrowser.appdata.xml`.
-- The `qute-pass` userscript now understands domains in gpg filenames
+- The metainfo file `glimpsebrowser.appdata.xml` is now renamed to
+  `org.glimpsebrowser.glimpsebrowser.appdata.xml`.
+- The `glimpse-pass` userscript now understands domains in gpg filenames
   in addition to directory names.
 - The autocompletion for `content.headers.user_agent` got updated to only
   include the default and Chrome, as setting the UA to Firefox has various
   bad side-effects.
 - Combining Qt 5.12 with an older PyQt can lead to issues, so a warning is
-  now shown when starting qutebrowser with that combination.
+  now shown when starting glimpsebrowser with that combination.
 
 Fixed
 ~~~~~
@@ -323,7 +323,7 @@ Fixed
   * A javascript error on page load was fixed.
   * `window.print()` works with Qt 5.12 now.
   * Fixed handling of duplicate download filenames.
-  * Fixed broken `qute://history` page.
+  * Fixed broken `glimpse://history` page.
   * Fixed PDF.js not working properly.
   * The download button in PDF.js now works (it's not possible to make
     it work with earlier Qt versions).
@@ -351,7 +351,7 @@ Fixed
   some pages.
 - PDF.js is now bundled again with the macOS/Windows release.
 - PDF.js is now searched in the correct path (if not installed system-wide)
-  instead of hardcoding `~/.local/share/qutebrowser`.
+  instead of hardcoding `~/.local/share/glimpsebrowser`.
 - Improved logging for PDF.js resources which fail to load.
 - Crash when closing a tab after doing a search.
 - Tabs appearing when hidden after e.g. closing tabs.
@@ -380,10 +380,10 @@ Added
     fine-grained/restrictive control about which IPs are exposed via WebRTC.
   * `tabs.max_width` which allows to have a more "normal" look for tabs.
   * `content.mute` which allows to mute pages (or all tabs) by default.
-- Running qutebrowser with QtWebKit or Qt < 5.9 now shows a warning (only
+- Running glimpsebrowser with QtWebKit or Qt < 5.9 now shows a warning (only
   once), as support for those is going to be removed in a future release.
 - New t[iI][hHu] default bindings (similar to `tsh` etc.) to toggle images.
-- The qute-pass userscript now has optional OTP support.
+- The glimpse-pass userscript now has optional OTP support.
 - When `:spawn --userscript` is called with a count, that count is now
   passed to userscripts as `$QUTE_COUNT`.
 
@@ -400,14 +400,14 @@ Changed
 - The default keybinding to leave passthrough mode was changed from `<Ctrl-V>`
   to `<Shift-Escape>`, which makes pasting from the clipboard easier in
   passthrough mode and is also unlikely to conflict with webpage bindings.
-- The `app_id` is now set to `qutebrowser` for Wayland.
+- The `app_id` is now set to `glimpsebrowser` for Wayland.
 - `Command` or `Cmd` can now be used (instead of `Meta`) to map the Command key
   on macOS.
 - Using `:set option` now shows the value of the setting (like `:set option?`
   already did).
 - The `completion.web_history_max_items` setting got renamed to
   `completion.web_history.max_items`.
-- The Makefile shipped with qutebrowser now supports overriding variables
+- The Makefile shipped with glimpsebrowser now supports overriding variables
   `DATADIR` and `MANDIR`.
 - Regenerating completion history now shows a progress dialog.
 - The `content.autoplay` setting now supports URL patterns on Qt >= 5.11.
@@ -417,7 +417,7 @@ Changed
   page instead of zooming.
 - Editing text in an external editor now simulates a JS "input" event, which
   improves compatibility with websites reacting via JS to input.
-- The `qute://settings` page is now properly sorted on Python 3.5.
+- The `glimpse://settings` page is now properly sorted on Python 3.5.
 - `:zoom`, `:zoom-in` and `:zoom-out` now have a `--quiet` switch which causes
   them to not display a message.
 - The `scrolling.bar` setting now takes three values instead of being a
@@ -433,11 +433,11 @@ Changed
 Fixed
 ~~~~~
 
-- `qute://` pages now work properly on Qt 5.11.2
+- `glimpse://` pages now work properly on Qt 5.11.2
 - Error when passing a substring with spaces to `:tab-take`.
 - Greasemonkey scripts which start with an UTF-8 BOM are now handled correctly.
 - When no documentation has been generated, the plaintext documentation now can
-  be shown for more files such as `qute://help/userscripts.html`.
+  be shown for more files such as `glimpse://help/userscripts.html`.
 - Crash when doing initial run on Wayland without XWayland.
 - Crash when trying to load an empty session file.
 - `:hint` with an invalid `--mode=` value now shows a proper error.
@@ -476,7 +476,7 @@ Fixed
 - Crash in the `importer.py` script when importing Chrome bookmarks from newer Chrome versions.
 - The `content.webrtc_public_interfaces_only` option didn't work on Qt 5.11 previously (it now does).
   Note it still does not work on Qt 5.10 (due to a Qt bug) and Qt < 5.9.2.
-- Repeated escaping of entries in `qute://log` when refreshing page.
+- Repeated escaping of entries in `glimpse://log` when refreshing page.
 - The host blocker doesn't block 0.0.0.0 anymore.
 - Crash when using :// as URL pattern.
 - The `:buffer` completion now sorts tabs with indices >= 10 correctly again.
@@ -487,9 +487,9 @@ v1.4.1 (2018-07-11)
 Security
 ~~~~~~~~
 
-- CVE-2018-10895: Fix CSRF issue on the qute://settings page, leading to
+- CVE-2018-10895: Fix CSRF issue on the glimpse://settings page, leading to
   possible arbitrary code execution. See the related GitHub issue for details:
-  https://github.com/qutebrowser/qutebrowser/issues/4060
+  https://github.com/glimpsebrowser/glimpsebrowser/issues/4060
 
 Fixed
 ~~~~~
@@ -502,7 +502,7 @@ Fixed
   trying to use U2F.
 - The `link_pyqt.py` script now works correctly with PyQt 5.11.
 - The Windows installer now uninstalls the old version before installing the
-  new one, fixing issues with qutebrowser not starting after installing v1.4.0
+  new one, fixing issues with glimpsebrowser not starting after installing v1.4.0
   over v1.3.3.
 
 v1.4.0 (2018-07-03)
@@ -519,8 +519,8 @@ Added
   selects the first hint.
 - New `input.escape_quits_reporter` setting which can be used to avoid
   accidentally quitting the crash reporter when pressing escape.
-- New `qute-lastpass` userscript which uses the LastPass CLI to fill passwords.
-- The Makefile now installs a `/usr/share/metainfo/qutebrowser.appdata.xml` file.
+- New `glimpse-lastpass` userscript which uses the LastPass CLI to fill passwords.
+- The Makefile now installs a `/usr/share/metainfo/glimpsebrowser.appdata.xml` file.
 - QtWebEngine: Support for printing from webpages via `window.print`.
 - QtWebEngine: Support for muting tabs:
   * New `{audio}` field for `window.title_format` and `tabs.title.format` which
@@ -591,14 +591,14 @@ Changed
   browsing.
 - When a prompt is opened in insert/passthrough mode, the mode is restored
   after closing the prompt.
-- On Qt 5.10 or newer, dictionaries are now read from the qutebrowser data
-  directory (e.g. `~/.local/share/qutebrowser`) instead of `/usr/share/qt`.
+- On Qt 5.10 or newer, dictionaries are now read from the glimpsebrowser data
+  directory (e.g. `~/.local/share/glimpsebrowser`) instead of `/usr/share/qt`.
   Existing dictionaries are copied over.
 - If an error while parsing `~/.netrc` occurs, the cause of the error is now
   logged.
 - On Qt 5.9 or newer, certificate errors now show Chromium's detailed error
   page.
-- Greasemonkey scripts now support a "@qute-js-world" tag to run them in a
+- Greasemonkey scripts now support a "@glimpse-js-world" tag to run them in a
   different JavaScript context.
 
 Fixed
@@ -607,7 +607,7 @@ Fixed
 - Various subtle keyboard focus issues.
 - The security fix in v1.3.3 caused URLs with ampersands
   (`www.example.com?one=1&two=2`) to send the wrong arguments when clicked on
-  the `qute://history` page.
+  the `glimpse://history` page.
 - Crash when opening a PDF page with PDF.js enabled (on QtWebKit), but no
   PDF.js installed.
 - Crash when closing a tab shortly after opening it.
@@ -629,11 +629,11 @@ v1.3.3 (2018-06-21)
 Security
 ~~~~~~~~
 
-- CVE-2018-1000559: An XSS vulnerability on the `qute://history` page allowed
+- CVE-2018-1000559: An XSS vulnerability on the `glimpse://history` page allowed
   websites to inject HTML into the page via a crafted title tag. This could
   allow them to steal your browsing history. If you're currently unable to
   upgrade, avoid using `:history`. See the related GitHub issue for details:
-  https://github.com/qutebrowser/qutebrowser/issues/4011.
+  https://github.com/glimpsebrowser/glimpsebrowser/issues/4011.
 
 Fixed
 ~~~~~
@@ -686,7 +686,7 @@ Added
 - New `tabs.min_width` setting to configure the minimal width for tabs.
 - New userscripts:
   * `getbib` to download bibtex information for DOIs on a page.
-  * `qute-keepass` to get passwords from KeePassX.
+  * `glimpse-keepass` to get passwords from KeePassX.
 
 Changed
 ~~~~~~~
@@ -760,14 +760,14 @@ v1.2.1 (2018-03-14)
 Fixed
 ~~~~~
 
-- qutebrowser now starts properly when the PyQt5 QOpenGLFunctions package wasn't
+- glimpsebrowser now starts properly when the PyQt5 QOpenGLFunctions package wasn't
   found.
 - The keybinding cheatsheet on the quickstart page is now loaded from a local
-  `qute://` URL again.
+  `glimpse://` URL again.
 - With "tox -e mkvenv-pypi", PyQt 5.10.0 is used again instead of Qt 5.10.1,
-  because of an issue with Qt 5.10.1 which causes qutebrowser to fail to start
+  because of an issue with Qt 5.10.1 which causes glimpsebrowser to fail to start
   ("Could not find QtWebEngineProcess").
-- Unbinding keys which were bound in older qutebrowser versions now doesn't
+- Unbinding keys which were bound in older glimpsebrowser versions now doesn't
   crash anymore.
 - Fixed a crash when reloading a page which wasn't fully loaded with v1.2.0
 - Keys on the numeric keypad now fall back to the same bindings without `Num+`
@@ -808,8 +808,8 @@ Added
   * New `--edit` flag for `:view-source` to open the source in an external editor.
   * New `--select` flag for `:follow-hint` which acts like the given string was entered but doesn't necessary follow the hint.
 - New special pages:
-  * `qute://bindings` (opened via `:bind`) which shows all keybindings.
-  * `qute://tabs` (opened via `:buffer`) which lists all tabs.
+  * `glimpse://bindings` (opened via `:bind`) which shows all keybindings.
+  * `glimpse://tabs` (opened via `:buffer`) which lists all tabs.
 - New settings:
   * `statusbar.widgets` to configure which widgets should be shown in which
     order in the statusbar.
@@ -849,7 +849,7 @@ Changed
   a performance and stability improvement.
 - When an editor is spawned with `:open-editor` and `:config-edit`, the changes
   are now applied as soon as the file is saved in the editor.
-- The `hist_importer.py` script now only imports URL schemes qutebrowser can
+- The `hist_importer.py` script now only imports URL schemes glimpsebrowser can
   handle.
 - Deleting a prefix (`:`, `/` or `?`) via backspace now leaves command mode.
 - Angular 1 elements and `<summary>`/`<details>` now get hints assigned.
@@ -895,7 +895,7 @@ Fixed
 - Crash with an empty `completion.timestamp_format`.
 - Crash when `completion.min_chars` is set in some cases.
 - HTML/JS resource files are now read into RAM on start to avoid crashes when
-  changing qutebrowser versions while it's open.
+  changing glimpsebrowser versions while it's open.
 - Setting `bindings.key_mappings` to an empty value is now allowed.
 - Bindings to an empty commands are now ignored rather than crashing.
 
@@ -904,7 +904,7 @@ Removed
 
 - `QUTE_SELECTED_HTML` is now not set for userscripts anymore except when called
   via hints.
-- The `qutebrowser_viewsource` userscript has been removed as
+- The `glimpsebrowser_viewsource` userscript has been removed as
   `:view-source --edit` can now be used.
 - The `tabs.persist_mode_on_change` setting has been removed and replaced by
   `tabs.mode_on_change`.
@@ -942,7 +942,7 @@ Added
 - Initial support for Greasemonkey scripts. There are still some rough edges,
   but many scripts should already work.
 - There's now a `misc/Makefile` file in releases, which should help
-  distributions which package qutebrowser, as they can run something like
+  distributions which package glimpsebrowser, as they can run something like
   `make -f misc/Makefile DESTDIR="$pkgdir" install` now.
 - New fields for `window.title_format` and `tabs.title.format`:
   * `{current_url}`
@@ -985,7 +985,7 @@ Added
 - New `config.source(...)` method for `config.py` to source another file.
 - New `{line}` and `{column}` replacements for `editor.command` to position the
   cursor correctly.
-- New `qute-pass` userscript as alternative to `password_fill` which allows
+- New `glimpse-pass` userscript as alternative to `password_fill` which allows
   selecting accounts via rofi or any other dmenu-compatile application.
 - New `hist_importer.py` script to import history from Firefox/Chromium.
 
@@ -1002,7 +1002,7 @@ Changed
   flickering and updates immediately after setting a stylesheet.
 - High-DPI favicons are now used when available.
 - The `asciidoc2html.py` script now uses Pygments (which is already a dependency
-  of qutebrowser) instead of `source-highlight` for syntax highlighting.
+  of glimpsebrowser) instead of `source-highlight` for syntax highlighting.
 - The `:buffer` command now doesn't require quoting anymore, similar to `:open`.
 - The `importer.py` script was largely rewritten and now also supports importing
   from Firefox' `places.sqlite` file and Chrome/Chromium profiles.
@@ -1015,11 +1015,11 @@ Changed
 - `:undo` now can re-open multiple tabs after `:tab-only` was used.
 - `:config-write-py` with a relative path now puts the file into the config
   directory.
-- The `qute://version` page now also shows the uptime of qutebrowser.
-- qutebrowser now prompts to create a non-existing directory when starting a
+- The `glimpse://version` page now also shows the uptime of glimpsebrowser.
+- glimpsebrowser now prompts to create a non-existing directory when starting a
   download.
 - `:jseval --file` now searches relative paths in a `js/` subdir in
-  qutebrowser's data dir, e.g. `~/.local/share/qutebrowser/js`.
+  glimpsebrowser's data dir, e.g. `~/.local/share/glimpsebrowser/js`.
 - The current/default bindings are now shown in the ``:bind` completion.
 - Empty categories are now hidden in the `:open` completion.
 - Search terms for URLs and titles can now be mixed when filtering the
@@ -1029,7 +1029,7 @@ Changed
   order, and mixed matches on URL/tite are possible.
 - The system's default encoding (rather than UTF-8) is now used to decode
   subprocess output.
-- qutebrowser now ensures it's focused again after an external editor is closed.
+- glimpsebrowser now ensures it's focused again after an external editor is closed.
 - The `colors.completion.fg` setting can now be a list, allowing to specify
   different colors for the three completion columns.
 
@@ -1038,15 +1038,15 @@ Fixed
 
 - More consistent sizing for favicons with vertical tabs.
 - Using `:home` on pinned tabs is now prevented.
-- Fix crash with unknown file types loaded via `qute://help`.
+- Fix crash with unknown file types loaded via `glimpse://help`.
 - Scrolling performance improvements.
-- Sites like `qute://help` now redirect to `qute://help/` to make sure links
+- Sites like `glimpse://help` now redirect to `glimpse://help/` to make sure links
   work properly.
 - Fixes for the size calculation of pinned tabs in the tab bar.
 - Worked around a crash with PyQt 5.9.1 compiled against Qt < 5.9.1 when using
-  `:yank` or `qute://` URLs.
-- Fixed crash when opening `qute://help/img`.
-- Fixed `gU` (`:navigate up`) on `qute://help` and webservers not handling `..`
+  `:yank` or `glimpse://` URLs.
+- Fixed crash when opening `glimpse://help/img`.
+- Fixed `gU` (`:navigate up`) on `glimpse://help` and webservers not handling `..`
   in a URL.
 - Using e.g. `-s backend webkit` to set the backend now works correctly.
 - Fixed crash when closing the tab an external editor was opened in.
@@ -1082,7 +1082,7 @@ v1.0.4 (2017-11-28)
 Fixed
 ~~~~~
 
-- The `qute://gpl` page now works correctly again.
+- The `glimpse://gpl` page now works correctly again.
 - Trying to bind an empty command now doesn't crash anymore.
 - Fixed crash when `:config-write-py` fails to write to the given path.
 - Fixed crash for some users when selecting a file with Qt 5.9.3
@@ -1161,9 +1161,9 @@ Major changes
   QtWebEngine now should be a required dependency, and QtWebKit (if new enough)
   should be changed to an optional dependency.
 - Completely rewritten configuration system which ignores the old config file.
-  See link:qute://help/configuring.html[] for details.
+  See link:glimpse://help/configuring.html[] for details.
 - Various documentation files got moved to the doc/ subfolder;
- `qutebrowser.desktop` got moved to misc/.
+ `glimpsebrowser.desktop` got moved to misc/.
 - `:set` now doesn't support toggling/cycling values anymore, that functionality
   got moved to `:config-cycle`.
 - New completion engine based on sqlite, which allows to complete
@@ -1172,7 +1172,7 @@ Major changes
   completion is too slow on your machine, try setting it to a few 1000 items.
 - Up/Down now navigates through the command history instead of selecting
   completion items. Either use Tab to cycle through the completion, or
-  https://github.com/qutebrowser/qutebrowser/blob/master/doc/help/configuring.asciidoc#migrating-older-configurations[restore the old behavior].
+  https://github.com/glimpsebrowser/glimpsebrowser/blob/master/doc/help/configuring.asciidoc#migrating-older-configurations[restore the old behavior].
 
 Added
 ~~~~~
@@ -1182,7 +1182,7 @@ Added
 - New `backend` setting to select the backend to use.
   Together with the previous setting, this should make most wrapper scripts
   unnecessary.
-- qutebrowser can now be set as the default browser on macOS.
+- glimpsebrowser can now be set as the default browser on macOS.
 - New config commands:
   * `:config-cycle` to cycle an option between multiple values.
   * `:config-unset` to remove a configured option.
@@ -1190,7 +1190,7 @@ Added
   * `:config-source` to (re-)read a `config.py` file.
   * `:config-edit` to open the `config.py` file in an editor.
   * `:config-write-py` to write a `config.py` template file.
-- New `:version` command which opens `qute://version`.
+- New `:version` command which opens `glimpse://version`.
 - New back/forward indicator in the statusbar.
 - New `bindings.key_mappings` setting to map keys to other keys.
 - QtWebEngine: Support for proxy authentication.
@@ -1214,7 +1214,7 @@ Removed
 
 - Migrating QtWebEngine data written by versions before 2016-11-15 (before
   v0.9.0) is now not supported anymore.
-- Upgrading qutebrowser with a version older than v0.4.0 still running now won't
+- Upgrading glimpsebrowser with a version older than v0.4.0 still running now won't
   work properly anymore.
 - The `--harfbuzz` and `--relaxed-config` commandline arguments got dropped.
 
@@ -1294,14 +1294,14 @@ Changed
   * The bundled Python is updated from 3.4 to 3.6
   * They are now generated with PyInstaller instead of cx_Freeze
   * The installer is now generated using NSIS instead of being a MSI
-- Improved `qute://history` page (with lazy loading)
+- Improved `glimpse://history` page (with lazy loading)
 - Crash reports are not public anymore.
 - Paths like `C:` are now treated as absolute paths on Windows for downloads,
   and invalid paths are handled properly.
 - Comments in the config file are now placed before the individual options
   instead of being before sections.
 - Messages are now hidden when clicked.
-- stdin is now closed immediately for processes spawned from qutebrowser.
+- stdin is now closed immediately for processes spawned from glimpsebrowser.
 - When `ui -> message-timeout` is set to 0, messages are now never cleared.
 - Middle/right-clicking the blank parts of the tab bar (when vertical) now
   closes the current tab.
@@ -1310,8 +1310,8 @@ Changed
 - `:view-source`, `:tab-clone` and `:navigate --tab` now don't open the tab as
   "explicit" anymore, i.e. (with the default settings) open it next to the
   active tab.
-- `qute:*` pages now use `qute://*` instead (e.g. `qute://version` instead of
-  `qute:version`), but the old versions are automatically redirected.
+- `glimpse:*` pages now use `glimpse://*` instead (e.g. `glimpse://version` instead of
+  `glimpse:version`), but the old versions are automatically redirected.
 - Texts in prompts are now selectable.
 - The default level for `:messages` is now `info`, not `error`
 - Trying to focus the currently focused tab with `:tab-focus` now focuses the
@@ -1383,7 +1383,7 @@ Fixed
 - URLs are now redacted properly (username/password, and path/query for HTTPS) when using Proxy Autoconfig with QtWebKit
 - Crash when updating adblock lists with invalid UTF8-chars in them
 - Fixed the web inspector with QtWebEngine
-- Version checks when starting qutebrowser now also take the Qt version PyQt was compiled against into account
+- Version checks when starting glimpsebrowser now also take the Qt version PyQt was compiled against into account
 - Hinting a input now doesn't select existing text anymore with QtWebKit
 - The cursor now moves to the end when input elements are selected with QtWebEngine
 - Download suffixes like (1) are now correctly stripped with QtWebEngine
@@ -1408,7 +1408,7 @@ Added
     * The `colors -> webpage.bg` option
     * The HTML5 fullscreen API (e.g. youtube videos) with QtWebEngine
     * `:download --mhtml`
-- New `qute:history` URL and `:history` command to show the browsing history
+- New `glimpse:history` URL and `:history` command to show the browsing history
 - Open tabs are now auto-saved on each successful load and restored in case of a crash
 - `:jseval` now has a `--file` flag so you can pass a javascript file
 - `:session-save` now has a `--only-active-window` flag to only save the active window
@@ -1422,7 +1422,7 @@ Changed
 - New way of clicking hints which solves various small issues
 - When yanking a mailto: link via hints, the mailto: prefix is now stripped
 - Zoom level messages are now not stacked on top of each other anymore
-- qutebrowser now automatically uses QtWebEngine if QtWebKit is unavailable
+- glimpsebrowser now automatically uses QtWebEngine if QtWebKit is unavailable
 - :history-clear now asks for a confirmation, unless it's run with --force.
 - `input -> mouse-zoom-divider` can now be 0 to disable zooming by mouse wheel
 - `network -> proxy` can also be set to `pac+file://...` now to
@@ -1484,7 +1484,7 @@ v0.9.0 (2016-12-28)
 Added
 ~~~~~
 
-- *New dependency:* qutebrowser now depends on the Qt QML module, which is
+- *New dependency:* glimpsebrowser now depends on the Qt QML module, which is
    packaged separately in some distributions (as Qt Declarative/QML/Quick).
 - New `:rl-backward-kill-word` command which does what `:rl-unix-word-rubout`
   did before v0.8.0.
@@ -1536,7 +1536,7 @@ Changed
       and friends instead of `-webkit-gradient`. The most common cases get
       migrated automatically, but if you drastically changed the defaults,
       you'll need to manually adjust your config.
-    * Styling hints by styling `qutehint` elements in `user-stylesheet` was
+    * Styling hints by styling `glimpsehint` elements in `user-stylesheet` was
       never officially supported and does not work anymore.
     * Hints are now not affected by the page's stylesheet or zoom anymore.
 - `:bookmark-add` now has a `--toggle` flag which deletes the bookmark if it
@@ -1576,7 +1576,7 @@ Changed
 - Counts can now be used with special keybindings (e.g. with modifiers).
   This was already implemented for v0.7.0 originally, but got reverted because
   it caused some issues and then never re-applied.
-- Sending a command to an existing instance (via "qutebrowser :reload") now
+- Sending a command to an existing instance (via "glimpsebrowser :reload") now
   doesn't mark it as urgent anymore.
 - `tabs -> title-format` now treats an empty string as valid.
 - Bindings for `:`, `/` and `?` are now configured explicitly and not hardcoded
@@ -1585,7 +1585,7 @@ Changed
   `never`.
 - `:open-editor` can now be used in any mode.
 - Lots of improvements to and bugfixes for the QtWebEngine backend, such as
-  working hints. However, using qutebrowser directly from git is still advised
+  working hints. However, using glimpsebrowser directly from git is still advised
   when using `--backend webengine`.
 - `content -> javascript-can-open-windows` got renamed to
   `javascript-can-open-windows-automatically`.
@@ -1608,8 +1608,8 @@ Changed
     * `fonts -> messages.error`
     * `fonts -> messages.warning`
     * `fonts -> messages.info`
-- The `qute:settings` page now also shows option descriptions.
-- `qute:version` and `qutebrowser --version` now show various important paths
+- The `glimpse:settings` page now also shows option descriptions.
+- `glimpse:version` and `glimpsebrowser --version` now show various important paths
 - `:spawn`/userscripts now show a nicer error when a script wasn't found
 - Various functionality now works when javascript is disabled with QtWebKit
 - Various commands/settings taking `left`/`right`/`previous` arguments now take
@@ -1657,7 +1657,7 @@ Fixed
 - `:tab-detach` now fails correctly when there's only one tab open.
 - Various small issues with the command completion
 - Fixed hang when using multiple spaces in a row with the URL completion
-- qutebrowser now still starts with an incorrectly configured
+- glimpsebrowser now still starts with an incorrectly configured
   `$XDG_RUNTIME_DIR`.
 - Fixed crash when a userscript writes invalid unicode data to the FIFO
 - Fixed crash when a included HTML was not found
@@ -1725,7 +1725,7 @@ Added
 - New `:repeat-command` command (mapped to `.`) to repeat the last command.
   Note that two former default bundings conflict with that binding, unbinding
   them via `:unbind .i` and `:unbind .o` is recommended.
-- New `qute:bookmarks` page which displays all bookmarks and quickmarks.
+- New `glimpse:bookmarks` page which displays all bookmarks and quickmarks.
 - New `:prompt-open-download` (bound to `Ctrl-X`) which can be used to open a
   download directly when getting the filename prompt.
 - New `{host}` replacement for tab- and window titles which evaluates
@@ -1757,7 +1757,7 @@ Fixed
 
 - Compatibility with PyQt 5.7
 - Fixed some configuration values being lost when a config option gets removed
-  from qutebrowser's code.
+  from glimpsebrowser's code.
 - Fix crash when downloading with a full disk
 - Using `:jump-mark` (e.g. `''`) when the current URL is invalid doesn't crash
   anymore.
@@ -1803,7 +1803,7 @@ Added
 Changed
 ~~~~~~~
 
-- qutebrowser got a new (slightly updated) logo
+- glimpsebrowser got a new (slightly updated) logo
 - `:tab-focus` can now take a negative index to focus the nth tab counted from
   the right.
 - `:yank` can now yank the pretty/decoded URL by adding `--pretty`
@@ -1815,7 +1815,7 @@ Changed
   not be.
 - Show favicons as window icon with `tabs-are-windows` set.
 - `:bind <key>` without a command now shows the existing binding
-- The optional `colorlog` dependency got removed, as qutebrowser now displays
+- The optional `colorlog` dependency got removed, as glimpsebrowser now displays
   colored logs without it.
 - URLs are now shown decoded when hovering.
 - Keybindings are now shown in the command completion
@@ -1849,7 +1849,7 @@ Fixed
 - Fixed updating the tab index in the statusbar when opening a background tab
 - Fixed a crash when entering `:-- ` in the commandline
 - Fixed `:debug-console` with PyQt 5.6
-- Fixed qutebrowser not starting when `sys.stderr` is `None`
+- Fixed glimpsebrowser not starting when `sys.stderr` is `None`
 - Fixed crash when cancelling a download which belongs to an MHTML download
 - Fixed rebinding of keybindings being case-sensitive
 - Fix for tab indicators getting lost when moving tabs
@@ -1919,10 +1919,10 @@ Changed
 - `:download-remove --all` got un-deprecated to provide symmetry with
   `:download-cancel --all`. It does the same as `:download-clear`.
 - Improved detection of URLs/search terms when pasting multiple lines.
-- Don't remove `qutebrowser-editor-*` temporary file if editor subprocess crashed
-- Userscripts are also searched in `/usr/share/qutebrowser/userscripts`.
+- Don't remove `glimpsebrowser-editor-*` temporary file if editor subprocess crashed
+- Userscripts are also searched in `/usr/share/glimpsebrowser/userscripts`.
 - Blocked hosts are now also read from a `blocked-hosts` file in the config dir
-  (e.g. `~/.config/qutebrowser/blocked-hosts`).
+  (e.g. `~/.config/glimpsebrowser/blocked-hosts`).
 
 Fixed
 ~~~~~
@@ -1982,7 +1982,7 @@ Added
 - New userscripts in `misc/userscripts`:
     - `open_download` to easily open a file in your downloads folder.
     - `view_in_mpv` to open a video in mpv and remove it from the page.
-    - `qutedmenu` and `dmenu_qutebrowser` to select URLs via dmenu
+    - `glimpsedmenu` and `dmenu_glimpsebrowser` to select URLs via dmenu
 - New setting `content -> host-blocking-whitelist` to whitelist certain domains
   from the adblocker.
 - `{scroll_pos}` can now be used in `ui -> window-title-format` and
@@ -2008,9 +2008,9 @@ Added
 - New command `:download-clear` which replaces `:download-remove --all`.
 - `:set-cmd-text` has a new `--append` argument to append to the current
   statusbar text.
-- qutebrowser now uses `~/.netrc` if available to authenticate via HTTP.
+- glimpsebrowser now uses `~/.netrc` if available to authenticate via HTTP.
 - New `:fake-key` command to send a fake keypress to a website or to
-  qutebrowser.
+  glimpsebrowser.
 - New `--mhtml` argument for `:download` to download a page including all
   resources as MHTML file.
 - New option `tabs -> title-alignment` to change the alignment of tab titles.
@@ -2021,7 +2021,7 @@ Changed
 - The `colors -> tabs.bg/fg.selected` option got split into
   `tabs.bg/fg.selected.odd/even`.
 - `:spawn --userscript` and `:hint` with the `userscript` target now look up
-  relative paths in `~/.local/share/qutebrowser/userscripts` or
+  relative paths in `~/.local/share/glimpsebrowser/userscripts` or
   `$XDG_DATA_HOME`. Using a binary in `$PATH` won't work anymore with
   `--userscript`.
 - New design for error pages
@@ -2096,13 +2096,13 @@ Fixed
 - Worked around a Qt issue where middle-clicking caused scrolling with a
   touchpad to restart at the beginning of the page.
 - The `completion -> web-history-max-items` setting is now also respected for
-  items added after starting qutebrowser.
+  items added after starting glimpsebrowser.
 - Search terms are now shared between different tabs again
 - Tests (a reduced subset of them) now run correctly again when DISPLAY is not
   set.
-- Fixed an issue causing qutebrowser to crash with Python 3.5 as soon as an ad
+- Fixed an issue causing glimpsebrowser to crash with Python 3.5 as soon as an ad
   was blocked.
-- Fixed an issue causing qutebrowser to not start with more recent Python 3.4
+- Fixed an issue causing glimpsebrowser to not start with more recent Python 3.4
   versions (e.g. on Debian experimental).
 - Fixed various `PendingDeprecationWarnings` shown with Python 3.5.
 
@@ -2138,7 +2138,7 @@ Changed
 
 - Some developer scripts got moved to `scripts/dev/`
 - When downloading to a FIFO or special file, a confirmation is displayed as
-  this might cause qutebrowser to hang.
+  this might cause glimpsebrowser to hang.
 - The `:yank-selected` command now works in all modes instead of just caret
   mode and is not hidden anymore.
 - `minimal_webkit_testbrowser.py` now has a `--webengine` switch to test
@@ -2158,7 +2158,7 @@ Changed
 Fixed
 ~~~~~
 
-- Fixed a bug where cookies were saved despite qutebrowser being started in
+- Fixed a bug where cookies were saved despite glimpsebrowser being started in
   private browsing mode.
 - The local socket used for inter-process communication (opening new instances)
   is now ensured to only be accessible by the user on all operating systems.
@@ -2181,7 +2181,7 @@ Fixed
   anymore.
 - `~` is now always expanded when spawning a script.
 - Fixed various corner cases when opening links in an existing instance.
-- Fixed a race-condition causing an exception when starting qutebrowser.
+- Fixed a race-condition causing an exception when starting glimpsebrowser.
 
 Removed
 ~~~~~~~
@@ -2211,7 +2211,7 @@ Added
 - New arguments `--basedir` and `--temp-basedir` (intended for debugging) to set a different base directory for all data, which allows multiple invocations.
 - New argument `--no-err-windows` to suppress all error windows.
 - New arguments `--top-navigate` and `--bottom-navigate` (`-t`/`-b`) for `:scroll-page` to specify a navigation action (e.g. automatically go to the next page when arriving at the bottom).
-- New flag `-d`/`--detach` for `:spawn` to detach the spawned process so it's not closed when qutebrowser is.
+- New flag `-d`/`--detach` for `:spawn` to detach the spawned process so it's not closed when glimpsebrowser is.
 - New flag `-v`/`--verbose` for `:spawn` to print information when the process started/exited successfully.
 - Many new color settings (foreground setting for every background setting).
 - New setting `ui -> modal-js-dialog` to use the standard modal dialogs for javascript questions instead of using the statusbar.
@@ -2232,7 +2232,7 @@ Changed
 - `:scroll` now takes a direction argument (`up`/`down`/`left`/`right`/`top`/`bottom`/`page-up`/`page-down`) instead of two pixel arguments (`dx`/`dy`). The old form still works but is deprecated.
 - The `ui -> user-stylesheet` setting now also takes file paths relative to the config directory.
 - The `content -> cookies-accept` setting now has new `no-3rdparty` (default) and `no-unknown-3rdparty` values to block third-party cookies. The `default` value got renamed to `all`.
-- Improved startup time by reading the webpage history while qutebrowser is open.
+- Improved startup time by reading the webpage history while glimpsebrowser is open.
 - The way `:spawn` splits its commandline has been changed slightly to allow commands with flags.
 - The default for the `new-instance-open-target` setting has been changed to `tab`.
 - Sessions now store zoom/scroll-position separately for each entry.
@@ -2256,16 +2256,16 @@ Fixed
 - Fixed wrong cursor position when completing the first item in the completion.
 - Fixed exception when using search engines with {foo} in their name.
 - Fixed a bug where the same title was shown for all tabs on some systems.
-- Don't install the scripts package when installing qutebrowser.
+- Don't install the scripts package when installing glimpsebrowser.
 - Fixed searching for terms starting with a hyphen (e.g. `/-foo`)
 - Proxy authentication credentials are now remembered between different tabs.
 - Fixed updating of the tab title on pages without title.
 - Fixed AssertionError when closing many windows quickly.
 - Various fixes for deprecated key bindings and auto-migrations.
-- Workaround for qutebrowser not starting when there are NUL-bytes in the history (because of a currently unknown bug).
+- Workaround for glimpsebrowser not starting when there are NUL-bytes in the history (because of a currently unknown bug).
 - Fixed handling of keybindings containing Ctrl/Meta on macOS.
 - Fixed crash when downloading a URL without filename (e.g. magnet links) via "Save as...".
-- Fixed exception when starting qutebrowser with `:set` as argument.
+- Fixed exception when starting glimpsebrowser with `:set` as argument.
 - Fixed horrible completion performance when the `shrink` option was set.
 - Sessions now store zoom/scroll-position correctly.
 
@@ -2275,7 +2275,7 @@ v0.2.1 (2015-04-19)
 Fixed
 ~~~~~
 
-- Added missing manpage (doc/qutebrowser.1.asciidoc) to archive.
+- Added missing manpage (doc/glimpsebrowser.1.asciidoc) to archive.
 
 v0.2.0 (2015-04-19)
 -------------------
@@ -2302,7 +2302,7 @@ Added
     * New option `completion -> web-history-max-items` to configure how many history items to show in the completion.
     * The option `completion -> history-length` for the command history got renamed to `cmd-history-max-items`.
 - Better save logic for the config/state:
-    * Only save files if modified (e.g. don't overwrite the config if it was edited outside of qutebrowser and nothing was changed in qutebrowser).
+    * Only save files if modified (e.g. don't overwrite the config if it was edited outside of glimpsebrowser and nothing was changed in glimpsebrowser).
     * Save things (cookies, config, quickmarks, ...) periodically all 15 seconds (time can be changed with the `general -> auto-save-interval` option).
 - Opera-like mouse rocker gestures
     * New option `input -> rocker-gestures`. When turned on, the history can be navigated back/forward by holding a mouse button and pressing the other one.
@@ -2338,12 +2338,12 @@ Added
 - New option (`content -> host-blocking-enabled`) to enable/disable host blocking.
 - New values `tab-bg`/`tab-bg-silent` for `new-instance-open-target` to open a background tab.
 - New `ui -> downloads-position` setting to move the downloads to the bottom.
-- New `ui -> hide-mouse-cursor` option to hide the mouse cursor inside qutebrowser.
-- New argument `-s` for qutebrowser to set a temporary config option.
+- New `ui -> hide-mouse-cursor` option to hide the mouse cursor inside glimpsebrowser.
+- New argument `-s` for glimpsebrowser to set a temporary config option.
 - New argument `-p` for the `:set` command to print the new value.
 - New `--rapid` option to `:hint`. The `rapid`/`rapid-win` targets are now deprecated, and `--rapid` can be used as well with the targets run/hover/userscript/spawn as well.
 - New `-f` argument to `:bind` to overwrite the old binding.
-- New `--qt-name` argument to qutebrowser which is passed to Qt to set `WM_CLASS`.
+- New `--qt-name` argument to glimpsebrowser which is passed to Qt to set `WM_CLASS`.
 - Alternating row colors in completion. This adds a new `colors -> completion.alternate-bg` option.
 
 Changed
@@ -2426,7 +2426,7 @@ v0.1.4 (2015-03-19)
 Changed
 ~~~~~~~
 
-* The Windows builds come with Qt 5.4.1 which has some https://lists.schokokeks.org/pipermail/qutebrowser/2015-March/000054.html[related bugfixes].
+* The Windows builds come with Qt 5.4.1 which has some https://lists.schokokeks.org/pipermail/glimpsebrowser/2015-March/000054.html[related bugfixes].
 * Improvements to CPU usage when idle.
 * Ensure there's no size for `font-family` settings.
 * Handle URLs with double-colon as search strings.
@@ -2536,7 +2536,7 @@ v0.1.1 (2014-12-28)
 Added
 ~~~~~
 
-* Set window icon and add a qutebrowser.ico file for Windows.
+* Set window icon and add a glimpsebrowser.ico file for Windows.
 * Ask the user when downloading to an already existing file.
 * Add a `network -> proxy-dns-requests` option.
 * Add "Remove finished" to the download context menu
@@ -2581,7 +2581,7 @@ Fixed
 * Handle data being `None` in download read timer.
 * Stop download read timer when reply has finished.
 * Fix handling of small/big `fuzzyval`'s in `NeighborList`.
-* Fix crashes when entering invalid values in `qute:settings`.
+* Fix crashes when entering invalid values in `glimpse:settings`.
 * Abort questions in `NetworkManager` when destroyed.
 * Fix height calculation of download view.
 * Always auto-remove adblock downloads when done.

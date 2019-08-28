@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2017-2018 Josefson Souza <josefson.br@gmail.com>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """Tool to import browser history from other browsers."""
@@ -37,10 +37,10 @@ class Error(Exception):
 def parse():
     """Parse command line arguments."""
     description = ("This program is meant to extract browser history from your"
-                   " previous browser and import them into qutebrowser.")
-    epilog = ("Databases:\n\n\tqutebrowser: Is named 'history.sqlite' and can "
+                   " previous browser and import them into glimpsebrowser.")
+    epilog = ("Databases:\n\n\tglimpsebrowser: Is named 'history.sqlite' and can "
               "be found at your --basedir. In order to find where your "
-              "basedir is you can run ':open qute:version' inside qutebrowser."
+              "basedir is you can run ':open glimpse:version' inside glimpsebrowser."
               "\n\n\tFirefox: Is named 'places.sqlite', and can be found at "
               "your system's profile folder. Check this link for where it is "
               "located: http://kb.mozillazine.org/Profile_folder"
@@ -49,7 +49,7 @@ def parse():
               "located: https://chromium.googlesource.com/chromium/src/+/"
               "master/docs/user_data_dir.md\n\n"
               "Example: hist_importer.py -b firefox -s /Firefox/Profile/"
-              "places.sqlite -d /qutebrowser/data/history.sqlite")
+              "places.sqlite -d /glimpsebrowser/data/history.sqlite")
     parser = argparse.ArgumentParser(
         description=description, epilog=epilog,
         formatter_class=argparse.RawTextHelpFormatter
@@ -60,7 +60,7 @@ def parse():
                         type=str, help='Source: Full path to the sqlite data'
                         'base file from the source browser.')
     parser.add_argument('-d', '--dest', dest='dest', required=True, type=str,
-                        help='\nDestination: Full path to the qutebrowser '
+                        help='\nDestination: Full path to the glimpsebrowser '
                         'sqlite database')
     return parser.parse_args()
 
@@ -98,7 +98,7 @@ def clean(history):
     """Clean up records from source database.
 
     Receives a list of record and sanityze them in order for them to be
-    properly imported to qutebrowser. Sanitation requires adding a 4th
+    properly imported to glimpsebrowser. Sanitation requires adding a 4th
     attribute 'redirect' which is filled with '0's, and also purging all
     records that have a NULL/None datetime attribute.
 

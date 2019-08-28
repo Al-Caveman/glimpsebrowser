@@ -18,10 +18,10 @@
 # Customizable variables
 ################################################################################
 
-NAME ?= qutebrowser
+NAME ?= glimpsebrowser
 
 SOURCE_DIR ?= .
-SOURCE_FILES ?= dist/qutebrowser.app LICENSE
+SOURCE_FILES ?= dist/glimpsebrowser.app LICENSE
 
 TEMPLATE_DMG ?= template.dmg
 TEMPLATE_SIZE ?= 300m

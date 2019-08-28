@@ -1,28 +1,28 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Web server for end2end tests.
 
 This script gets called as a QProcess from end2end/conftest.py.
 
 Some of the handlers here are inspired by the server project, but simplified
-for qutebrowser's needs. Note that it probably doesn't handle e.g. multiple
+for glimpsebrowser's needs. Note that it probably doesn't handle e.g. multiple
 parameters or headers with the same name properly.
 """
 
@@ -44,14 +44,14 @@ _redirect_later_event = None
 @app.route('/')
 def root():
     """Show simple text."""
-    return flask.Response(b'qutebrowser test webserver, '
+    return flask.Response(b'glimpsebrowser test webserver, '
                           b'<a href="/user-agent">user agent</a>')
 
 
 @app.route('/data/<path:path>')
 @app.route('/data2/<path:path>')  # for per-URL settings
 def send_data(path):
-    """Send a given data file to qutebrowser.
+    """Send a given data file to glimpsebrowser.
 
     If a directory is requested, its index.html is sent.
     """

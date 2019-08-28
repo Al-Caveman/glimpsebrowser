@@ -1,9 +1,9 @@
 Getting stacktraces on crashes
 ==============================
 :toc:
-The Compiler <mail@qutebrowser.org>
+The Compiler <mail@glimpsebrowser.org>
 
-When there is a fatal crash in qutebrowser - most of the times a
+When there is a fatal crash in glimpsebrowser - most of the times a
 https://en.wikipedia.org/wiki/Segmentation_fault[segfault] - the crash report
 usually doesn't contain much viable information, as these crashes usually
 happen inside of the Qt mainloop in C++.
@@ -57,7 +57,7 @@ Then edit your `/etc/pacman.conf` to add the repository to the bottom:
 
 ----
 [qt-debug]
-Server = https://qutebrowser.org/qt-debug/$arch
+Server = https://glimpsebrowser.org/qt-debug/$arch
 ----
 
 Then install the packages:
@@ -77,7 +77,7 @@ I'd also expect it to take around 6 GB of RAM and 30 GB of disk space for a
 successful compile run.
 
 ----
-$ git clone https://github.com/qutebrowser/qt-debug-pkgbuild.git
+$ git clone https://github.com/glimpsebrowser/qt-debug-pkgbuild.git
 $ cd qt-debug-pkgbuild
 $ export DEBUG_CFLAGS='-ggdb3 -fvar-tracking-assignments -Og'
 $ export DEBUG_CXXFLAGS='-ggdb3 -fvar-tracking-assignments -Og'
@@ -92,13 +92,13 @@ Getting the stack trace
 
 First install `gdb` on your system if it's not installed already.
 
-Then run qutebrowser directly inside gdb like this:
+Then run glimpsebrowser directly inside gdb like this:
 
 ----
-$ gdb $(readlink -f $(which python3)) -ex 'run -m qutebrowser --debug'
+$ gdb $(readlink -f $(which python3)) -ex 'run -m glimpsebrowser --debug'
 ----
 
-Note qutebrowser/gdb will take a long time to start. After you reproduce the
+Note glimpsebrowser/gdb will take a long time to start. After you reproduce the
 crash, you should now see something like:
 
 ----
@@ -169,9 +169,9 @@ happened.
 For Windows
 -----------
 
-When you see the _qutebrowser.exe has stopped working_ window, do not click
+When you see the _glimpsebrowser.exe has stopped working_ window, do not click
 "Close the program". Instead, open your task manager, there right-click on
-`qutebrowser.exe` and select "Create dump file". Remember the path of the dump
+`glimpsebrowser.exe` and select "Create dump file". Remember the path of the dump
 file displayed there.
 
 Now install
@@ -182,4 +182,4 @@ Microsoft, then run the *DebugDiag 2 Analysis* tool. There, check
 
 Close the Internet Explorer which opens when it's done and use the
 folder-button at the top left to get to the reports. There find the report file
-and send it to mail@qutebrowser.org.
+and send it to mail@glimpsebrowser.org.

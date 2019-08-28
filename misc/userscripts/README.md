@@ -4,7 +4,7 @@ The following userscripts are included in the current directory.
 
 - [cast](./cast): Cast content on your Chromecast using [castnow][]. Only
   [youtube-dl][] downloadable content.
-- [dmenu_qutebrowser](./dmenu_qutebrowser): Pipes history, quickmarks, and URL into dmenu.
+- [dmenu_glimpsebrowser](./dmenu_glimpsebrowser): Pipes history, quickmarks, and URL into dmenu.
 - [format_json](./format_json): Pretty prints current page's JSON code in other
   tab.
 - [getbib](./getbib): Scraping the current web page for DOIs and downloading
@@ -15,11 +15,11 @@ The following userscripts are included in the current directory.
 - [password_fill](./password_fill): Find a username/password entry and fill it
   with credentials given by the configured backend (currently only pass) for the
   current website.
-- [qute-keepass](./qute-keepass): Insertion of usernames and passwords from keepass
+- [glimpse-keepass](./glimpse-keepass): Insertion of usernames and passwords from keepass
   databases using pykeepass.
-- [qute-pass](./qute-pass): Insert login information using pass and a
+- [glimpse-pass](./glimpse-pass): Insert login information using pass and a
   dmenu-compatible application (e.g. dmenu, rofi -dmenu, ...).
-- [qutedmenu](./qutedmenu): Handle open -s && open -t with bemenu.
+- [glimpsedmenu](./glimpsedmenu): Handle open -s && open -t with bemenu.
 - [readability](./readability): Executes python-readability on current page and
   opens the summary as new tab.
 - [ripbang](./ripbang): Adds DuckDuckGo bang as searchengine.
@@ -36,15 +36,15 @@ The following userscripts are included in the current directory.
 
 The following userscripts can be found on their own repositories.
 
-- [qurlshare](https://github.com/sim590/qurlshare): *secure* sharing of an URL between qutebrowser
+- [qurlshare](https://github.com/sim590/qurlshare): *secure* sharing of an URL between glimpsebrowser
   instances using a distributed hash table.
-- [qutebrowser-userscripts](https://github.com/cryzed/qutebrowser-userscripts):
+- [glimpsebrowser-userscripts](https://github.com/cryzed/glimpsebrowser-userscripts):
   a small pack of userscripts.
-- [qutebrowser-zotero](https://github.com/parchd-1/qutebrowser-zotero): connects
-  qutebrowser to [Zotero][] standalone.
-- [qute.match](https://github.com/bziur/qute.match): execute script based on
+- [glimpsebrowser-zotero](https://github.com/parchd-1/glimpsebrowser-zotero): connects
+  glimpsebrowser to [Zotero][] standalone.
+- [glimpse.match](https://github.com/bziur/glimpse.match): execute script based on
   visited url.
-- [qutepocket](https://github.com/kepi/qutepocket): Add URL to your [Pocket][]
+- [glimpsepocket](https://github.com/kepi/glimpsepocket): Add URL to your [Pocket][]
   bookmark manager.
 - [qb-scripts](https://github.com/peterjschroeder/qb-scripts): a small pack of
   userscripts.
@@ -53,9 +53,9 @@ The following userscripts can be found on their own repositories.
 - [qtb.us](https://github.com/Chinggis6/qtb.us): small pack of userscripts.
 - [pinboard.zsh](https://github.com/dmix/pinboard.zsh): Add URL to your
   [Pinboard][] bookmark manager.
-- [qute-capture](https://github.com/alcah/qute-capture): Capture links with
+- [glimpse-capture](https://github.com/alcah/glimpse-capture): Capture links with
   Emacs's org-mode to a read-later file.
-- [qute-code-hint](https://github.com/LaurenceWarne/qute-code-hint): Copy code
+- [glimpse-code-hint](https://github.com/LaurenceWarne/glimpse-code-hint): Copy code
   snippets on web pages to the clipboard via hints.
 
 [Zotero]: https://www.zotero.org/

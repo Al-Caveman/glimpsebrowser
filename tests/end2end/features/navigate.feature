@@ -23,11 +23,11 @@ Feature: Using :navigate
         And I run :navigate up with count 2
         Then data/navigate should be loaded
 
-    Scenario: Navigating up in qute://help/
+    Scenario: Navigating up in glimpse://help/
         When the documentation is up to date
-        And I open qute://help/commands.html
+        And I open glimpse://help/commands.html
         And I run :navigate up
-        Then qute://help/ should be loaded
+        Then glimpse://help/ should be loaded
 
     # prev/next
 

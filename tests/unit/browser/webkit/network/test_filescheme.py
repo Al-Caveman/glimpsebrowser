@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2015-2018 Antoni Boucher (antoyo) <bouanto@zoho.com>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
 
@@ -26,8 +26,8 @@ import bs4
 from PyQt5.QtCore import QUrl
 from PyQt5.QtNetwork import QNetworkRequest
 
-from qutebrowser.browser.webkit.network import filescheme
-from qutebrowser.utils import urlutils, utils
+from glimpsebrowser.browser.webkit.network import filescheme
+from glimpsebrowser.utils import urlutils, utils
 
 
 @pytest.mark.parametrize('create_file, create_dir, filterfunc, expected', [
@@ -234,7 +234,7 @@ class TestDirbrowserHtml:
         assert not parsed.parent
 
     def test_oserror(self, mocker):
-        m = mocker.patch('qutebrowser.browser.webkit.network.filescheme.'
+        m = mocker.patch('glimpsebrowser.browser.webkit.network.filescheme.'
                          'os.listdir')
         m.side_effect = OSError('Error message')
         html = filescheme.dirbrowser_html('').decode('utf-8')

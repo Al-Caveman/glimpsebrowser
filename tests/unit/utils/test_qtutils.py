@@ -1,24 +1,24 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 
-"""Tests for qutebrowser.utils.qtutils."""
+"""Tests for glimpsebrowser.utils.qtutils."""
 
 import io
 import os
@@ -31,7 +31,7 @@ from PyQt5.QtCore import (QDataStream, QPoint, QUrl, QByteArray, QIODevice,
                           QTimer, QBuffer, QFile, QProcess, QFileDevice)
 from PyQt5.QtGui import QColor
 
-from qutebrowser.utils import qtutils, utils, usertypes
+from glimpsebrowser.utils import qtutils, utils, usertypes
 import overflow_test_cases
 
 if utils.is_linux:
@@ -252,7 +252,7 @@ def test_qcolor_to_qsscolor_invalid():
 
 @pytest.mark.parametrize('obj', [
     QPoint(23, 42),
-    QUrl('http://www.qutebrowser.org/'),
+    QUrl('http://www.glimpsebrowser.org/'),
 ])
 def test_serialize(obj):
     """Test a serialize/deserialize round trip.
@@ -373,7 +373,7 @@ class TestSavefileOpen:
     @pytest.fixture
     def qsavefile_mock(self, mocker):
         """Mock for QSaveFile."""
-        m = mocker.patch('qutebrowser.utils.qtutils.QSaveFile')
+        m = mocker.patch('glimpsebrowser.utils.qtutils.QSaveFile')
         instance = m()
         yield instance
         instance.commit.assert_called_once_with()
@@ -495,7 +495,7 @@ class TestSavefileOpen:
     def test_line_endings(self, tmpdir):
         """Make sure line endings are translated correctly.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/309
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/309
         """
         filename = tmpdir / 'foo'
         with qtutils.savefile_open(str(filename)) as f:

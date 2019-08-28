@@ -1,8 +1,8 @@
 +++
 <div id="headline">
-	<img class="qutebrowser-logo" src="/icons/qutebrowser.svg" alt="qutebrowser" />
+	<img class="glimpsebrowser-logo" src="/icons/glimpsebrowser.svg" alt="glimpsebrowser" />
 	<div class="text">
-		<span class="heading-text">qutebrowser</span>
+		<span class="heading-text">glimpsebrowser</span>
 		A keyboard-driven browser.
 	</div>
 </div>
@@ -13,8 +13,8 @@
 	<a href="/doc/install.html">Install</a>
 	<a href="/doc/changelog.html">Changelog</a>
 	<a href="/doc/contributing.html">Contributing</a>
-	<a href="https://www.github.com/qutebrowser/qutebrowser">GitHub</a>
-	<a href="https://github.com/qutebrowser/qutebrowser/releases">Releases</a>
-	<a href="https://blog.qutebrowser.org/">Blog</a>
+	<a href="https://www.github.com/glimpsebrowser/glimpsebrowser">GitHub</a>
+	<a href="https://github.com/glimpsebrowser/glimpsebrowser/releases">Releases</a>
+	<a href="https://blog.glimpsebrowser.org/">Blog</a>
 </div>
 +++

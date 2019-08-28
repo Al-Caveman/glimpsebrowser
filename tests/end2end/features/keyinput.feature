@@ -70,7 +70,7 @@ Feature: Keyboard input
         And I wait for "Focus object changed: <PyQt5.QtWebKitWidgets.QWebView object at *>" in the log
         And I run :fake-key x
         And I run :inspector
-        And I wait for "Focus object changed: <qutebrowser.browser.webkit.webview.WebView *>" in the log
+        And I wait for "Focus object changed: <glimpsebrowser.browser.webkit.webview.WebView *>" in the log
         Then the error "No focused webview!" should be shown
 
     Scenario: :fake-key sending special key to the website
@@ -87,9 +87,9 @@ Feature: Keyboard input
         And the javascript message "key press: 89" should be logged
         And the javascript message "key release: 89" should be logged
 
-    Scenario: :fake-key sending keypress to qutebrowser
+    Scenario: :fake-key sending keypress to glimpsebrowser
         When I run :fake-key -g x
-        And I wait for "got keypress in mode KeyMode.normal - delegating to <qutebrowser.keyinput.modeparsers.NormalKeyParser>" in the log
+        And I wait for "got keypress in mode KeyMode.normal - delegating to <glimpsebrowser.keyinput.modeparsers.NormalKeyParser>" in the log
         Then no crash should happen
 
     # Macros

@@ -2,20 +2,20 @@
 
 # Copyright 2018-2019 Ryan Roden-Corrent (rcorre) <ryan@rcorre.net>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 from unittest import mock
 
 import pytest
@@ -23,7 +23,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QTextDocument, QColor
 from PyQt5.QtWidgets import QTextEdit
 
-from qutebrowser.completion import completiondelegate
+from glimpsebrowser.completion import completiondelegate
 
 
 @pytest.mark.parametrize('pat,txt,segments', [
@@ -38,7 +38,7 @@ from qutebrowser.completion import completiondelegate
     ('foo', '<foo>', [(1, 3)]),
     ('<a>', "<a>bc", [(0, 3)]),
 
-    # https://github.com/qutebrowser/qutebrowser/issues/4199
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/4199
     ('foo', "'foo'", [(1, 3)]),
     ('x', "'x'", [(1, 1)]),
     ('lt', "<lt", [(1, 2)]),

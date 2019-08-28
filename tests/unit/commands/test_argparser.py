@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.commands.argparser."""
+"""Tests for glimpsebrowser.commands.argparser."""
 
 import inspect
 import enum
@@ -25,7 +25,7 @@ import enum
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.commands import argparser, cmdexc
+from glimpsebrowser.commands import argparser, cmdexc
 
 
 Enum = enum.Enum('Enum', ['foo', 'foo_bar'])
@@ -59,7 +59,7 @@ class TestArgumentParser:
         with pytest.raises(argparser.ArgumentParserExit):
             parser.parse_args(['--help'])
 
-        expected_url = QUrl('qute://help/commands.html#foo')
+        expected_url = QUrl('glimpse://help/commands.html#foo')
         assert tabbed_browser_stubs[1].loaded_url == expected_url
 
 

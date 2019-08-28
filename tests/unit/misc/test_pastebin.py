@@ -3,25 +3,25 @@
 # Copyright 2016-2019 Florian Bruhin (The-Compiler) <me@the-compiler.org>
 # Copyright 2016-2018 Anna Kobak (avk) <awerk@onet.eu>:
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.misc import httpclient, pastebin
+from glimpsebrowser.misc import httpclient, pastebin
 
 
 @pytest.fixture
@@ -56,7 +56,7 @@ def test_paste_with_parent(data, pbclient):
     http_stub = pbclient._client
     pbclient.paste(data["name"], data["title"], data["text"], data["reply"])
     assert http_stub.data == data
-    assert http_stub.url == QUrl('https://crashes.qutebrowser.org/api/create')
+    assert http_stub.url == QUrl('https://crashes.glimpsebrowser.org/api/create')
 
 
 @pytest.mark.parametrize('data', [
@@ -77,7 +77,7 @@ def test_paste_without_parent(data, pbclient):
     http_stub = pbclient._client
     pbclient.paste(data["name"], data["title"], data["text"])
     assert pbclient._client.data == data
-    assert http_stub.url == QUrl('https://crashes.qutebrowser.org/api/create')
+    assert http_stub.url == QUrl('https://crashes.glimpsebrowser.org/api/create')
 
 
 def test_paste_private(pbclient):
@@ -91,7 +91,7 @@ def test_paste_private(pbclient):
     http_stub = pbclient._client
     pbclient.paste(data["name"], data["title"], data["text"], private=True)
     assert pbclient._client.data == data
-    assert http_stub.url == QUrl('https://crashes.qutebrowser.org/api/create')
+    assert http_stub.url == QUrl('https://crashes.glimpsebrowser.org/api/create')
 
 
 @pytest.mark.parametrize('http', [

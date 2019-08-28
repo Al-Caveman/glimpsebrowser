@@ -1,25 +1,25 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 # pylint: disable=unused-import,wildcard-import,unused-wildcard-import
 
-"""The qutebrowser test suite conftest file."""
+"""The glimpsebrowser test suite conftest file."""
 
 import os
 import sys
@@ -37,15 +37,15 @@ from helpers import logfail
 from helpers.logfail import fail_on_logging
 from helpers.messagemock import message_mock, message_bridge
 from helpers.fixtures import *  # noqa: F403
-from qutebrowser.utils import qtutils, standarddir, usertypes, utils, version
-from qutebrowser.misc import objects
-from qutebrowser.qt import sip
+from glimpsebrowser.utils import qtutils, standarddir, usertypes, utils, version
+from glimpsebrowser.misc import objects
+from glimpsebrowser.qt import sip
 
-import qutebrowser.app  # To register commands
+import glimpsebrowser.app  # To register commands
 
 
 ON_CI = 'CI' in os.environ
-_qute_scheme_handler = None
+_glimpse_scheme_handler = None
 
 
 # Set hypothesis settings
@@ -178,7 +178,7 @@ def pytest_ignore_collect(path):
 def qapp_args():
     """Make QtWebEngine unit tests run on Qt 5.7.1.
 
-    See https://github.com/qutebrowser/qutebrowser/issues/3163
+    See https://github.com/glimpsebrowser/glimpsebrowser/issues/3163
     """
     if qVersion() == '5.7.1':
         return [sys.argv[0], '--disable-seccomp-filter-sandbox']
@@ -188,21 +188,21 @@ def qapp_args():
 @pytest.fixture(scope='session')
 def qapp(qapp):
     """Change the name of the QApplication instance."""
-    qapp.setApplicationName('qute_test')
+    qapp.setApplicationName('glimpse_test')
     return qapp
 
 
 def pytest_addoption(parser):
-    parser.addoption('--qute-delay', action='store', default=0, type=int,
-                     help="Delay between qutebrowser commands.")
-    parser.addoption('--qute-profile-subprocs', action='store_true',
+    parser.addoption('--glimpse-delay', action='store', default=0, type=int,
+                     help="Delay between glimpsebrowser commands.")
+    parser.addoption('--glimpse-profile-subprocs', action='store_true',
                      default=False, help="Run cProfile for subprocesses.")
-    parser.addoption('--qute-bdd-webengine', action='store_true',
+    parser.addoption('--glimpse-bdd-webengine', action='store_true',
                      help='Use QtWebEngine for BDD tests')
 
 
 def pytest_configure(config):
-    webengine_arg = config.getoption('--qute-bdd-webengine')
+    webengine_arg = config.getoption('--glimpse-bdd-webengine')
     webengine_env = os.environ.get('QUTE_BDD_WEBENGINE', '')
     config.webengine = bool(webengine_arg or webengine_env)
     # Fail early if QtWebEngine is not available
@@ -272,10 +272,10 @@ def apply_fake_os(monkeypatch, request):
     else:
         raise ValueError("Invalid fake_os {}".format(name))
 
-    monkeypatch.setattr('qutebrowser.utils.utils.is_mac', mac)
-    monkeypatch.setattr('qutebrowser.utils.utils.is_linux', linux)
-    monkeypatch.setattr('qutebrowser.utils.utils.is_windows', windows)
-    monkeypatch.setattr('qutebrowser.utils.utils.is_posix', posix)
+    monkeypatch.setattr('glimpsebrowser.utils.utils.is_mac', mac)
+    monkeypatch.setattr('glimpsebrowser.utils.utils.is_linux', linux)
+    monkeypatch.setattr('glimpsebrowser.utils.utils.is_windows', windows)
+    monkeypatch.setattr('glimpsebrowser.utils.utils.is_posix', posix)
 
 
 @pytest.fixture(scope='session', autouse=True)

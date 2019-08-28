@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2015-2018 Daniel Schadt
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test the built-in directory browser."""
 
@@ -27,7 +27,7 @@ import pytest
 import bs4
 
 from PyQt5.QtCore import QUrl
-from qutebrowser.utils import urlutils
+from glimpsebrowser.utils import urlutils
 
 
 pytestmark = pytest.mark.qtwebengine_skip("Title is empty when parsing for "
@@ -119,13 +119,13 @@ class Item:
     text = attr.ib()
 
 
-def parse(quteproc):
-    """Parse the dirbrowser content from the given quteproc.
+def parse(glimpseproc):
+    """Parse the dirbrowser content from the given glimpseproc.
 
     Args:
-        quteproc: The quteproc fixture.
+        glimpseproc: The glimpseproc fixture.
     """
-    html = quteproc.get_content(plain=False)
+    html = glimpseproc.get_content(plain=False)
     soup = bs4.BeautifulSoup(html, 'html.parser')
     print(soup.prettify())
     title_prefix = 'Browse directory: '
@@ -161,46 +161,46 @@ def dir_layout(tmpdir_factory):
     return DirLayout(tmpdir_factory)
 
 
-def test_parent_folder(dir_layout, quteproc):
-    quteproc.open_url(dir_layout.file_url())
-    page = parse(quteproc)
+def test_parent_folder(dir_layout, glimpseproc):
+    glimpseproc.open_url(dir_layout.file_url())
+    page = parse(glimpseproc)
     assert page.parent == dir_layout.base_path()
 
 
-def test_parent_with_slash(dir_layout, quteproc):
+def test_parent_with_slash(dir_layout, glimpseproc):
     """Test the parent link with a URL that has a trailing slash."""
-    quteproc.open_url(dir_layout.file_url() + '/')
-    page = parse(quteproc)
+    glimpseproc.open_url(dir_layout.file_url() + '/')
+    page = parse(glimpseproc)
     assert page.parent == dir_layout.base_path()
 
 
-def test_parent_in_root_dir(dir_layout, quteproc):
+def test_parent_in_root_dir(dir_layout, glimpseproc):
     # This actually works on windows
     root_path = os.path.realpath('/')
     urlstr = QUrl.fromLocalFile(root_path).toString(QUrl.FullyEncoded)
-    quteproc.open_url(urlstr)
-    page = parse(quteproc)
+    glimpseproc.open_url(urlstr)
+    page = parse(glimpseproc)
     assert page.parent is None
 
 
-def test_enter_folder_smoke(dir_layout, quteproc):
-    quteproc.open_url(dir_layout.file_url())
-    quteproc.send_cmd(':hint all normal')
+def test_enter_folder_smoke(dir_layout, glimpseproc):
+    glimpseproc.open_url(dir_layout.file_url())
+    glimpseproc.send_cmd(':hint all normal')
     # a is the parent link, s is the first listed folder/file
-    quteproc.send_cmd(':follow-hint s')
+    glimpseproc.send_cmd(':follow-hint s')
     expected_url = urlutils.file_url(dir_layout.path('folder0'))
-    quteproc.wait_for_load_finished_url(expected_url)
-    page = parse(quteproc)
+    glimpseproc.wait_for_load_finished_url(expected_url)
+    page = parse(glimpseproc)
     assert page.path == dir_layout.path('folder0')
 
 
 @pytest.mark.parametrize('folder', DirLayout.layout_folders())
-def test_enter_folder(dir_layout, quteproc, folder):
-    quteproc.open_url(dir_layout.file_url())
-    quteproc.click_element_by_text(text=folder)
+def test_enter_folder(dir_layout, glimpseproc, folder):
+    glimpseproc.open_url(dir_layout.file_url())
+    glimpseproc.click_element_by_text(text=folder)
     expected_url = urlutils.file_url(dir_layout.path(folder))
-    quteproc.wait_for_load_finished_url(expected_url)
-    page = parse(quteproc)
+    glimpseproc.wait_for_load_finished_url(expected_url)
+    page = parse(glimpseproc)
     assert page.path == dir_layout.path(folder)
     assert page.parent == dir_layout.path()
     folders, files = DirLayout.get_folder_content(folder)

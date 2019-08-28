@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Get qutebrowser crash information and stacktraces from coredumpctl."""
+"""Get glimpsebrowser crash information and stacktraces from coredumpctl."""
 
 import os
 import os.path
@@ -99,8 +99,8 @@ def get_info(pid):
     return data
 
 
-def is_qutebrowser_dump(parsed):
-    """Check if the given Line is a qutebrowser dump."""
+def is_glimpsebrowser_dump(parsed):
+    """Check if the given Line is a glimpsebrowser dump."""
     basename = os.path.basename(parsed.exe)
     if basename == 'python' or basename.startswith('python3'):
         info = get_info(parsed.pid)
@@ -109,9 +109,9 @@ def is_qutebrowser_dump(parsed):
         except KeyError:
             return True
         else:
-            return '-m qutebrowser' in cmdline
+            return '-m glimpsebrowser' in cmdline
     else:
-        return basename == 'qutebrowser'
+        return basename == 'glimpsebrowser'
 
 
 def dump_infos_gdb(parsed):
@@ -168,7 +168,7 @@ def main():
         parsed = parse_coredumpctl_line(line)
         if not parsed.present and not args.all:
             continue
-        if is_qutebrowser_dump(parsed):
+        if is_glimpsebrowser_dump(parsed):
             dump_infos(parsed)
 
 

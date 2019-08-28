@@ -4,45 +4,45 @@ API modules
 cmdutils module
 ---------------
 
-.. automodule:: qutebrowser.api.cmdutils
+.. automodule:: glimpsebrowser.api.cmdutils
    :members:
    :imported-members:
 
 apitypes module
 ---------------
 
-.. automodule:: qutebrowser.api.apitypes
+.. automodule:: glimpsebrowser.api.apitypes
    :members:
    :imported-members:
 
 config module
 -------------
 
-.. automodule:: qutebrowser.api.config
+.. automodule:: glimpsebrowser.api.config
    :members:
 
 downloads module
 ----------------
 
-.. automodule:: qutebrowser.api.downloads
+.. automodule:: glimpsebrowser.api.downloads
    :members:
 
 hook module
 -----------
 
-.. automodule:: qutebrowser.api.hook
+.. automodule:: glimpsebrowser.api.hook
    :members:
 
 interceptor module
 ------------------
 
-.. automodule:: qutebrowser.api.interceptor
+.. automodule:: glimpsebrowser.api.interceptor
    :members:
    :imported-members:
 
 message module
 --------------
 
-.. automodule:: qutebrowser.api.message
+.. automodule:: glimpsebrowser.api.message
    :members:
    :imported-members:

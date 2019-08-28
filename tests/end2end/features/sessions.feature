@@ -109,7 +109,7 @@ Feature: Saving and loading sessions
     And I open data/title.html
     And I open data/numbers/2.txt in a new tab
     And I open data/numbers/3.txt in a new window
-    # Full output apart from "geometry:" and the active window (needs qutewm)
+    # Full output apart from "geometry:" and the active window (needs glimpsewm)
     Then the session should look like:
       windows:
       - tabs:
@@ -160,7 +160,7 @@ Feature: Saving and loading sessions
     And I open data/title.html
     And I open data/numbers/2.txt in a new tab
     And I open data/numbers/3.txt in a new window
-    # Full output apart from "geometry:" and the active window (needs qutewm)
+    # Full output apart from "geometry:" and the active window (needs glimpsewm)
     Then the session should look like:
       windows:
       - tabs:
@@ -196,7 +196,7 @@ Feature: Saving and loading sessions
             url: http://localhost:*/data/numbers/3.txt
             zoom: 1.0
 
-  # https://github.com/qutebrowser/qutebrowser/issues/879
+  # https://github.com/glimpsebrowser/glimpsebrowser/issues/879
 
   Scenario: Saving a session with a page using history.replaceState()
     When I open data/sessions/history_replace_state.html without waiting

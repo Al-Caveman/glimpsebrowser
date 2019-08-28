@@ -3,24 +3,24 @@
 
 # Copyright 2014-2019 Florian Bruhin (The-Compiler) <me@the-compiler.org>
 
-# this file is part of qutebrowser.
+# this file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the gnu general public license as published by
 # the free software foundation, either version 3 of the license, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but without any warranty; without even the implied warranty of
 # merchantability or fitness for a particular purpose.  see the
 # gnu general public license for more details.
 #
 # you should have received a copy of the gnu general public license
-# along with qutebrowser.  if not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  if not, see <http://www.gnu.org/licenses/>.
 
 """Generate Qt resources based on source files."""
 
 import subprocess
 
-with open('qutebrowser/resources.py', 'w', encoding='utf-8') as f:
-    subprocess.run(['pyrcc5', 'qutebrowser.rcc'], stdout=f, check=True)
+with open('glimpsebrowser/resources.py', 'w', encoding='utf-8') as f:
+    subprocess.run(['pyrcc5', 'glimpsebrowser.rcc'], stdout=f, check=True)

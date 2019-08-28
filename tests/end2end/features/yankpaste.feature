@@ -51,9 +51,9 @@ Feature: Yanking and pasting.
 
     Scenario: Yanking inline to clipboard
         When I open data/title.html
-        And I run :yank inline '[[{url}][qutebrowser</3org]]'
-        Then the message "Yanked inline block to clipboard: [[http://localhost:(port)/data/title.html][qutebrowser</3org]]" should be shown
-        And the clipboard should contain "[[http://localhost:(port)/data/title.html][qutebrowser</3org]]"
+        And I run :yank inline '[[{url}][glimpsebrowser</3org]]'
+        Then the message "Yanked inline block to clipboard: [[http://localhost:(port)/data/title.html][glimpsebrowser</3org]]" should be shown
+        And the clipboard should contain "[[http://localhost:(port)/data/title.html][glimpsebrowser</3org]]"
 
     Scenario: Yanking domain to clipboard
         When I open data/title.html
@@ -169,7 +169,7 @@ Feature: Yanking and pasting.
         And I run :open {clipboard}
         Then the error "Invalid URL" should be shown
 
-    # https://travis-ci.org/qutebrowser/qutebrowser/jobs/157941726
+    # https://travis-ci.org/glimpsebrowser/glimpsebrowser/jobs/157941726
     @qtwebengine_flaky
     Scenario: Pasting multiple urls in a new tab
         When I put the following lines into the clipboard:
@@ -191,13 +191,13 @@ Feature: Yanking and pasting.
         And I set url.searchengines to {"DEFAULT": "http://localhost:(port)/data/hello.txt?q={}"}
         And I put the following lines into the clipboard:
             this url:
-            http://qutebrowser.org
+            http://glimpsebrowser.org
             should not open
         And I run :open -t {clipboard}
-        And I wait until data/hello.txt?q=this%20url%3A%0Ahttp%3A%2F%2Fqutebrowser.org%0Ashould%20not%20open is loaded
+        And I wait until data/hello.txt?q=this%20url%3A%0Ahttp%3A%2F%2Fglimpsebrowser.org%0Ashould%20not%20open is loaded
         Then the following tabs should be open:
             - about:blank
-            - data/hello.txt?q=this%20url%3A%0Ahttp%3A%2F%2Fqutebrowser.org%0Ashould%20not%20open (active)
+            - data/hello.txt?q=this%20url%3A%0Ahttp%3A%2F%2Fglimpsebrowser.org%0Ashould%20not%20open (active)
 
     Scenario: Pasting multiline whose first line looks like a URI
         When I set url.auto_search to naive
@@ -212,7 +212,7 @@ Feature: Yanking and pasting.
             - about:blank
             - data/hello.txt?q=text%3A%0Ashould%20open%0Aas%20search (active)
 
-    # https://travis-ci.org/qutebrowser/qutebrowser/jobs/157941726
+    # https://travis-ci.org/glimpsebrowser/glimpsebrowser/jobs/157941726
     @qtwebengine_flaky
     Scenario: Pasting multiple urls in a background tab
         When I put the following lines into the clipboard:
@@ -275,7 +275,7 @@ Feature: Yanking and pasting.
 
     Scenario: Inserting text into an empty text field
         When I open data/paste_primary.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :insert-text Hello world
         # Compare
@@ -284,11 +284,11 @@ Feature: Yanking and pasting.
     Scenario: Inserting text into an empty text field with javascript disabled
         When I set content.javascript.enabled to false
         And I open data/paste_primary.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         And I run :insert-text Hello world
         And I wait for "Inserting text into element *" in the log
-        And I run :jseval console.log("textarea contents: " + document.getElementById('qute-textarea').value);
+        And I run :jseval console.log("textarea contents: " + document.getElementById('glimpse-textarea').value);
         # Enable javascript again for the other tests
         And I set content.javascript.enabled to true
         # Compare
@@ -297,7 +297,7 @@ Feature: Yanking and pasting.
     Scenario: Inserting text into a text field at specific position
         When I open data/paste_primary.html
         And I insert "one two three four" into the text field
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         # Move to the beginning and two characters to the right
         And I press the keys "<Home>"
@@ -309,7 +309,7 @@ Feature: Yanking and pasting.
 
     Scenario: Inserting text into a text field with undo
         When I open data/paste_primary.html
-        And I run :click-element id qute-textarea
+        And I run :click-element id glimpse-textarea
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         # Paste and undo
         And I run :insert-text This text should be undone
@@ -328,7 +328,7 @@ Feature: Yanking and pasting.
 
     Scenario: Inserting text with a read-only field
         When I open data/paste_primary.html
-        And I run :click-element id qute-textarea-noedit
+        And I run :click-element id glimpse-textarea-noedit
         And I wait for "Clicked non-editable element!" in the log
         And I run :enter-mode insert
         And I run :insert-text test

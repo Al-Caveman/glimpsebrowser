@@ -1,0 +1,13 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>icons/glimpsebrowser-16x16.png</file>
+    <file>icons/glimpsebrowser-24x24.png</file>
+    <file>icons/glimpsebrowser-32x32.png</file>
+    <file>icons/glimpsebrowser-48x48.png</file>
+    <file>icons/glimpsebrowser-64x64.png</file>
+    <file>icons/glimpsebrowser-96x96.png</file>
+    <file>icons/glimpsebrowser-128x128.png</file>
+    <file>icons/glimpsebrowser-256x256.png</file>
+    <file>icons/glimpsebrowser-512x512.png</file>
+</qresource>
+</RCC>

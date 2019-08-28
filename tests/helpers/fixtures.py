@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 # pylint: disable=invalid-name
 
@@ -42,17 +42,17 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 from PyQt5.QtNetwork import QNetworkCookieJar
 
 import helpers.stubs as stubsmod
-from qutebrowser.config import (config, configdata, configtypes, configexc,
+from glimpsebrowser.config import (config, configdata, configtypes, configexc,
                                 configfiles, configcache)
-from qutebrowser.api import config as configapi
-from qutebrowser.utils import objreg, standarddir, utils, usertypes
-from qutebrowser.browser import greasemonkey, history, qutescheme
-from qutebrowser.browser.webkit import cookies
-from qutebrowser.misc import savemanager, sql, objects
-from qutebrowser.keyinput import modeman
+from glimpsebrowser.api import config as configapi
+from glimpsebrowser.utils import objreg, standarddir, utils, usertypes
+from glimpsebrowser.browser import greasemonkey, history, glimpsescheme
+from glimpsebrowser.browser.webkit import cookies
+from glimpsebrowser.misc import savemanager, sql, objects
+from glimpsebrowser.keyinput import modeman
 
 
-_qute_scheme_handler = None
+_glimpse_scheme_handler = None
 
 
 class WidgetContainer(QWidget):
@@ -91,7 +91,7 @@ class WinRegistryHelper:
         registry = attr.ib()
 
         def windowTitle(self):
-            return 'window title - qutebrowser'
+            return 'window title - glimpsebrowser'
 
     def __init__(self):
         self._ids = []
@@ -168,17 +168,17 @@ def greasemonkey_manager(data_tmpdir):
 @pytest.fixture(scope='session')
 def testdata_scheme(qapp):
     try:
-        global _qute_scheme_handler
-        from qutebrowser.browser.webengine import webenginequtescheme
+        global _glimpse_scheme_handler
+        from glimpsebrowser.browser.webengine import webengineglimpsescheme
         from PyQt5.QtWebEngineWidgets import QWebEngineProfile
-        webenginequtescheme.init()
-        _qute_scheme_handler = webenginequtescheme.QuteSchemeHandler(
+        webengineglimpsescheme.init()
+        _glimpse_scheme_handler = webengineglimpsescheme.GlimpseSchemeHandler(
             parent=qapp)
-        _qute_scheme_handler.install(QWebEngineProfile.defaultProfile())
+        _glimpse_scheme_handler.install(QWebEngineProfile.defaultProfile())
     except ImportError:
         pass
 
-    @qutescheme.add_handler('testdata')
+    @glimpsescheme.add_handler('testdata')
     def handler(url):  # pylint: disable=unused-variable
         file_abs = os.path.abspath(os.path.dirname(__file__))
         filename = os.path.join(file_abs, os.pardir, 'end2end',
@@ -207,7 +207,7 @@ def web_tab_setup(qtbot, tab_registry, session_manager_stub,
 @pytest.fixture
 def webkit_tab(web_tab_setup, qtbot, cookiejar_and_cache, mode_manager,
                widget_container):
-    webkittab = pytest.importorskip('qutebrowser.browser.webkit.webkittab')
+    webkittab = pytest.importorskip('glimpsebrowser.browser.webkit.webkittab')
 
     tab = webkittab.WebKitTab(win_id=0, mode_manager=mode_manager,
                               private=False)
@@ -223,7 +223,7 @@ def webengine_tab(web_tab_setup, qtbot, redirect_webengine_data,
     tabwidget.index_of = 0
 
     webenginetab = pytest.importorskip(
-        'qutebrowser.browser.webengine.webenginetab')
+        'glimpsebrowser.browser.webengine.webenginetab')
 
     tab = webenginetab.WebEngineTab(win_id=0, mode_manager=mode_manager,
                                     private=False)
@@ -520,7 +520,7 @@ def mode_manager(win_registry, config_stub, key_config_stub, qapp):
 def standarddir_tmpdir(folder, monkeypatch, tmpdir):
     """Set tmpdir/config as the configdir.
 
-    Use this to avoid creating a 'real' config dir (~/.config/qute_test).
+    Use this to avoid creating a 'real' config dir (~/.config/glimpse_test).
     """
     confdir = tmpdir / folder
     confdir.ensure(dir=True)
@@ -534,7 +534,7 @@ def standarddir_tmpdir(folder, monkeypatch, tmpdir):
 def download_tmpdir(monkeypatch, tmpdir):
     """Set tmpdir/download as the downloaddir.
 
-    Use this to avoid creating a 'real' download dir (~/.config/qute_test).
+    Use this to avoid creating a 'real' download dir (~/.config/glimpse_test).
     """
     return standarddir_tmpdir('download', monkeypatch, tmpdir)
 
@@ -543,7 +543,7 @@ def download_tmpdir(monkeypatch, tmpdir):
 def config_tmpdir(monkeypatch, tmpdir):
     """Set tmpdir/config as the configdir.
 
-    Use this to avoid creating a 'real' config dir (~/.config/qute_test).
+    Use this to avoid creating a 'real' config dir (~/.config/glimpse_test).
     """
     monkeypatch.setattr(
         standarddir, 'config_py',
@@ -565,7 +565,7 @@ def config_py_arg(tmpdir, monkeypatch):
 def data_tmpdir(monkeypatch, tmpdir):
     """Set tmpdir/data as the datadir.
 
-    Use this to avoid creating a 'real' data dir (~/.local/share/qute_test).
+    Use this to avoid creating a 'real' data dir (~/.local/share/glimpse_test).
     """
     return standarddir_tmpdir('data', monkeypatch, tmpdir)
 
@@ -583,7 +583,7 @@ def runtime_tmpdir(monkeypatch, tmpdir):
 def cache_tmpdir(monkeypatch, tmpdir):
     """Set tmpdir/cache as the cachedir.
 
-    Use this to avoid creating a 'real' cache dir (~/.cache/qute_test).
+    Use this to avoid creating a 'real' cache dir (~/.cache/glimpse_test).
     """
     return standarddir_tmpdir('cache', monkeypatch, tmpdir)
 

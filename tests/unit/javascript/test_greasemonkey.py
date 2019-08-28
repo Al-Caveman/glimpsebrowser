@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
-# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.browser.greasemonkey."""
+"""Tests for glimpsebrowser.browser.greasemonkey."""
 
 import logging
 import textwrap
@@ -25,12 +25,12 @@ import pytest
 import py.path  # pylint: disable=no-name-in-module
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.utils import usertypes
-from qutebrowser.browser import greasemonkey
+from glimpsebrowser.utils import usertypes
+from glimpsebrowser.browser import greasemonkey
 
 test_gm_script = r"""
 // ==UserScript==
-// @name qutebrowser test userscript
+// @name glimpsebrowser test userscript
 // @namespace invalid.org
 // @include http://localhost:*/data/title.html
 // @match http://*.trolol.com/*
@@ -56,7 +56,7 @@ def test_all():
 
     gm_manager = greasemonkey.GreasemonkeyManager()
     assert (gm_manager.all_scripts()[0].name ==
-            "qutebrowser test userscript")
+            "glimpsebrowser test userscript")
 
 
 @pytest.mark.parametrize("url, expected_matches", [
@@ -79,7 +79,7 @@ def test_get_scripts_by_url(url, expected_matches):
 
 @pytest.mark.parametrize("url, expected_matches", [
     # included
-    ('https://github.com/qutebrowser/qutebrowser/', 1),
+    ('https://github.com/glimpsebrowser/glimpsebrowser/', 1),
     # neither included nor excluded
     ('http://aaaaaaaaaa.com/', 0),
     # excluded takes priority
@@ -130,13 +130,13 @@ def test_no_name_with_fallback():
 
 
 def test_bad_scheme(caplog):
-    """qute:// isn't in the list of allowed schemes."""
+    """glimpse:// isn't in the list of allowed schemes."""
     _save_script("var nothing = true;\n", 'nothing.user.js')
 
     with caplog.at_level(logging.WARNING):
         gm_manager = greasemonkey.GreasemonkeyManager()
 
-    scripts = gm_manager.scripts_for(QUrl('qute://settings'))
+    scripts = gm_manager.scripts_for(QUrl('glimpse://settings'))
     assert len(scripts.start + scripts.end + scripts.idle) == 0
 
 
@@ -154,7 +154,7 @@ def test_utf8_bom():
     """
     script = textwrap.dedent("""
         \N{BYTE ORDER MARK}// ==UserScript==
-        // @name qutebrowser test userscript
+        // @name glimpsebrowser test userscript
         // ==/UserScript==
     """.lstrip('\n'))
     _save_script(script, 'bom.user.js')
@@ -219,7 +219,7 @@ class TestForceDocumentEnd:
 def test_required_scripts_are_included(download_stub, tmpdir):
     test_require_script = textwrap.dedent("""
         // ==UserScript==
-        // @name qutebrowser test userscript
+        // @name glimpsebrowser test userscript
         // @namespace invalid.org
         // @include http://localhost:*/data/title.html
         // @match http://trolol*

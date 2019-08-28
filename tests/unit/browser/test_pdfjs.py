@@ -2,20 +2,20 @@
 
 # Copyright 2015 Daniel Schadt
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
 import os.path
@@ -23,8 +23,8 @@ import os.path
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.browser import pdfjs
-from qutebrowser.utils import usertypes, utils, urlmatch
+from glimpsebrowser.browser import pdfjs
+from glimpsebrowser.utils import usertypes, utils, urlmatch
 
 
 pytestmark = [pytest.mark.usefixtures('data_tmpdir')]
@@ -53,7 +53,7 @@ def test_generate_pdfjs_page(available, snippet, monkeypatch):
 
 
 # Note that we got double protection, once because we use QUrl.FullyEncoded and
-# because we use qutebrowser.utils.javascript.to_js. Characters like " are
+# because we use glimpsebrowser.utils.javascript.to_js. Characters like " are
 # already replaced by QUrl.
 @pytest.mark.parametrize('filename, expected', [
     ('foo.bar', "foo.bar"),
@@ -63,7 +63,7 @@ def test_generate_pdfjs_page(available, snippet, monkeypatch):
      'foobar%22);alert(%22attack!%22);'),
 ])
 def test_generate_pdfjs_script(filename, expected):
-    expected_open = 'open("qute://pdfjs/file?filename={}");'.format(expected)
+    expected_open = 'open("glimpse://pdfjs/file?filename={}");'.format(expected)
     actual = pdfjs._generate_pdfjs_script(filename)
     assert expected_open in actual
     assert 'PDFView' in actual
@@ -130,7 +130,7 @@ class TestResources:
         for path in ['/usr/share/pdf.js/',
                      str(tmpdir / 'data' / 'pdfjs'),
                      # hardcoded for --temp-basedir
-                     os.path.expanduser('~/.local/share/qutebrowser/pdfjs/')]:
+                     os.path.expanduser('~/.local/share/glimpsebrowser/pdfjs/')]:
             read_system_mock.assert_any_call(path, ['web/test', 'test'])
 
     def test_get_pdfjs_res_not_found(self, read_system_mock, read_file_mock,
@@ -227,7 +227,7 @@ def test_is_available(available, mocker):
     # PDF.js disabled
     ('application/pdf', 'http://www.example.com', False, False),
     # Download button in PDF.js
-    ('application/pdf', 'blob:qute%3A///b45250b3', True, False),
+    ('application/pdf', 'blob:glimpse%3A///b45250b3', True, False),
 ])
 def test_should_use_pdfjs(mimetype, url, enabled, expected, config_stub):
     config_stub.val.content.pdfjs = enabled
@@ -246,6 +246,6 @@ def test_should_use_pdfjs_url_pattern(config_stub, url, expected):
 
 
 def test_get_main_url():
-    expected = ('qute://pdfjs/web/viewer.html?filename='
+    expected = ('glimpse://pdfjs/web/viewer.html?filename='
                 'hello?world.pdf&file=')
     assert pdfjs.get_main_url('hello?world.pdf') == QUrl(expected)

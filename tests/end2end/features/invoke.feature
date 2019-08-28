@@ -1,7 +1,7 @@
 # vim: ft=cucumber fileencoding=utf-8 sts=4 sw=4 et:
 
 Feature: Invoking a new process
-    Simulate what happens when running qutebrowser with an existing instance
+    Simulate what happens when running glimpsebrowser with an existing instance
 
     Background:
         Given I clean up open tabs
@@ -94,7 +94,7 @@ Feature: Invoking a new process
               - history:
                 - url: http://localhost:*/data/search.html
 
-    Scenario: Opening a new qutebrowser instance with no parameters
+    Scenario: Opening a new glimpsebrowser instance with no parameters
         When I set new_instance_open_target to tab
         And I set url.start_pages to ["http://localhost:(port)/data/hello.txt"]
         And I open data/title.html

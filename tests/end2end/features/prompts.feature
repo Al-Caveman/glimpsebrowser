@@ -436,7 +436,7 @@ Feature: Prompts
         And I wait for a prompt
         And I run :quit
         Then the javascript message "confirm reply: false" should be logged
-        And qutebrowser should quit
+        And glimpsebrowser should quit
 
     Scenario: Using :prompt-open-download with a prompt which does not support it
         When I open data/hello.txt
@@ -462,7 +462,7 @@ Feature: Prompts
         And I run :prompt-accept prompt-in-command-mode
         Then "Added quickmark prompt-in-command-mode for *" should be logged
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1093
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1093
     @qtwebengine_skip: QtWebEngine doesn't open the second page/prompt
     Scenario: Keyboard focus with multiple auth prompts
         When I open basic-auth/user5/password5 without waiting
@@ -488,8 +488,8 @@ Feature: Prompts
               "user": "user6"
             }
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1249#issuecomment-175205531
-    # https://github.com/qutebrowser/qutebrowser/pull/2054#issuecomment-258285544
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1249#issuecomment-175205531
+    # https://github.com/glimpsebrowser/glimpsebrowser/pull/2054#issuecomment-258285544
     @qtwebengine_notifications
     Scenario: Interrupting SSL prompt during a notification prompt
         Given I have a fresh instance

@@ -1,7 +1,7 @@
-Content-Type: multipart/related; boundary="---=_qute-6d584056-b1e4-4882-91e6-d4a6d23adb67"
+Content-Type: multipart/related; boundary="---=_glimpse-6d584056-b1e4-4882-91e6-d4a6d23adb67"
 MIME-Version: 1.0
 
------=_qute-6d584056-b1e4-4882-91e6-d4a6d23adb67
+-----=_glimpse-6d584056-b1e4-4882-91e6-d4a6d23adb67
 Content-Location: http://localhost:1234/data/downloads/mhtml/simple/simple.html
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
@@ -16,4 +16,4 @@ Content-Transfer-Encoding: quoted-printable
    =20
 
 </body></html>
------=_qute-6d584056-b1e4-4882-91e6-d4a6d23adb67--
+-----=_glimpse-6d584056-b1e4-4882-91e6-d4a6d23adb67--

@@ -1,25 +1,25 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import pytest
 
-from qutebrowser.browser import downloads, qtnetworkdownloads
+from glimpsebrowser.browser import downloads, qtnetworkdownloads
 
 
 def test_download_model(qapp, qtmodeltester, config_stub, cookiejar_and_cache,
@@ -31,34 +31,34 @@ def test_download_model(qapp, qtmodeltester, config_stub, cookiejar_and_cache,
 
 
 @pytest.mark.parametrize('url, title, out', [
-    ('http://qutebrowser.org/INSTALL.html',
-     'Installing qutebrowser | qutebrowser',
-     'Installing qutebrowser _ qutebrowser.html'),
-    ('http://qutebrowser.org/INSTALL.html',
-     'Installing qutebrowser | qutebrowser.html',
-     'Installing qutebrowser _ qutebrowser.html'),
-    ('http://qutebrowser.org/INSTALL.HTML',
-     'Installing qutebrowser | qutebrowser',
-     'Installing qutebrowser _ qutebrowser.html'),
-    ('http://qutebrowser.org/INSTALL.html',
-     'Installing qutebrowser | qutebrowser.HTML',
-     'Installing qutebrowser _ qutebrowser.HTML'),
-    ('http://qutebrowser.org/',
-     'qutebrowser | qutebrowser',
-     'qutebrowser _ qutebrowser.html'),
-    ('https://github.com/qutebrowser/qutebrowser/releases',
-     'Releases · qutebrowser/qutebrowser',
-     'Releases · qutebrowser_qutebrowser.html'),
-    ('http://qutebrowser.org/index.php',
-     'qutebrowser | qutebrowser',
-     'qutebrowser _ qutebrowser.html'),
-    ('http://qutebrowser.org/index.php',
-     'qutebrowser | qutebrowser - index.php',
-     'qutebrowser _ qutebrowser - index.php.html'),
-    ('https://qutebrowser.org/img/cheatsheet-big.png',
+    ('http://glimpsebrowser.org/INSTALL.html',
+     'Installing glimpsebrowser | glimpsebrowser',
+     'Installing glimpsebrowser _ glimpsebrowser.html'),
+    ('http://glimpsebrowser.org/INSTALL.html',
+     'Installing glimpsebrowser | glimpsebrowser.html',
+     'Installing glimpsebrowser _ glimpsebrowser.html'),
+    ('http://glimpsebrowser.org/INSTALL.HTML',
+     'Installing glimpsebrowser | glimpsebrowser',
+     'Installing glimpsebrowser _ glimpsebrowser.html'),
+    ('http://glimpsebrowser.org/INSTALL.html',
+     'Installing glimpsebrowser | glimpsebrowser.HTML',
+     'Installing glimpsebrowser _ glimpsebrowser.HTML'),
+    ('http://glimpsebrowser.org/',
+     'glimpsebrowser | glimpsebrowser',
+     'glimpsebrowser _ glimpsebrowser.html'),
+    ('https://github.com/glimpsebrowser/glimpsebrowser/releases',
+     'Releases · glimpsebrowser/glimpsebrowser',
+     'Releases · glimpsebrowser_glimpsebrowser.html'),
+    ('http://glimpsebrowser.org/index.php',
+     'glimpsebrowser | glimpsebrowser',
+     'glimpsebrowser _ glimpsebrowser.html'),
+    ('http://glimpsebrowser.org/index.php',
+     'glimpsebrowser | glimpsebrowser - index.php',
+     'glimpsebrowser _ glimpsebrowser - index.php.html'),
+    ('https://glimpsebrowser.org/img/cheatsheet-big.png',
      'cheatsheet-big.png (3342×2060)',
      None),
-    ('http://qutebrowser.org/page-with-no-title.html',
+    ('http://glimpsebrowser.org/page-with-no-title.html',
      '',
      None),
 ])

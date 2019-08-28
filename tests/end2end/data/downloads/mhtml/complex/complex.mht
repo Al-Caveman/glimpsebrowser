@@ -1,7 +1,7 @@
-Content-Type: multipart/related; boundary="---=_qute-5314618b-e51d-46e1-9598-103536e86b59"
+Content-Type: multipart/related; boundary="---=_glimpse-5314618b-e51d-46e1-9598-103536e86b59"
 MIME-Version: 1.0
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/complex.html
 MIME-Version: 1.0
 Content-Type: text/html; charset="UTF-8"
@@ -10,7 +10,7 @@ Content-Transfer-Encoding: quoted-printable
 <html><head>
         <meta http-equiv=3D"Content-Type" content=3D"text/html;charset=3DUT=
 F-8">
-        <title>qutebrowser mhtml test</title>
+        <title>glimpsebrowser mhtml test</title>
    =20
         <!-- make sure <style> tags are parsed  -->
         <style>
@@ -53,19 +53,19 @@ serif;
         <!-- make sure images are included -->
         <img src=3D"Banner.png" id=3D"banner">
        =20
-        <h1>Welcome to the qutebrowser mhtml test page</h1>
+        <h1>Welcome to the glimpsebrowser mhtml test page</h1>
        =20
         <div class=3D"dyk">
-        ...that the word <em>qutebrowser</em> is a word play on Qt, the
+        ...that the word <em>glimpsebrowser</em> is a word play on Qt, the
         framework the browser is built with?
         </div>
        =20
         <h2>What is this page?</h2>
        =20
         <p>This page is a test-case for the mhtml download feature of
-        qutebrowser. Under normal circumstances, you won't see this page, e=
+        glimpsebrowser. Under normal circumstances, you won't see this page, e=
 xcept
-        if you're a qutebrowser developer <em>or</em> you're attending one =
+        if you're a glimpsebrowser developer <em>or</em> you're attending one =
 of
         The-Compiler's pytest demos.</p>
        =20
@@ -79,24 +79,24 @@ ated
        =20
         <p>This page references other assets and when the page is downloade=
 d,
-        qutebrowser checks if each asset was downloaded. If some assets are
+        glimpsebrowser checks if each asset was downloaded. If some assets are
         missing, the test fails and the poor developers have to search for =
 the
         error.</p>
        =20
-        <h2>Can I contribute to qutebrowser?</h2>
+        <h2>Can I contribute to glimpsebrowser?</h2>
        =20
         <p>Yes!</p>
        =20
         <div class=3D"dyk">
-        ...that qutebrowser is free software? Free as in <em>free beer</em>=
+        ...that glimpsebrowser is free software? Free as in <em>free beer</em>=
  and
         <em>free speech</em>! Isn't that great?
         </div>
        =20
         <h2>...and how?</h2>
        =20
-        <p>See <a href=3D"https://github.com/qutebrowser/qutebrowser/blob/m=
+        <p>See <a href=3D"https://github.com/glimpsebrowser/glimpsebrowser/blob/m=
 aster/doc/contributing.asciidoc">
         here</a> for more information.</p>
        =20
@@ -107,7 +107,7 @@ aster/doc/contributing.asciidoc">
         </div>
        =20
         <div class=3D"dyk">
-        ...the IRC channel for qutebrowser is <code>#qutebrowser</code> on
+        ...the IRC channel for glimpsebrowser is <code>#glimpsebrowser</code> on
         irc.freenode.net
         </div>
        =20
@@ -129,7 +129,7 @@ t: no-repeat; width: 160px; height: 160px;"></div>
    =20
 
 </body></html>
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/Background.png
 MIME-Version: 1.0
 Content-Type: image/png
@@ -140,7 +140,7 @@ B3RJTUUH4AICDwo6PeZczAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUH
 AAAAMElEQVQY0+3DUQ0AIAxDwaYSYK+W5t8H84ALvrjk1N2W9D+613IFUxgwwSlcRHPmAgsRBhHi
 LLCEAAAAAElFTkSuQmCC
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/Banner.png
 MIME-Version: 1.0
 Content-Type: image/png
@@ -446,7 +446,7 @@ AhUA1s8a/NKwOae5wFBroaJNzeksk+83UEwwmhFohlG9atd6xB2Ly/uk/xcqeo8gtcFcs86dMHQd
 SdSOpssdbJXkelcIIcTwBuqgpcM3bt5e0Pzi6lirhQ3r/AqRqypyU4AdZ6JQaRBnq93mF95vHpNr
 Y/gZoCfnqR5FxXopPk3TmWX3cVCVEBVCCPHn/QC4F+TMsZASEwAAAABJRU5ErkJggg==
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/DYK.png
 MIME-Version: 1.0
 Content-Type: image/png
@@ -669,7 +669,7 @@ RrhfCSHfG6vwX3yYaLqW+vPaLvoPYMg/yzKVKjxLGBsKJrahBBqOsqC+q87CcLRY9BRfaCJACaPk
 CJHIZrPdtrb+X2ml13L/XfMA8ET93jZm6XiM4Xj048EyJSbFAlBxYApGwFOAY4QRCtawSShhYISB
 QAKBcLxYPFttki4CpADAKUJwlAnst/K32xX/3vrq/wNwvhL7pbGSTwAAAABJRU5ErkJggg==
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/Inline.png
 MIME-Version: 1.0
 Content-Type: image/png
@@ -685,7 +685,7 @@ CBABggARIAgQAYIAESAIEAGCABEgCBABwoh3QuyL7nMC4gpGgCBABAgCRIAgQAQIAkSAIEAECAJE
 gCBABAgCRIAw4p0Q+6L7nIC4ghEgCBABggARIAgQAYIAESAIEAGCABEgCBABggARIIx4J8S+6D4n
 IK5gBAgCRIAgQAQIAkSAIEAECAJEgCBABAgCRIAgQAQIIw997mYx/U+iXAAAAABJRU5ErkJggg==
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/base.css
 MIME-Version: 1.0
 Content-Type: text/css; charset=utf-8
@@ -708,7 +708,7 @@ div.dyk {
     border-radius: 64px;
 }
    =20
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/external-in-extern.css
 MIME-Version: 1.0
 Content-Type: text/css; charset=utf-8
@@ -719,7 +719,7 @@ h1, h2, h3, h4, h5, h6 {
     color: #0A396E;
     border-bottom: 1px dotted #474747;
 }
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/favicon.png
 MIME-Version: 1.0
 Content-Type: image/png
@@ -807,7 +807,7 @@ gjXlKDDc9a8AAAAldEVYdGRhdGU6Y3JlYXRlADIwMTUtMTEtMTJUMjE6NTE6NTgrMDE6MDDirQAD
 AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE1LTExLTEyVDIxOjUxOjU4KzAxOjAwk/C4vwAAAABJRU5E
 rkJggg==
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59
 Content-Location: http://localhost:1337/data/downloads/mhtml/complex/script.js
 MIME-Version: 1.0
 Content-Type: application/javascript
@@ -822,4 +822,4 @@ X2tleXMgKz0gU3RyaW5nLmZyb21DaGFyQ29kZShlLmNoYXJDb2RlKTsKICBpZiAod2luZG93Ll9r
 ZXlzLmVuZHNXaXRoKCJxdXRlIikpIHsKICAgIGFsZXJ0KCJJdCdzIGp1c3QgYSBxdXRlIGJyb3dz
 ZXIhIik7CiAgICB3aW5kb3cuX2tleXMgPSAiIjsKICB9Cn0=
 
------=_qute-5314618b-e51d-46e1-9598-103536e86b59--
+-----=_glimpse-5314618b-e51d-46e1-9598-103536e86b59--

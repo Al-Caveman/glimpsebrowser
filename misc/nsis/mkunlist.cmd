@@ -1,6 +1,6 @@
 @echo off
 
-rem This is called from qutebrowser NSIS script at compile time.
+rem This is called from glimpsebrowser NSIS script at compile time.
 rem It enumerates the files/directories of the release and generates an nsh
 rem file with the commands to remove them.
 

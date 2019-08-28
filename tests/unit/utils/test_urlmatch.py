@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.urlmatch.
+"""Tests for glimpsebrowser.utils.urlmatch.
 
 The tests are mostly inspired by Chromium's:
 https://cs.chromium.org/chromium/src/extensions/common/url_pattern_unittest.cc
@@ -37,7 +37,7 @@ import hypothesis
 import hypothesis.strategies as hst
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.utils import urlmatch
+from glimpsebrowser.utils import urlmatch
 
 
 @pytest.mark.parametrize('pattern, error', [
@@ -326,7 +326,7 @@ class TestMatchAnything:
         "chrome://favicon/http://google.com",
         "file:///foo/bar",
         "file://localhost/foo/bar",
-        "qute://version",
+        "glimpse://version",
         "about:blank",
         "data:text/html;charset=utf-8,<html>asdf</html>",
     ])
@@ -580,7 +580,7 @@ def test_equal_string():
 
 def test_repr():
     pat = urlmatch.UrlPattern('https://www.example.com/')
-    expected = ("qutebrowser.utils.urlmatch.UrlPattern("
+    expected = ("glimpsebrowser.utils.urlmatch.UrlPattern("
                 "pattern='https://www.example.com/')")
     assert repr(pat) == expected
 

@@ -630,7 +630,7 @@ Feature: Tab management
                 - url: http://localhost:*/data/title.html
                   title: Test title
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2289
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2289
 
     @qtwebkit_skip @qt<5.9
     Scenario: Cloning a tab with a view-source URL
@@ -832,7 +832,7 @@ Feature: Tab management
         And I set tabs.last_close to close
         And I run :tab-only
         And I run :tab-close
-        Then qutebrowser should quit
+        Then glimpsebrowser should quit
 
     # tab settings
 
@@ -963,14 +963,14 @@ Feature: Tab management
 
     Scenario: :buffer without args or count
         When I run :buffer
-        Then qute://tabs should be loaded
+        Then glimpse://tabs should be loaded
 
     Scenario: :buffer with a matching title
         When I open data/title.html
         And I open data/search.html in a new tab
         And I open data/scroll/simple.html in a new tab
         And I run :buffer Searching text
-        And I wait for "Current tab changed, focusing <qutebrowser.browser.* tab_id=* url='http://localhost:*/data/search.html'>" in the log
+        And I wait for "Current tab changed, focusing <glimpsebrowser.browser.* tab_id=* url='http://localhost:*/data/search.html'>" in the log
         Then the following tabs should be open:
             - data/title.html
             - data/search.html (active)
@@ -1077,7 +1077,7 @@ Feature: Tab management
 
     # :tab-take
 
-    @xfail_norun  # Needs qutewm
+    @xfail_norun  # Needs glimpsewm
     Scenario: Take a tab from another window
         Given I have a fresh instance
         When I open data/numbers/1.txt
@@ -1102,7 +1102,7 @@ Feature: Tab management
 
     # :tab-give
 
-    @xfail_norun  # Needs qutewm
+    @xfail_norun  # Needs glimpsewm
     Scenario: Give a tab to another window
         Given I have a fresh instance
         When I open data/numbers/1.txt
@@ -1156,14 +1156,14 @@ Feature: Tab management
         When I set tabs.last_close to close
         And I run :tab-only
         And I run :tab-close ;; tab-next
-        Then qutebrowser should quit
+        Then glimpsebrowser should quit
         And no crash should happen
 
     Scenario: Using :tab-prev after closing last tab (#1448)
         When I set tabs.last_close to close
         And I run :tab-only
         And I run :tab-close ;; tab-prev
-        Then qutebrowser should quit
+        Then glimpsebrowser should quit
         And no crash should happen
 
     Scenario: Opening link with tabs_are_windows set (#2162)
@@ -1338,7 +1338,7 @@ Feature: Tab management
 
     Scenario: Focused webview after clicking link in bg
         When I open data/hints/link_input.html
-        And I run :click-element id qute-input-existing
+        And I run :click-element id glimpse-input-existing
         And I wait for "Entering mode KeyMode.insert *" in the log
         And I run :leave-mode
         And I hint with args "all tab-bg" and follow a
@@ -1349,7 +1349,7 @@ Feature: Tab management
 
     Scenario: Focused webview after opening link in bg
         When I open data/hints/link_input.html
-        And I run :click-element id qute-input-existing
+        And I run :click-element id glimpse-input-existing
         And I wait for "Entering mode KeyMode.insert *" in the log
         And I run :leave-mode
         And I open data/hello.txt in a new background tab

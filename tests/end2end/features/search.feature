@@ -140,7 +140,7 @@ Feature: Searching on a page
         And I wait for "search found foo" in the log
         Then "foo" should be found
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2438
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2438
     Scenario: Jumping to next match after clearing
         When I set search.ignore_case to always
         And I run :search foo

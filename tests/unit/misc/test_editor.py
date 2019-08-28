@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.misc.editor."""
+"""Tests for glimpsebrowser.misc.editor."""
 
 import time
 import os
@@ -27,8 +27,8 @@ import logging
 from PyQt5.QtCore import QProcess
 import pytest
 
-from qutebrowser.misc import editor as editormod
-from qutebrowser.utils import usertypes
+from glimpsebrowser.misc import editor as editormod
+from glimpsebrowser.utils import usertypes
 
 
 @pytest.fixture(autouse=True)
@@ -78,7 +78,7 @@ class TestFileHandling:
         editor.edit("")
         filename = editor._filename
         assert os.path.exists(filename)
-        assert os.path.basename(filename).startswith('qutebrowser-editor-')
+        assert os.path.basename(filename).startswith('glimpsebrowser-editor-')
         editor._proc.finished.emit(0, QProcess.NormalExit)
         assert not os.path.exists(filename)
 

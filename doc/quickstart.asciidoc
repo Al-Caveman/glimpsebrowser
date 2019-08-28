@@ -1,6 +1,6 @@
-qutebrowser quickstart
+glimpsebrowser quickstart
 ======================
-The Compiler <mail@qutebrowser.org>
+The Compiler <mail@glimpsebrowser.org>
 
 NOTE: This page will only appear on the first start. To view it at a later
 time, use the `:help` command.
@@ -17,24 +17,24 @@ Basic keybindings to get you started
 * To click on something without using the mouse, press `f` to show the hints, then type the keys next to what you want to click on (if that sounds weird, then just try pressing `f` and see what happens)
 * Press `:` to show the commandline
 * To search in a page, press `/`, type the phrase to search for, then press Enter. Use `n` and `N` to go back and forth through the matches, and press Esc to stop doing the search.
-* To close qutebrowser, press `Alt-F4`, or `:q`, or `:wq` to save the currently open tabs and quit (note that in the settings you can make qutebrowser always save the currently open tabs)
+* To close glimpsebrowser, press `Alt-F4`, or `:q`, or `:wq` to save the currently open tabs and quit (note that in the settings you can make glimpsebrowser always save the currently open tabs)
 
 What to do now
 --------------
 
-* View the link:https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-big.png[key binding cheatsheet]
+* View the link:https://raw.githubusercontent.com/glimpsebrowser/glimpsebrowser/master/doc/img/cheatsheet-big.png[key binding cheatsheet]
 to make yourself familiar with the key bindings: +
-image:https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-small.png["qutebrowser key binding cheatsheet",link="https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-big.png"]
-* There's also a https://www.shortcutfoo.com/app/dojos/qutebrowser[free training
+image:https://raw.githubusercontent.com/glimpsebrowser/glimpsebrowser/master/doc/img/cheatsheet-small.png["glimpsebrowser key binding cheatsheet",link="https://raw.githubusercontent.com/glimpsebrowser/glimpsebrowser/master/doc/img/cheatsheet-big.png"]
+* There's also a https://www.shortcutfoo.com/app/dojos/glimpsebrowser[free training
   course] on shortcutfoo for the keybindings - note that you need to be in
   insert mode (i) for it to work.
 * Run `:adblock-update` to download adblock lists and activate adblocking.
 * If you just cloned the repository, you'll need to run
 `scripts/asciidoc2html.py` to generate the documentation.
-* Go to the link:qute://settings[settings page] to set up qutebrowser the way you want it.
+* Go to the link:glimpse://settings[settings page] to set up glimpsebrowser the way you want it.
 * Subscribe to
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser[the mailinglist] or
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser-announce[the announce-only mailinglist].
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser[the mailinglist] or
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser-announce[the announce-only mailinglist].
 * Let me know what features you are missing or things that need (even small!)
 improvements.
 
@@ -43,22 +43,22 @@ Getting help
 
 If you get stuck, you can get help in multiple ways:
 
-* The `:help` command inside qutebrowser shows the built-in documentation.
+* The `:help` command inside glimpsebrowser shows the built-in documentation.
 Additionally, each command can be started with a `--help` flag to show its
 help.
-* IRC channel: irc://irc.freenode.org/#qutebrowser[`#qutebrowser`] on
+* IRC channel: irc://irc.freenode.org/#glimpsebrowser[`#glimpsebrowser`] on
 http://freenode.net/[Freenode]
-(https://webchat.freenode.net/?channels=#qutebrowser[webchat])
-* Mailinglist: mailto:qutebrowser@lists.qutebrowser.org[] (
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser[subscribe])
+(https://webchat.freenode.net/?channels=#glimpsebrowser[webchat])
+* Mailinglist: mailto:glimpsebrowser@lists.glimpsebrowser.org[] (
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser[subscribe])
 
 Donating
 --------
 
-Working on qutebrowser is a very rewarding hobby, but like (nearly) all hobbies
+Working on glimpsebrowser is a very rewarding hobby, but like (nearly) all hobbies
 it also costs some money. Namely I have to pay for the server and domain, and
 do occasional hardware upgrades footnote:[It turned out a 160 GB SSD is rather
-small - the VMs and custom Qt builds I use for testing/developing qutebrowser
+small - the VMs and custom Qt builds I use for testing/developing glimpsebrowser
 need about 100 GB of space].
 
 If you want to give me a beer or a pizza back, I'm trying to make it as easy as

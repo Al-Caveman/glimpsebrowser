@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.version."""
+"""Tests for glimpsebrowser.utils.version."""
 
 import io
 import sys
@@ -36,11 +36,11 @@ import attr
 import pkg_resources
 import pytest
 
-import qutebrowser
-from qutebrowser.config import config
-from qutebrowser.utils import version, usertypes, utils, standarddir
-from qutebrowser.misc import pastebin
-from qutebrowser.browser import pdfjs
+import glimpsebrowser
+from glimpsebrowser.config import config
+from glimpsebrowser.utils import version, usertypes, utils, standarddir
+from glimpsebrowser.misc import pastebin
+from glimpsebrowser.browser import pdfjs
 
 
 @pytest.mark.parametrize('os_release, expected', [
@@ -234,7 +234,7 @@ class GitStrSubprocessFake:
         self.retval = self.UNSET
         gitpath = os.path.normpath(gitpath)
         expected = os.path.abspath(os.path.join(
-            os.path.dirname(qutebrowser.__file__), os.pardir))
+            os.path.dirname(glimpsebrowser.__file__), os.pardir))
         assert gitpath == expected
         return retval
 
@@ -250,16 +250,16 @@ class TestGitStr:
         On fixture teardown, it makes sure it got called with git-commit-id as
         argument.
         """
-        mocker.patch('qutebrowser.utils.version.subprocess',
+        mocker.patch('glimpsebrowser.utils.version.subprocess',
                      side_effect=AssertionError)
-        m = mocker.patch('qutebrowser.utils.version.utils.read_file')
+        m = mocker.patch('glimpsebrowser.utils.version.utils.read_file')
         yield m
         m.assert_called_with('git-commit-id')
 
     @pytest.fixture
     def git_str_subprocess_fake(self, mocker, monkeypatch):
         """Fixture patching _git_str_subprocess with a GitStrSubprocessFake."""
-        mocker.patch('qutebrowser.utils.version.subprocess',
+        mocker.patch('glimpsebrowser.utils.version.subprocess',
                      side_effect=AssertionError)
         fake = GitStrSubprocessFake()
         monkeypatch.setattr(version, '_git_str_subprocess', fake.func)
@@ -299,9 +299,9 @@ class TestGitStr:
     def test_normal_path_oserror(self, mocker, git_str_subprocess_fake,
                                  caplog):
         """Test with things raising OSError."""
-        m = mocker.patch('qutebrowser.utils.version.os')
+        m = mocker.patch('glimpsebrowser.utils.version.os')
         m.path.join.side_effect = OSError
-        mocker.patch('qutebrowser.utils.version.utils.read_file',
+        mocker.patch('glimpsebrowser.utils.version.utils.read_file',
                      side_effect=OSError)
         with caplog.at_level(logging.ERROR, 'misc'):
             assert version._git_str() is None
@@ -347,11 +347,11 @@ class TestGitStrSubprocess:
             """Helper closure to call git."""
             env = os.environ.copy()
             env.update({
-                'GIT_AUTHOR_NAME': 'qutebrowser testsuite',
-                'GIT_AUTHOR_EMAIL': 'mail@qutebrowser.org',
+                'GIT_AUTHOR_NAME': 'glimpsebrowser testsuite',
+                'GIT_AUTHOR_EMAIL': 'mail@glimpsebrowser.org',
                 'GIT_AUTHOR_DATE': 'Thu  1 Jan 01:00:00 CET 1970',
-                'GIT_COMMITTER_NAME': 'qutebrowser testsuite',
-                'GIT_COMMITTER_EMAIL': 'mail@qutebrowser.org',
+                'GIT_COMMITTER_NAME': 'glimpsebrowser testsuite',
+                'GIT_COMMITTER_EMAIL': 'mail@glimpsebrowser.org',
                 'GIT_COMMITTER_DATE': 'Thu  1 Jan 01:00:00 CET 1970',
             })
             if utils.is_windows:
@@ -395,9 +395,9 @@ class TestGitStrSubprocess:
         Args:
             exc: The exception to raise.
         """
-        m = mocker.patch('qutebrowser.utils.version.os')
+        m = mocker.patch('glimpsebrowser.utils.version.os')
         m.path.isdir.return_value = True
-        mocker.patch('qutebrowser.utils.version.subprocess.run',
+        mocker.patch('glimpsebrowser.utils.version.subprocess.run',
                      side_effect=exc)
         ret = version._git_str_subprocess(str(tmpdir))
         assert ret is None
@@ -677,7 +677,7 @@ class TestModuleVersions:
         The aim of this test is to fail if that gets missing in some future
         version of sip.
         """
-        from qutebrowser.qt import sip
+        from glimpsebrowser.qt import sip
         assert isinstance(sip.SIP_VERSION_STR, str)
 
 
@@ -767,13 +767,13 @@ class TestPDFJSVersion:
     """Tests for _pdfjs_version."""
 
     def test_not_found(self, mocker):
-        mocker.patch('qutebrowser.utils.version.pdfjs.get_pdfjs_res_and_path',
+        mocker.patch('glimpsebrowser.utils.version.pdfjs.get_pdfjs_res_and_path',
                      side_effect=pdfjs.PDFJSNotFound('/build/pdf.js'))
         assert version._pdfjs_version() == 'no'
 
     def test_unknown(self, monkeypatch):
         monkeypatch.setattr(
-            'qutebrowser.utils.version.pdfjs.get_pdfjs_res_and_path',
+            'glimpsebrowser.utils.version.pdfjs.get_pdfjs_res_and_path',
             lambda path: (b'foobar', None))
         assert version._pdfjs_version() == 'unknown (bundled)'
 
@@ -796,7 +796,7 @@ class TestPDFJSVersion:
               'use strict';
         """.replace('VARNAME', varname)).strip().encode('utf-8')
         monkeypatch.setattr(
-            'qutebrowser.utils.version.pdfjs.get_pdfjs_res_and_path',
+            'glimpsebrowser.utils.version.pdfjs.get_pdfjs_res_and_path',
             lambda path: (pdfjs_code, '/foo/bar/pdf.js'))
         assert version._pdfjs_version() == '1.2.109 (/foo/bar/pdf.js)'
 
@@ -908,8 +908,8 @@ def test_version_output(params, stubs, monkeypatch, config_stub):
     config.instance.config_py_loaded = params.config_py_loaded
     import_path = os.path.abspath('/IMPORTPATH')
     patches = {
-        'qutebrowser.__file__': os.path.join(import_path, '__init__.py'),
-        'qutebrowser.__version__': 'VERSION',
+        'glimpsebrowser.__file__': os.path.join(import_path, '__init__.py'),
+        'glimpsebrowser.__version__': 'VERSION',
         '_git_str': lambda: ('GIT COMMIT' if params.git_commit else None),
         'platform.python_implementation': lambda: 'PYTHON IMPLEMENTATION',
         'platform.python_version': lambda: 'PYTHON VERSION',
@@ -977,7 +977,7 @@ def test_version_output(params, stubs, monkeypatch, config_stub):
     substitutions['ssl'] = 'SSL VERSION' if params.ssl_support else 'no'
 
     for name, val in patches.items():
-        monkeypatch.setattr('qutebrowser.utils.version.' + name, val)
+        monkeypatch.setattr('glimpsebrowser.utils.version.' + name, val)
 
     if params.frozen:
         monkeypatch.setattr(sys, 'frozen', True, raising=False)
@@ -985,7 +985,7 @@ def test_version_output(params, stubs, monkeypatch, config_stub):
         monkeypatch.delattr(sys, 'frozen', raising=False)
 
     template = textwrap.dedent("""
-        qutebrowser vVERSION{git_commit}
+        glimpsebrowser vVERSION{git_commit}
         Backend: {backend}
 
         PYTHON IMPLEMENTATION: PYTHON VERSION
@@ -1032,9 +1032,9 @@ def pbclient(stubs):
 
 def test_pastebin_version(pbclient, message_mock, monkeypatch, qtbot):
     """Test version.pastebin_version() sets the url."""
-    monkeypatch.setattr('qutebrowser.utils.version.version',
+    monkeypatch.setattr('glimpsebrowser.utils.version.version',
                         lambda: "dummy")
-    monkeypatch.setattr('qutebrowser.utils.utils.log_clipboard', True)
+    monkeypatch.setattr('glimpsebrowser.utils.utils.log_clipboard', True)
 
     version.pastebin_version(pbclient)
     pbclient.success.emit("https://www.example.com/\n")
@@ -1047,7 +1047,7 @@ def test_pastebin_version(pbclient, message_mock, monkeypatch, qtbot):
 
 def test_pastebin_version_twice(pbclient, monkeypatch):
     """Test whether calling pastebin_version twice sends no data."""
-    monkeypatch.setattr('qutebrowser.utils.version.version',
+    monkeypatch.setattr('glimpsebrowser.utils.version.version',
                         lambda: "dummy")
 
     version.pastebin_version(pbclient)
@@ -1065,7 +1065,7 @@ def test_pastebin_version_twice(pbclient, monkeypatch):
 
 def test_pastebin_version_error(pbclient, caplog, message_mock, monkeypatch):
     """Test version.pastebin_version() with errors."""
-    monkeypatch.setattr('qutebrowser.utils.version.version',
+    monkeypatch.setattr('glimpsebrowser.utils.version.version',
                         lambda: "dummy")
 
     version.pastebin_url = None

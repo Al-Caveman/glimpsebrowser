@@ -3,20 +3,20 @@
 
 # Copyright 2015 Corentin Julé <corentinjule@gmail.com>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
 import os.path
@@ -28,8 +28,8 @@ import pytest
 
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.components import adblock
-from qutebrowser.utils import urlmatch
+from glimpsebrowser.components import adblock
+from glimpsebrowser.utils import urlmatch
 from helpers import utils
 
 
@@ -37,7 +37,7 @@ pytestmark = pytest.mark.usefixtures('qapp')
 
 # TODO See ../utils/test_standarddirutils for OSError and caplog assertion
 
-WHITELISTED_HOSTS = ('qutebrowser.org', 'mediumhost.io', 'http://*.edu')
+WHITELISTED_HOSTS = ('glimpsebrowser.org', 'mediumhost.io', 'http://*.edu')
 
 BLOCKLIST_HOSTS = ('localhost',
                    'mediumhost.io',
@@ -54,7 +54,7 @@ URLS_TO_CHECK = ('http://localhost',
                  'http://ads.worsthostever.net',
                  'http://goodhost.gov',
                  'ftp://verygoodhost.com',
-                 'http://qutebrowser.org',
+                 'http://glimpsebrowser.org',
                  'http://veryverygoodhost.edu')
 
 
@@ -333,7 +333,7 @@ def test_invalid_utf8(config_stub, tmpdir, caplog, host_blocker_factory,
                       location):
     """Make sure invalid UTF-8 is handled correctly.
 
-    See https://github.com/qutebrowser/qutebrowser/issues/2301
+    See https://github.com/glimpsebrowser/glimpsebrowser/issues/2301
     """
     blocklist = tmpdir / 'blocklist'
     if location == 'comment':
@@ -411,8 +411,8 @@ def test_config_change_initial(config_stub, tmpdir, host_blocker_factory):
 
     - A blocklist is present in host_blocking.lists and blocked_hosts is
       populated
-    - User quits qutebrowser, empties host_blocking.lists from his config
-    - User restarts qutebrowser, does adblock-update
+    - User quits glimpsebrowser, empties host_blocking.lists from his config
+    - User restarts glimpsebrowser, does adblock-update
     """
     create_blocklist(tmpdir, blocked_hosts=BLOCKLIST_HOSTS,
                      name='blocked-hosts', line_format='one_per_line')

@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.config.configdata."""
+"""Tests for glimpsebrowser.config.configdata."""
 
 import textwrap
 
@@ -24,9 +24,9 @@ import yaml
 import pytest
 
 # To run cmdutils.register decorators
-from qutebrowser import app  # pylint: disable=unused-import
-from qutebrowser.config import configdata, configtypes
-from qutebrowser.utils import usertypes
+from glimpsebrowser import app  # pylint: disable=unused-import
+from glimpsebrowser.config import configdata, configtypes
+from glimpsebrowser.utils import usertypes
 
 
 def test_init(config_stub):
@@ -44,7 +44,7 @@ def test_data(config_stub):
         option.typ.to_py(option.default)
         option.typ.to_str(option.default)
 
-        # https://github.com/qutebrowser/qutebrowser/issues/3104
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/3104
         # For lists/dicts, don't use None as default
         if isinstance(option.typ, (configtypes.Dict, configtypes.List)):
             assert option.default is not None

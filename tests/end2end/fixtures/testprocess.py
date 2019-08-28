@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Base class for a subprocess run for tests."""
 
@@ -32,7 +32,7 @@ from PyQt5.QtTest import QSignalSpy
 
 from helpers import utils
 
-from qutebrowser.utils import utils as quteutils
+from glimpsebrowser.utils import utils as glimpseutils
 
 
 class InvalidLine(Exception):
@@ -83,7 +83,7 @@ def _render_log(data, *, verbose, threshold=100):
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Add qutebrowser/server sections to captured output if a test failed."""
+    """Add glimpsebrowser/server sections to captured output if a test failed."""
     outcome = yield
     if call.when not in ['call', 'teardown']:
         return
@@ -92,7 +92,7 @@ def pytest_runtest_makereport(item, call):
     if report.passed:
         return
 
-    quteproc_log = getattr(item, '_quteproc_log', None)
+    glimpseproc_log = getattr(item, '_glimpseproc_log', None)
     server_log = getattr(item, '_server_log', None)
 
     if not hasattr(report.longrepr, 'addsection'):
@@ -105,9 +105,9 @@ def pytest_runtest_makereport(item, call):
         return
 
     verbose = item.config.getoption('--verbose')
-    if quteproc_log is not None:
-        report.longrepr.addsection("qutebrowser output",
-                                   _render_log(quteproc_log, verbose=verbose))
+    if glimpseproc_log is not None:
+        report.longrepr.addsection("glimpsebrowser output",
+                                   _render_log(glimpseproc_log, verbose=verbose))
     if server_log is not None:
         report.longrepr.addsection("server output",
                                    _render_log(server_log, verbose=verbose))
@@ -304,7 +304,7 @@ class Process(QObject):
         if not self.is_running():
             return
 
-        if quteutils.is_windows:
+        if glimpseutils.is_windows:
             self.proc.kill()
         else:
             self.proc.terminate()
@@ -380,7 +380,7 @@ class Process(QObject):
         __tracebackhide__ = lambda e: e.errisinstance(WaitForTimeout)
         message = kwargs.get('message', None)
         if message is not None:
-            elided = quteutils.elide(repr(message), 100)
+            elided = glimpseutils.elide(repr(message), 100)
             self._log("\n----> Waiting for {} in the log".format(elided))
 
         spy = QSignalSpy(self.new_data)
@@ -405,7 +405,7 @@ class Process(QObject):
                     self._log("----> found it")
                 return match
 
-        raise quteutils.Unreachable
+        raise glimpseutils.Unreachable
 
     def _wait_for_match(self, spy, kwargs):
         """Try matching the kwargs with the given QSignalSpy."""
@@ -435,7 +435,7 @@ class Process(QObject):
         means pytest-qt fails the test.
 
         Instead, we check for skip messages periodically in
-        QuteProc._maybe_skip, and call _maybe_skip after every parsed message
+        GlimpseProc._maybe_skip, and call _maybe_skip after every parsed message
         in wait_for (where it's most likely that new messages arrive).
         """
 

@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2014-2018 Claude (longneck) <longneck@scratchbook.ch>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """Tool to import data from other browsers.
@@ -125,7 +125,7 @@ def get_args():
         required=False)
     parser.add_argument(
         '--oldconfig',
-        help="Output search engine format for old qutebrowser.conf format",
+        help="Output search engine format for old glimpsebrowser.conf format",
         default=False,
         action='store_true',
         required=False)
@@ -154,13 +154,13 @@ def get_args():
 def search_escape(url):
     """Escape URLs such that preexisting { and } are handled properly.
 
-    Will obviously trash a properly-formatted qutebrowser URL.
+    Will obviously trash a properly-formatted glimpsebrowser URL.
     """
     return url.replace('{', '{{').replace('}', '}}')
 
 
 def opensearch_convert(url):
-    """Convert a basic OpenSearch URL into something qutebrowser can use.
+    """Convert a basic OpenSearch URL into something glimpsebrowser can use.
 
     Exceptions:
         KeyError:

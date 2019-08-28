@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import operator
 
@@ -27,8 +27,8 @@ from PyQt5.QtGui import QKeyEvent, QKeySequence
 from PyQt5.QtWidgets import QWidget
 
 from unit.keyinput import key_data
-from qutebrowser.keyinput import keyutils
-from qutebrowser.utils import utils
+from glimpsebrowser.keyinput import keyutils
+from glimpsebrowser.utils import utils
 
 
 @pytest.fixture(params=key_data.KEYS, ids=lambda k: k.attribute)
@@ -247,7 +247,7 @@ class TestKeySequence:
     def test_repr(self):
         seq = keyutils.KeySequence(Qt.Key_A | Qt.ControlModifier,
                                    Qt.Key_B | Qt.ShiftModifier)
-        assert repr(seq) == ("<qutebrowser.keyinput.keyutils.KeySequence "
+        assert repr(seq) == ("<glimpsebrowser.keyinput.keyutils.KeySequence "
                              "keys='<Ctrl+a>B'>")
 
     @pytest.mark.parametrize('sequences, expected', [

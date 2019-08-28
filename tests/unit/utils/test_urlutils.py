@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.urlutils."""
+"""Tests for glimpsebrowser.utils.urlutils."""
 
 import os.path
 import logging
@@ -27,9 +27,9 @@ from PyQt5.QtCore import QUrl
 from PyQt5.QtNetwork import QNetworkProxy
 import pytest
 
-from qutebrowser.api import cmdutils
-from qutebrowser.browser.network import pac
-from qutebrowser.utils import utils, urlutils, qtutils, usertypes
+from glimpsebrowser.api import cmdutils
+from glimpsebrowser.browser.network import pac
+from glimpsebrowser.utils import utils, urlutils, qtutils, usertypes
 from helpers import utils as testutils
 
 
@@ -95,7 +95,7 @@ def fake_dns(monkeypatch):
 @pytest.fixture(autouse=True)
 def init_config(config_stub):
     config_stub.val.url.searchengines = {
-        'test': 'http://www.qutebrowser.org/?q={}',
+        'test': 'http://www.glimpsebrowser.org/?q={}',
         'test-with-dash': 'http://www.example.org/?q={}',
         'path-search': 'http://www.example.org/{}',
         'DEFAULT': 'http://www.example.com/?q={}',
@@ -109,7 +109,7 @@ class TestFuzzyUrl:
     @pytest.fixture
     def os_mock(self, mocker):
         """Mock the os module and some os.path functions."""
-        m = mocker.patch('qutebrowser.utils.urlutils.os')
+        m = mocker.patch('glimpsebrowser.utils.urlutils.os')
         # Using / to get the same behavior across OS'
         m.path.join.side_effect = lambda *args: '/'.join(args)
         m.path.expanduser.side_effect = os.path.expanduser
@@ -117,11 +117,11 @@ class TestFuzzyUrl:
 
     @pytest.fixture
     def is_url_mock(self, mocker):
-        return mocker.patch('qutebrowser.utils.urlutils.is_url')
+        return mocker.patch('glimpsebrowser.utils.urlutils.is_url')
 
     @pytest.fixture
     def get_search_url_mock(self, mocker):
-        return mocker.patch('qutebrowser.utils.urlutils._get_search_url')
+        return mocker.patch('glimpsebrowser.utils.urlutils._get_search_url')
 
     def test_file_relative_cwd(self, os_mock):
         """Test with relative=True, cwd set, and an existing file."""
@@ -230,7 +230,7 @@ class TestFuzzyUrl:
             urlutils.fuzzy_url(url, do_search=True)
 
     @pytest.mark.parametrize('urlstring', [
-        'http://www.qutebrowser.org/',
+        'http://www.glimpsebrowser.org/',
         '/foo',
         'test'
     ])
@@ -270,10 +270,10 @@ class TestFuzzyUrl:
 @pytest.mark.parametrize('url, special', [
     ('file:///tmp/foo', True),
     ('about:blank', True),
-    ('qute:version', True),
-    ('qute://version', True),
-    ('http://www.qutebrowser.org/', False),
-    ('www.qutebrowser.org', False),
+    ('glimpse:version', True),
+    ('glimpse://version', True),
+    ('http://www.glimpsebrowser.org/', False),
+    ('www.glimpsebrowser.org', False),
 ])
 def test_special_urls(url, special):
     assert urlutils.is_special_url(QUrl(url)) == special
@@ -282,9 +282,9 @@ def test_special_urls(url, special):
 @pytest.mark.parametrize('open_base_url', [True, False])
 @pytest.mark.parametrize('url, host, query', [
     ('testfoo', 'www.example.com', 'q=testfoo'),
-    ('test testfoo', 'www.qutebrowser.org', 'q=testfoo'),
-    ('test testfoo bar foo', 'www.qutebrowser.org', 'q=testfoo bar foo'),
-    ('test testfoo ', 'www.qutebrowser.org', 'q=testfoo'),
+    ('test testfoo', 'www.glimpsebrowser.org', 'q=testfoo'),
+    ('test testfoo bar foo', 'www.glimpsebrowser.org', 'q=testfoo bar foo'),
+    ('test testfoo ', 'www.glimpsebrowser.org', 'q=testfoo'),
     ('!python testfoo', 'www.example.com', 'q=%21python testfoo'),
     ('blub testfoo', 'www.example.com', 'q=blub testfoo'),
     ('stripped ', 'www.example.com', 'q=stripped'),
@@ -306,7 +306,7 @@ def test_get_search_url(config_stub, url, host, query, open_base_url):
 
 
 @pytest.mark.parametrize('url, host', [
-    ('test', 'www.qutebrowser.org'),
+    ('test', 'www.glimpsebrowser.org'),
     ('test-with-dash', 'www.example.org'),
 ])
 def test_get_search_url_open_base_url(config_stub, url, host):
@@ -335,8 +335,8 @@ def test_get_search_url_invalid(url):
     # Normal hosts
     (True, True, False, 'http://foobar'),
     (True, True, False, 'localhost:8080'),
-    (True, True, True, 'qutebrowser.org'),
-    (True, True, True, ' qutebrowser.org '),
+    (True, True, True, 'glimpsebrowser.org'),
+    (True, True, True, ' glimpsebrowser.org '),
     (True, True, False, 'http://user:password@example.com/foo?bar=baz#fish'),
     # IPs
     (True, True, False, '127.0.0.1'),
@@ -346,12 +346,12 @@ def test_get_search_url_invalid(url):
     # Special URLs
     (True, True, False, 'file:///tmp/foo'),
     (True, True, False, 'about:blank'),
-    (True, True, False, 'qute:version'),
-    (True, True, False, 'qute://version'),
+    (True, True, False, 'glimpse:version'),
+    (True, True, False, 'glimpse://version'),
     (True, True, False, 'localhost'),
     # _has_explicit_scheme False, special_url True
-    (True, True, False, 'qute::foo'),
-    (True, True, False, 'qute:://foo'),
+    (True, True, False, 'glimpse::foo'),
+    (True, True, False, 'glimpse:://foo'),
     # Invalid URLs
     (False, False, False, ''),
     (False, True, False, 'onlyscheme:'),
@@ -417,13 +417,13 @@ def test_is_url(config_stub, fake_dns,
 
 
 @pytest.mark.parametrize('user_input, output', [
-    ('qutebrowser.org', 'http://qutebrowser.org'),
-    ('http://qutebrowser.org', 'http://qutebrowser.org'),
+    ('glimpsebrowser.org', 'http://glimpsebrowser.org'),
+    ('http://glimpsebrowser.org', 'http://glimpsebrowser.org'),
     ('::1/foo', 'http://[::1]/foo'),
     ('[::1]/foo', 'http://[::1]/foo'),
     ('http://[::1]', 'http://[::1]'),
-    ('qutebrowser.org', 'http://qutebrowser.org'),
-    ('http://qutebrowser.org', 'http://qutebrowser.org'),
+    ('glimpsebrowser.org', 'http://glimpsebrowser.org'),
+    ('http://glimpsebrowser.org', 'http://glimpsebrowser.org'),
     ('::1/foo', 'http://[::1]/foo'),
     ('[::1]/foo', 'http://[::1]/foo'),
     ('http://[::1]', 'http://[::1]'),
@@ -501,11 +501,11 @@ def test_raise_cmdexc_if_invalid(url, valid, has_err_string):
 
 @pytest.mark.parametrize('qurl, output', [
     (QUrl(), None),
-    (QUrl('http://qutebrowser.org/test.html'), 'test.html'),
-    (QUrl('http://qutebrowser.org/foo.html#bar'), 'foo.html'),
-    (QUrl('http://user:password@qutebrowser.org/foo?bar=baz#fish'), 'foo'),
-    (QUrl('http://qutebrowser.org/'), 'qutebrowser.org.html'),
-    (QUrl('qute://'), None),
+    (QUrl('http://glimpsebrowser.org/test.html'), 'test.html'),
+    (QUrl('http://glimpsebrowser.org/foo.html#bar'), 'foo.html'),
+    (QUrl('http://user:password@glimpsebrowser.org/foo?bar=baz#fish'), 'foo'),
+    (QUrl('http://glimpsebrowser.org/'), 'glimpsebrowser.org.html'),
+    (QUrl('glimpse://'), None),
 ])
 def test_filename_from_url(qurl, output):
     assert urlutils.filename_from_url(qurl) == output
@@ -513,17 +513,17 @@ def test_filename_from_url(qurl, output):
 
 @pytest.mark.parametrize('qurl, tpl', [
     (QUrl(), None),
-    (QUrl('qute://'), None),
-    (QUrl('qute://foobar'), None),
+    (QUrl('glimpse://'), None),
+    (QUrl('glimpse://foobar'), None),
     (QUrl('mailto:nobody'), None),
     (QUrl('ftp://example.com/'), ('ftp', 'example.com', 21)),
     (QUrl('ftp://example.com:2121/'), ('ftp', 'example.com', 2121)),
-    (QUrl('http://qutebrowser.org:8010/waterfall'),
-     ('http', 'qutebrowser.org', 8010)),
+    (QUrl('http://glimpsebrowser.org:8010/waterfall'),
+     ('http', 'glimpsebrowser.org', 8010)),
     (QUrl('https://example.com/'), ('https', 'example.com', 443)),
     (QUrl('https://example.com:4343/'), ('https', 'example.com', 4343)),
-    (QUrl('http://user:password@qutebrowser.org/foo?bar=baz#fish'),
-     ('http', 'qutebrowser.org', 80)),
+    (QUrl('http://user:password@glimpsebrowser.org/foo?bar=baz#fish'),
+     ('http', 'glimpsebrowser.org', 80)),
 ])
 def test_host_tuple(qurl, tpl):
     """Test host_tuple().
@@ -644,7 +644,7 @@ class TestIncDecNumber:
         """Test incdec_number with valid URLs."""
         if (value == '{}foo' and
                 url == 'http://example.com/path with {} spaces'):
-            pytest.xfail("https://github.com/qutebrowser/qutebrowser/issues/4917")
+            pytest.xfail("https://github.com/glimpsebrowser/glimpsebrowser/issues/4917")
 
         # The integer used should not affect test output, as long as it's
         # bigger than 1

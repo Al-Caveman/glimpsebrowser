@@ -4,8 +4,8 @@ Crowdfunding backers
 2017
 ----
 
-Mid-2017, qutebrowser had its
-https://www.kickstarter.com/projects/the-compiler/qutebrowser-v10-with-per-domain-settings[second crowdfunding]
+Mid-2017, glimpsebrowser had its
+https://www.kickstarter.com/projects/the-compiler/glimpsebrowser-v10-with-per-domain-settings[second crowdfunding]
 with the goal of implementing the new config system and releasing v1.0.
 
 Thanks a lot to the following people who contributed to it:
@@ -174,8 +174,8 @@ Other sponsors
 2016
 ----
 
-Mid-2016, qutebrowser did run a http://igg.me/at/qutebrowser[crowdfunding] for
-QtWebEngine support in qutebrowser.
+Mid-2016, glimpsebrowser did run a http://igg.me/at/glimpsebrowser[crowdfunding] for
+QtWebEngine support in glimpsebrowser.
 
 Thanks a lot to the following people who contributed to it:
 

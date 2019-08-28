@@ -8,23 +8,23 @@ Feature: Using private browsing
 
     Scenario: Opening new tab in private window
         When I open about:blank in a private window
-        And I open cookies/set?qute-private-test=42 without waiting in a new tab
+        And I open cookies/set?glimpse-private-test=42 without waiting in a new tab
         And I wait until cookies is loaded
         And I run :close
         And I wait for "removed: main-window" in the log
         And I open cookies
-        Then the cookie qute-private-test should not be set
+        Then the cookie glimpse-private-test should not be set
 
     Scenario: Opening new tab in private window with :navigate next
         When I open data/navigate in a private window
         And I run :navigate -t next
         And I wait until data/navigate/next.html is loaded
-        And I open cookies/set?qute-private-test=42 without waiting
+        And I open cookies/set?glimpse-private-test=42 without waiting
         And I wait until cookies is loaded
         And I run :close
         And I wait for "removed: main-window" in the log
         And I open cookies
-        Then the cookie qute-private-test should not be set
+        Then the cookie glimpse-private-test should not be set
 
     Scenario: Using command history in a new private browsing window
         When I run :set-cmd-text :message-info "Hello World"
@@ -40,14 +40,14 @@ Feature: Using private browsing
         And I run :command-accept
         # Then the error should not be shown again
 
-    ## https://github.com/qutebrowser/qutebrowser/issues/1219
+    ## https://github.com/glimpsebrowser/glimpsebrowser/issues/1219
 
     Scenario: Sharing cookies with private browsing
-        When I open cookies/set?qute-test=42 without waiting in a private window
+        When I open cookies/set?glimpse-test=42 without waiting in a private window
         And I wait until cookies is loaded
         And I open cookies in a new tab
         And I set content.private_browsing to false
-        Then the cookie qute-test should be set to 42
+        Then the cookie glimpse-test should be set to 42
 
     Scenario: Opening private window with :navigate increment
         # Private window handled in commands.py
@@ -121,22 +121,22 @@ Feature: Using private browsing
         And I wait for "Saved session */session.yml." in the log
         Then the file session.yml should not contain "hello.txt"
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2638
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2638
     Scenario: Turning off javascript with private browsing
         When I set content.javascript.enabled to false
         And I open data/javascript/consolelog.html in a private window
         Then the javascript message "console.log works!" should not be logged
 
-    # Probably needs qutewm to work properly...
+    # Probably needs glimpsewm to work properly...
     @qtwebkit_skip: Only applies to QtWebEngine @xfail_norun
     Scenario: Make sure local storage is isolated with private browsing
         When I open data/hello.txt in a private window
-        And I run :jseval localStorage.qute_private_test = 42
+        And I run :jseval localStorage.glimpse_private_test = 42
         And I wait for "42" in the log
         And I run :close
         And I wait for "removed: main-window" in the log
         And I open data/hello.txt
-        And I run :jseval localStorage.qute_private_test
+        And I run :jseval localStorage.glimpse_private_test
         Then "No output or error" should be logged
 
     Scenario: Opening quickmark in private window

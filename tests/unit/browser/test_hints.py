@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2017-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import string
 import functools
@@ -25,8 +25,8 @@ import operator
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.utils import usertypes
-import qutebrowser.browser.hints
+from glimpsebrowser.utils import usertypes
+import glimpsebrowser.browser.hints
 
 
 @pytest.fixture(autouse=True)
@@ -52,9 +52,9 @@ def test_show_benchmark(benchmark, tabbed_browser, qtbot, message_bridge,
     tab = tabbed_browser.widget.tabs[0]
 
     with qtbot.wait_signal(tab.load_finished):
-        tab.load_url(QUrl('qute://testdata/data/hints/benchmark.html'))
+        tab.load_url(QUrl('glimpse://testdata/data/hints/benchmark.html'))
 
-    manager = qutebrowser.browser.hints.HintManager(
+    manager = glimpsebrowser.browser.hints.HintManager(
         win_id=0, tab_id=tab.tab_id)
 
     def bench():
@@ -73,10 +73,10 @@ def test_match_benchmark(benchmark, tabbed_browser, qtbot, message_bridge,
     tab = tabbed_browser.widget.tabs[0]
 
     with qtbot.wait_signal(tab.load_finished):
-        tab.load_url(QUrl('qute://testdata/data/hints/benchmark.html'))
+        tab.load_url(QUrl('glimpse://testdata/data/hints/benchmark.html'))
 
     config_stub.val.hints.scatter = False
-    manager = qutebrowser.browser.hints.HintManager(
+    manager = glimpsebrowser.browser.hints.HintManager(
         win_id=0, tab_id=tab.tab_id)
 
     with qtbot.wait_signal(mode_manager.entered):
@@ -106,7 +106,7 @@ def test_scattered_hints_count(min_len, num_chars, num_elements):
     2. There can only be two hint lengths, only 1 apart
     3. There are no unique prefixes for long hints, such as 'la' with no 'l<x>'
     """
-    manager = qutebrowser.browser.hints.HintManager(0, 0)
+    manager = glimpsebrowser.browser.hints.HintManager(0, 0)
     chars = string.ascii_lowercase[:num_chars]
 
     hints = manager._hint_scattered(min_len, chars,

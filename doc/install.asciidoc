@@ -1,4 +1,4 @@
-Installing qutebrowser
+Installing glimpsebrowser
 ======================
 
 toc::[]
@@ -6,7 +6,7 @@ toc::[]
 On Debian / Ubuntu
 ------------------
 
-How to install qutebrowser depends a lot on the version of Debian/Ubuntu you're
+How to install glimpsebrowser depends a lot on the version of Debian/Ubuntu you're
 running.
 
 Ubuntu 16.04 LTS / Linux Mint 18
@@ -14,7 +14,7 @@ Ubuntu 16.04 LTS / Linux Mint 18
 
 Ubuntu 16.04 doesn't come with an up-to-date engine (a new enough QtWebKit, or
 QtWebEngine). However, it comes with Python 3.5, so you can
-<<tox,install qutebrowser via tox>>.
+<<tox,install glimpsebrowser via tox>>.
 
 You'll need some basic libraries to use the tox-installed PyQt:
 
@@ -26,43 +26,43 @@ Debian Stretch
 ~~~~~~~~~~~~~~
 
 Debian Stretch comes with QtWebEngine in the repositories. This makes it possible
-to install qutebrowser via the Debian package.
+to install glimpsebrowser via the Debian package.
 
 You'll need to download three packages:
 
 - https://packages.debian.org/sid/all/python3-pypeg2/download[PyPEG2] (a library
-  used by qutebrowser which is not in the earlier repositories)
-- https://packages.debian.org/sid/all/qutebrowser/download[qutebrowser] itself
-- Either https://packages.debian.org/sid/all/qutebrowser-qtwebengine/download[qutebrowser-qtwebengine]
-  or https://packages.debian.org/sid/all/qutebrowser-qtwebkit/download[qutebrowser-qtwebkit]
+  used by glimpsebrowser which is not in the earlier repositories)
+- https://packages.debian.org/sid/all/glimpsebrowser/download[glimpsebrowser] itself
+- Either https://packages.debian.org/sid/all/glimpsebrowser-qtwebengine/download[glimpsebrowser-qtwebengine]
+  or https://packages.debian.org/sid/all/glimpsebrowser-qtwebkit/download[glimpsebrowser-qtwebkit]
   (or both) depending on the backend you want to use. QtWebEngine is the
   default/recommended choice.
 
 After downloading, install the packages (make sure to install all the
-downloaded qutebrowser deb files in one apt command):
+downloaded glimpsebrowser deb files in one apt command):
 
 ----
 # apt install ./python3-pypeg2_*_all.deb
-# apt install ./qutebrowser*.deb
+# apt install ./glimpsebrowser*.deb
 ----
 
 For an update after the initial install, you only need to download/install the
-qutebrowser package.
+glimpsebrowser package.
 
 Debian Buster / Ubuntu 18.04 LTS / Linux Mint 19 (or newer)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With those distributions, qutebrowser is in the official repositories, and you
+With those distributions, glimpsebrowser is in the official repositories, and you
 can install it with apt:
 
 ----
-# apt install qutebrowser
+# apt install glimpsebrowser
 ----
 
 Additional hints
 ~~~~~~~~~~~~~~~~
 
-- Alternatively, you can <<tox,install qutebrowser via tox>> to get a newer
+- Alternatively, you can <<tox,install glimpsebrowser via tox>> to get a newer
   QtWebEngine version.
 - If running from git, run the following to generate the documentation for the
   `:help` command:
@@ -83,10 +83,10 @@ $ python3 scripts/asciidoc2html.py
 On Fedora
 ---------
 
-qutebrowser is available in the official repositories:
+glimpsebrowser is available in the official repositories:
 
 -----
-# dnf install qutebrowser
+# dnf install glimpsebrowser
 -----
 
 Additional hints
@@ -104,26 +104,26 @@ For more information see https://rpmfusion.org/Configuration.
 On Archlinux
 ------------
 
-qutebrowser is available in the official [community] repository.
+glimpsebrowser is available in the official [community] repository.
 
 ----
-# pacman -S qutebrowser
+# pacman -S glimpsebrowser
 ----
 
 There is also a -git version available in the AUR:
-https://aur.archlinux.org/packages/qutebrowser-git/[qutebrowser-git].
+https://aur.archlinux.org/packages/glimpsebrowser-git/[glimpsebrowser-git].
 
 You can install it using `makepkg` like this:
 
 ----
-$ git clone https://aur.archlinux.org/qutebrowser-git.git
-$ cd qutebrowser-git
+$ git clone https://aur.archlinux.org/glimpsebrowser-git.git
+$ cd glimpsebrowser-git
 $ makepkg -si
 $ cd ..
-$ rm -r qutebrowser-git
+$ rm -r glimpsebrowser-git
 ----
 
-or you could use an AUR helper, e.g. `yaourt -S qutebrowser-git`.
+or you could use an AUR helper, e.g. `yaourt -S glimpsebrowser-git`.
 
 If video or sound don't work with QtWebKit, try installing the gstreamer plugins:
 
@@ -134,10 +134,10 @@ If video or sound don't work with QtWebKit, try installing the gstreamer plugins
 On Gentoo
 ---------
 
-qutebrowser is available in the main repository and can be installed with:
+glimpsebrowser is available in the main repository and can be installed with:
 
 ----
-# emerge -av qutebrowser
+# emerge -av glimpsebrowser
 ----
 
 If video or sound don't work with QtWebKit, try installing the gstreamer
@@ -150,51 +150,51 @@ plugins:
 To be able to play videos with proprietary codecs with QtWebEngine, you will
 need to turn off the `bindist` flag for `dev-qt/qtwebengine`.
 
-See the https://wiki.gentoo.org/wiki/Qutebrowser#USE_flags[Gentoo Wiki] for
+See the https://wiki.gentoo.org/wiki/Glimpsebrowser#USE_flags[Gentoo Wiki] for
 more information.
 
 On Void Linux
 -------------
 
-qutebrowser is available in the official repositories and can be installed
+glimpsebrowser is available in the official repositories and can be installed
 with:
 
 ----
-# xbps-install qutebrowser
+# xbps-install glimpsebrowser
 ----
 
 It's currently recommended to install `python3-PyQt5-webengine` and
 `python3-PyQt5-opengl`, then start with `--backend webengine` to use the new
 backend.
 
-Since the v1.0 release, qutebrowser uses QtWebEngine by default.
+Since the v1.0 release, glimpsebrowser uses QtWebEngine by default.
 
 On NixOS
 --------
 
-Nixpkgs collection contains `pkgs.qutebrowser` since June 2015. You can install
+Nixpkgs collection contains `pkgs.glimpsebrowser` since June 2015. You can install
 it with:
 
 ----
-$ nix-env -i qutebrowser
+$ nix-env -i glimpsebrowser
 ----
 
 It's recommended to install `qt5.qtwebengine` and start with
 `--backend webengine` to use the new backend.
 
-Since the v1.0 release, qutebrowser uses QtWebEngine by default.
+Since the v1.0 release, glimpsebrowser uses QtWebEngine by default.
 
 On openSUSE
 -----------
 
-There are prebuilt RPMs available at https://software.opensuse.org/download.html?project=network&package=qutebrowser[OBS].
+There are prebuilt RPMs available at https://software.opensuse.org/download.html?project=network&package=glimpsebrowser[OBS].
 
 To use the QtWebEngine backend, install `libqt5-qtwebengine`.
 
 On Slackware
 ------------
 
-qutebrowser is available in the 3rd party repository at http://slackbuilds.org[slackbuilds.org]
+glimpsebrowser is available in the 3rd party repository at http://slackbuilds.org[slackbuilds.org]
 
 An easy way to install it is with sbopkg (frontend for slackbuilds.org) available at http://sbopkg.org[sbopkg.org]
 
@@ -209,16 +209,16 @@ sbopkg -r
 
 The pyPEG2 and MarkupSafe dependencies both need building for python3. You can either set PYTHON3=yes in the shell or set those as options in the dialog menu for each.
 
-Generate a queue file for qutebrowser and dependencies:
+Generate a queue file for glimpsebrowser and dependencies:
 
 ----
-sqg -p qutebrowser
+sqg -p glimpsebrowser
 ----
 
 Then load the queue in the dialog queue menu or via:
 
 ----
-PYTHON3=yes sbopkg -i qutebrowser
+PYTHON3=yes sbopkg -i glimpsebrowser
 ----
 
 If you use the dialog screen you can deselect any already-installed packages that you don't need/want to rebuild before starting the build process.
@@ -227,33 +227,33 @@ On OpenBSD
 ----------
 
 WARNING: OpenBSD only packages a legacy unmaintained version of QtWebKit (for
-which support was dropped in qutebrowser v1.0). It's advised to not use
-qutebrowser from OpenBSD ports for untrusted websites.
+which support was dropped in glimpsebrowser v1.0). It's advised to not use
+glimpsebrowser from OpenBSD ports for untrusted websites.
 
-qutebrowser is in http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/www/qutebrowser/[OpenBSD ports].
+glimpsebrowser is in http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/www/glimpsebrowser/[OpenBSD ports].
 
 Install the package:
 
 ----
-# pkg_add qutebrowser
+# pkg_add glimpsebrowser
 ----
 
 Or alternatively, use the ports system :
 
 ----
-# cd /usr/ports/www/qutebrowser
+# cd /usr/ports/www/glimpsebrowser
 # make install
 ----
 
 On FreeBSD
 ----------
 
-qutebrowser is in https://www.freshports.org/www/qutebrowser/[FreeBSD ports].
+glimpsebrowser is in https://www.freshports.org/www/glimpsebrowser/[FreeBSD ports].
 
 It can be installed with:
 
 ----
-# cd /usr/ports/www/qutebrowser
+# cd /usr/ports/www/glimpsebrowser
 # make install clean
 ----
 
@@ -263,17 +263,17 @@ and QtWebEngine backend is also not available.
 On Windows
 ----------
 
-There are different ways to install qutebrowser on Windows:
+There are different ways to install glimpsebrowser on Windows:
 
 Prebuilt binaries
 ~~~~~~~~~~~~~~~~~
 
 Prebuilt standalone packages and installers
-https://github.com/qutebrowser/qutebrowser/releases[are built] for every
+https://github.com/glimpsebrowser/glimpsebrowser/releases[are built] for every
 release.
 
 Note that you'll need to upgrade to new versions manually (subscribe to the
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser-announce[qutebrowser-announce
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser-announce[glimpsebrowser-announce
 mailinglist] to get notified on new releases). You can install a newer version
 without uninstalling the older one.
 
@@ -281,21 +281,21 @@ The binary release ships with a QtWebEngine built without proprietary codec
 support. To get support for e.g. h264/h265 videos, you'll need to build
 QtWebEngine from source yourself with support for that enabled.
 
-https://chocolatey.org/packages/qutebrowser[Chocolatey package]
+https://chocolatey.org/packages/glimpsebrowser[Chocolatey package]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * PackageManagement PowerShell module
 ----
-PS C:\> Install-Package qutebrowser
+PS C:\> Install-Package glimpsebrowser
 ----
 * Chocolatey's client
 ----
-C:\> choco install qutebrowser
+C:\> choco install glimpsebrowser
 ----
 * Scoop's client
 ----
 C:\> scoop bucket add extras
-C:\> scoop install qutebrowser
+C:\> scoop install glimpsebrowser
 ----
 
 Manual install
@@ -310,7 +310,7 @@ https://pip.pypa.io/en/latest/[pip]:
 $ pip install tox
 ----
 
-Then <<tox,install qutebrowser via tox>>.
+Then <<tox,install glimpsebrowser via tox>>.
 
 On macOS
 --------
@@ -318,12 +318,12 @@ On macOS
 Prebuilt binary
 ~~~~~~~~~~~~~~~
 
-The easiest way to install qutebrowser on macOS is to use the prebuilt `.app`
+The easiest way to install glimpsebrowser on macOS is to use the prebuilt `.app`
 files from the
-https://github.com/qutebrowser/qutebrowser/releases[release page].
+https://github.com/glimpsebrowser/glimpsebrowser/releases[release page].
 
 Note that you'll need to upgrade to new versions manually (subscribe to the
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser-announce[qutebrowser-announce
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser-announce[glimpsebrowser-announce
 mailinglist] to get notified on new releases).
 
 The binary release ships with a QtWebEngine built without proprietary codec
@@ -334,7 +334,7 @@ This binary is also available through the
 https://caskroom.github.io/[Homebrew Cask] package manager:
 
 ----
-$ brew cask install qutebrowser
+$ brew cask install glimpsebrowser
 ----
 
 Manual Install
@@ -342,19 +342,19 @@ Manual Install
 
 Alternatively, you can install the dependencies via a package manager (like
 http://brew.sh/[Homebrew] or https://www.macports.org/[MacPorts]) and run
-qutebrowser from source.
+glimpsebrowser from source.
 
 ==== Homebrew
 
 ----
 $ brew install qt5
-$ pip3 install qutebrowser
+$ pip3 install glimpsebrowser
 ----
 
-Since the v1.0 release, qutebrowser uses QtWebEngine by default.
+Since the v1.0 release, glimpsebrowser uses QtWebEngine by default.
 
 Homebrew's builds of Qt and PyQt don't come with QtWebKit (and `--with-qtwebkit`
-uses an old version of QtWebKit which qutebrowser doesn't support anymore). If
+uses an old version of QtWebKit which glimpsebrowser doesn't support anymore). If
 you want QtWebKit support, you'll need to build an up-to-date QtWebKit
 https://github.com/annulen/webkit/wiki/Building-QtWebKit-on-OS-X[manually].
 
@@ -369,7 +369,7 @@ The normal `setup.py install` doesn't install these files, so you'll have to do
 it as part of the packaging process.
 
 [[tox]]
-Installing qutebrowser with tox
+Installing glimpsebrowser with tox
 -------------------------------
 
 Getting the repository
@@ -379,14 +379,14 @@ First of all, clone the repository using http://git-scm.org/[git] and switch
 into the repository folder:
 
 ----
-$ git clone https://github.com/qutebrowser/qutebrowser.git
-$ cd qutebrowser
+$ git clone https://github.com/glimpsebrowser/glimpsebrowser.git
+$ cd glimpsebrowser
 ----
 
 Installing dependencies (including Qt)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Then run tox inside the qutebrowser repository to set up a
+Then run tox inside the glimpsebrowser repository to set up a
 https://docs.python.org/3/library/venv.html[virtual environment]:
 
 ----
@@ -399,7 +399,7 @@ This comes with an up-to-date Qt/PyQt including a pre-compiled QtWebEngine
 binary, but has a few caveats:
 
 - Make sure your `python3` is Python 3.5 or newer, otherwise you'll get a "No
-  matching distribution found" error. Note that qutebrowser itself also requires
+  matching distribution found" error. Note that glimpsebrowser itself also requires
   this.
 - It only works on 64-bit x86 systems, with other architectures you'll get the
   same error.
@@ -413,7 +413,7 @@ Installing dependencies (system-wide Qt)
 
 Alternatively, you can use `tox -e mkvenv` (without `-pypi`) to symlink your
 local Qt install instead of installing PyQt in the virtualenv. However, unless
-you have a new QtWebKit or QtWebEngine available, qutebrowser will not work. It
+you have a new QtWebKit or QtWebEngine available, glimpsebrowser will not work. It
 also typically means you'll be using an older release of QtWebEngine.
 
 On Windows, run `set PYTHON=C:\path\to\python.exe` (CMD) or ``$Env:PYTHON =
@@ -422,19 +422,19 @@ On Windows, run `set PYTHON=C:\path\to\python.exe` (CMD) or ``$Env:PYTHON =
 Creating a wrapper script
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Running `tox` does not install a system-wide `qutebrowser` script. You can
-launch qutebrowser by doing:
+Running `tox` does not install a system-wide `glimpsebrowser` script. You can
+launch glimpsebrowser by doing:
 
 ----
-.venv/bin/python3 -m qutebrowser
+.venv/bin/python3 -m glimpsebrowser
 ----
 
-You can create a simple wrapper script to start qutebrowser somewhere in your
-`$PATH` (e.g. `/usr/local/bin/qutebrowser` or `~/bin/qutebrowser`):
+You can create a simple wrapper script to start glimpsebrowser somewhere in your
+`$PATH` (e.g. `/usr/local/bin/glimpsebrowser` or `~/bin/glimpsebrowser`):
 
 ----
 #!/bin/bash
-~/path/to/qutebrowser/.venv/bin/python3 -m qutebrowser "$@"
+~/path/to/glimpsebrowser/.venv/bin/python3 -m glimpsebrowser "$@"
 ----
 
 Building the docs

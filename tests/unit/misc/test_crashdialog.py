@@ -1,27 +1,27 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.misc.crashdialog."""
+"""Tests for glimpsebrowser.misc.crashdialog."""
 
 import os
 import pytest
-from qutebrowser.misc import crashdialog
+from glimpsebrowser.misc import crashdialog
 
 
 VALID_CRASH_TEXT = """
@@ -51,8 +51,8 @@ WINDOWS_CRASH_TEXT = r"""
 Windows fatal exception: access violation
 _
 Current thread 0x000014bc (most recent call first):
-  File "qutebrowser\mainwindow\tabbedbrowser.py", line 468 in tabopen
-  File "qutebrowser\browser\shared.py", line 247 in get_tab
+  File "glimpsebrowser\mainwindow\tabbedbrowser.py", line 468 in tabopen
+  File "glimpsebrowser\browser\shared.py", line 247 in get_tab
 """
 
 INVALID_CRASH_TEXT = """

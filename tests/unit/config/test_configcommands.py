@@ -1,22 +1,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.config.configcommands."""
+"""Tests for glimpsebrowser.config.configcommands."""
 
 import logging
 import functools
@@ -25,11 +25,11 @@ import unittest.mock
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.config import configcommands, configutils
-from qutebrowser.api import cmdutils
-from qutebrowser.utils import usertypes, urlmatch
-from qutebrowser.keyinput import keyutils
-from qutebrowser.misc import objects
+from glimpsebrowser.config import configcommands, configutils
+from glimpsebrowser.api import cmdutils
+from glimpsebrowser.utils import usertypes, urlmatch
+from glimpsebrowser.keyinput import keyutils
+from glimpsebrowser.misc import objects
 
 
 # Alias because we need this a lot in here.
@@ -57,9 +57,9 @@ class TestSet:
     def test_set_no_args(self, commands, tabbed_browser_stubs):
         """Run ':set'.
 
-        Should open qute://settings."""
+        Should open glimpse://settings."""
         commands.set(win_id=0)
-        assert tabbed_browser_stubs[0].loaded_url == QUrl('qute://settings')
+        assert tabbed_browser_stubs[0].loaded_url == QUrl('glimpse://settings')
 
     @pytest.mark.parametrize('option', ['url.auto_search?', 'url.auto_search'])
     def test_get(self, config_stub, commands, message_mock, option):
@@ -75,7 +75,7 @@ class TestSet:
     @pytest.mark.parametrize('temp', [True, False])
     @pytest.mark.parametrize('option, old_value, inp, new_value', [
         ('url.auto_search', 'naive', 'dns', 'dns'),
-        # https://github.com/qutebrowser/qutebrowser/issues/2962
+        # https://github.com/glimpsebrowser/glimpsebrowser/issues/2962
         ('editor.command',
          ['gvim', '-f', '{file}', '-c', 'normal {line}G{column0}l'],
          '[emacs, "{}"]', ['emacs', '{}']),
@@ -188,7 +188,7 @@ class TestSet:
         """Run ':set ?'.
 
         Should show an error.
-        See https://github.com/qutebrowser/qutebrowser/issues/1109
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/1109
         """
         with pytest.raises(cmdutils.CommandError, match="No option '?'"):
             commands.set(win_id=0, option='?')
@@ -539,7 +539,7 @@ class TestEdit:
                                          'qapp')
 
     def test_no_source(self, commands, mocker):
-        mock = mocker.patch('qutebrowser.config.configcommands.editor.'
+        mock = mocker.patch('glimpsebrowser.config.configcommands.editor.'
                             'ExternalEditor._start_editor', autospec=True)
         commands.config_edit(no_source=True)
         mock.assert_called_once_with(unittest.mock.ANY)
@@ -553,7 +553,7 @@ class TestEdit:
                     f.write(text)
                 editor_self.file_updated.emit(text)
 
-            return mocker.patch('qutebrowser.config.configcommands.editor.'
+            return mocker.patch('glimpsebrowser.config.configcommands.editor.'
                                 'ExternalEditor._start_editor', autospec=True,
                                 side_effect=_write_file)
 
@@ -669,11 +669,11 @@ class TestBind:
                           tabbed_browser_stubs):
         """Run ':bind'.
 
-        Should open qute://bindings."""
+        Should open glimpse://bindings."""
         config_stub.val.bindings.default = no_bindings
         config_stub.val.bindings.commands = no_bindings
         commands.bind(win_id=0)
-        assert tabbed_browser_stubs[0].loaded_url == QUrl('qute://bindings')
+        assert tabbed_browser_stubs[0].loaded_url == QUrl('glimpse://bindings')
 
     @pytest.mark.parametrize('command', ['nop', 'nope'])
     def test_bind(self, commands, config_stub, no_bindings, key_config_stub,
@@ -769,7 +769,7 @@ class TestBind:
     def test_bind_duplicate(self, commands, config_stub, key_config_stub, key):
         """Run ':bind' with a key which already has been bound.'.
 
-        Also tests for https://github.com/qutebrowser/qutebrowser/issues/1544
+        Also tests for https://github.com/glimpsebrowser/glimpsebrowser/issues/1544
         """
         config_stub.val.bindings.default = {
             'normal': {'a': 'nop', '<Ctrl+x>': 'nop'}

@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Run vulture on the source files and filter out false-positives."""
 
@@ -29,24 +29,24 @@ import argparse
 
 import vulture
 
-import qutebrowser.app  # pylint: disable=unused-import
-from qutebrowser.extensions import loader
-from qutebrowser.misc import objects
-from qutebrowser.utils import utils
-from qutebrowser.browser.webkit import rfc6266
+import glimpsebrowser.app  # pylint: disable=unused-import
+from glimpsebrowser.extensions import loader
+from glimpsebrowser.misc import objects
+from glimpsebrowser.utils import utils
+from glimpsebrowser.browser.webkit import rfc6266
 # To run the decorators from there
 # pylint: disable=unused-import
-from qutebrowser.browser.webkit.network import webkitqutescheme
+from glimpsebrowser.browser.webkit.network import webkitglimpsescheme
 # pylint: enable=unused-import
-from qutebrowser.browser import qutescheme
-from qutebrowser.config import configtypes
+from glimpsebrowser.browser import glimpsescheme
+from glimpsebrowser.config import configtypes
 
 
 def whitelist_generator():  # noqa
     """Generator which yields lines to add to a vulture whitelist."""
     loader.load_components(skip_hooks=True)
 
-    # qutebrowser commands
+    # glimpsebrowser commands
     for cmd in objects.commands.values():
         yield utils.qualname(cmd.handler)
 
@@ -54,20 +54,20 @@ def whitelist_generator():  # noqa
     for name, member in inspect.getmembers(rfc6266, inspect.isclass):
         for attr in ['grammar', 'regex']:
             if hasattr(member, attr):
-                yield 'qutebrowser.browser.webkit.rfc6266.{}.{}'.format(name,
+                yield 'glimpsebrowser.browser.webkit.rfc6266.{}.{}'.format(name,
                                                                         attr)
 
     # PyQt properties
-    yield 'qutebrowser.mainwindow.statusbar.bar.StatusBar.color_flags'
-    yield 'qutebrowser.mainwindow.statusbar.url.UrlText.urltype'
+    yield 'glimpsebrowser.mainwindow.statusbar.bar.StatusBar.color_flags'
+    yield 'glimpsebrowser.mainwindow.statusbar.url.UrlText.urltype'
 
     # Not used yet, but soon (or when debugging)
-    yield 'qutebrowser.utils.debug.log_events'
-    yield 'qutebrowser.utils.debug.log_signals'
-    yield 'qutebrowser.utils.debug.qflags_key'
-    yield 'qutebrowser.utils.qtutils.QtOSError.qt_errno'
+    yield 'glimpsebrowser.utils.debug.log_events'
+    yield 'glimpsebrowser.utils.debug.log_signals'
+    yield 'glimpsebrowser.utils.debug.qflags_key'
+    yield 'glimpsebrowser.utils.qtutils.QtOSError.qt_errno'
     yield 'scripts.utils.bg_colors'
-    yield 'qutebrowser.misc.sql.SqliteErrorCode.CONSTRAINT'
+    yield 'glimpsebrowser.misc.sql.SqliteErrorCode.CONSTRAINT'
 
     # Qt attributes
     yield 'PyQt5.QtWebKit.QWebPage.ErrorPageExtensionReturn().baseUrl'
@@ -76,33 +76,33 @@ def whitelist_generator():  # noqa
     yield 'PyQt5.QtWebKit.QWebPage.ErrorPageExtensionReturn().fileNames'
     yield 'PyQt5.QtWidgets.QStyleOptionViewItem.backgroundColor'
 
-    ## qute://... handlers
-    for name in qutescheme._HANDLERS:  # pylint: disable=protected-access
+    ## glimpse://... handlers
+    for name in glimpsescheme._HANDLERS:  # pylint: disable=protected-access
         name = name.replace('-', '_')
-        yield 'qutebrowser.browser.qutescheme.qute_' + name
+        yield 'glimpsebrowser.browser.glimpsescheme.glimpse_' + name
 
     # Other false-positives
-    yield 'qutebrowser.completion.models.listcategory.ListCategory().lessThan'
-    yield 'qutebrowser.utils.jinja.Loader.get_source'
-    yield 'qutebrowser.utils.log.QtWarningFilter.filter'
-    yield 'qutebrowser.browser.pdfjs.is_available'
-    yield 'qutebrowser.misc.guiprocess.spawn_output'
-    yield 'qutebrowser.utils.usertypes.ExitStatus.reserved'
+    yield 'glimpsebrowser.completion.models.listcategory.ListCategory().lessThan'
+    yield 'glimpsebrowser.utils.jinja.Loader.get_source'
+    yield 'glimpsebrowser.utils.log.QtWarningFilter.filter'
+    yield 'glimpsebrowser.browser.pdfjs.is_available'
+    yield 'glimpsebrowser.misc.guiprocess.spawn_output'
+    yield 'glimpsebrowser.utils.usertypes.ExitStatus.reserved'
     yield 'QEvent.posted'
     yield 'log_stack'  # from message.py
     yield 'propagate'  # logging.getLogger('...).propagate = False
     # vulture doesn't notice the hasattr() and thus thinks netrc_used is unused
     # in NetworkManager.on_authentication_required
     yield 'PyQt5.QtNetwork.QNetworkReply.netrc_used'
-    yield 'qutebrowser.browser.downloads.last_used_directory'
+    yield 'glimpsebrowser.browser.downloads.last_used_directory'
     yield 'PaintContext.clip'  # from completiondelegate.py
     yield 'logging.LogRecord.log_color'  # from logging.py
     yield 'scripts.utils.use_color'  # from asciidoc2html.py
     for attr in ['pyeval_output', 'log_clipboard', 'fake_clipboard']:
-        yield 'qutebrowser.misc.utilcmds.' + attr
+        yield 'glimpsebrowser.misc.utilcmds.' + attr
 
     for attr in ['fileno', 'truncate', 'closed', 'readable']:
-        yield 'qutebrowser.utils.qtutils.PyQIODevice.' + attr
+        yield 'glimpsebrowser.utils.qtutils.PyQIODevice.' + attr
 
     for attr in ['msgs', 'priority', 'visit_attribute']:
         yield 'scripts.dev.pylint_checkers.config.' + attr
@@ -110,12 +110,12 @@ def whitelist_generator():  # noqa
         yield 'scripts.dev.pylint_checkers.modeline.' + attr
 
     for name, _member in inspect.getmembers(configtypes, inspect.isclass):
-        yield 'qutebrowser.config.configtypes.' + name
-    yield 'qutebrowser.config.configexc.ConfigErrorDesc.traceback'
-    yield 'qutebrowser.config.configfiles.ConfigAPI.load_autoconfig'
+        yield 'glimpsebrowser.config.configtypes.' + name
+    yield 'glimpsebrowser.config.configexc.ConfigErrorDesc.traceback'
+    yield 'glimpsebrowser.config.configfiles.ConfigAPI.load_autoconfig'
     yield 'types.ModuleType.c'  # configfiles:read_config_py
     for name in ['configdir', 'datadir']:
-        yield 'qutebrowser.config.configfiles.ConfigAPI.' + name
+        yield 'glimpsebrowser.config.configfiles.ConfigAPI.' + name
 
     yield 'include_aliases'
 
@@ -124,14 +124,14 @@ def whitelist_generator():  # noqa
         yield 'scripts.dev.src2asciidoc.UsageFormatter.' + attr
 
     # attrs
-    yield 'qutebrowser.browser.webkit.network.networkmanager.ProxyId.hostname'
-    yield 'qutebrowser.command.command.ArgInfo._validate_exclusive'
+    yield 'glimpsebrowser.browser.webkit.network.networkmanager.ProxyId.hostname'
+    yield 'glimpsebrowser.command.command.ArgInfo._validate_exclusive'
     yield 'scripts.get_coredumpctl_traces.Line.uid'
     yield 'scripts.get_coredumpctl_traces.Line.gid'
     yield 'scripts.importer.import_moz_places.places.row_factory'
 
     # component hooks
-    yield 'qutebrowser.components.adblock.on_config_changed'
+    yield 'glimpsebrowser.components.adblock.on_config_changed'
 
 
 def filter_func(item):
@@ -191,7 +191,7 @@ def run(files):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('files', nargs='*', default=['qutebrowser', 'scripts',
+    parser.add_argument('files', nargs='*', default=['glimpsebrowser', 'scripts',
                                                      'setup.py'])
     args = parser.parse_args()
     out = run(args.files)

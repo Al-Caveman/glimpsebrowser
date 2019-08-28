@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test hints based on html files with special comments."""
 
@@ -27,7 +27,7 @@ import attr
 import pytest
 import bs4
 
-from qutebrowser.utils import utils
+from glimpsebrowser.utils import utils
 
 
 def collect_tests():
@@ -89,7 +89,7 @@ def _parse_file(test_name):
 @pytest.mark.parametrize('zoom_level', [100, 66, 33])
 @pytest.mark.parametrize('find_implementation', ['javascript', 'python'])
 def test_hints(test_name, zoom_text_only, zoom_level, find_implementation,
-               quteproc, request):
+               glimpseproc, request):
     if zoom_text_only and request.config.webengine:
         pytest.skip("QtWebEngine doesn't have zoom.text_only")
     if find_implementation == 'python' and request.config.webengine:
@@ -100,27 +100,27 @@ def test_hints(test_name, zoom_text_only, zoom_level, find_implementation,
         pytest.xfail("QtWebEngine TODO: {}".format(parsed.qtwebengine_todo))
 
     url_path = 'data/hints/html/{}'.format(test_name)
-    quteproc.open_path(url_path)
+    glimpseproc.open_path(url_path)
 
     # setup
     if not request.config.webengine:
-        quteproc.set_setting('zoom.text_only', str(zoom_text_only))
-        quteproc.set_setting('hints.find_implementation', find_implementation)
-    quteproc.send_cmd(':zoom {}'.format(zoom_level))
+        glimpseproc.set_setting('zoom.text_only', str(zoom_text_only))
+        glimpseproc.set_setting('hints.find_implementation', find_implementation)
+    glimpseproc.send_cmd(':zoom {}'.format(zoom_level))
     # follow hint
-    quteproc.send_cmd(':hint all normal')
-    quteproc.wait_for(message='hints: a', category='hints')
-    quteproc.send_cmd(':follow-hint a')
-    quteproc.wait_for_load_finished('data/' + parsed.target)
+    glimpseproc.send_cmd(':hint all normal')
+    glimpseproc.wait_for(message='hints: a', category='hints')
+    glimpseproc.send_cmd(':follow-hint a')
+    glimpseproc.wait_for_load_finished('data/' + parsed.target)
     # reset
-    quteproc.send_cmd(':zoom 100')
+    glimpseproc.send_cmd(':zoom 100')
     if not request.config.webengine:
-        quteproc.set_setting('zoom.text_only', 'false')
-        quteproc.set_setting('hints.find_implementation', 'javascript')
+        glimpseproc.set_setting('zoom.text_only', 'false')
+        glimpseproc.set_setting('hints.find_implementation', 'javascript')
 
 
 @pytest.mark.skip  # Too flaky
-def test_word_hints_issue1393(quteproc, tmpdir):
+def test_word_hints_issue1393(glimpseproc, tmpdir):
     dict_file = tmpdir / 'dict'
     dict_file.write(textwrap.dedent("""
         alph
@@ -140,12 +140,12 @@ def test_word_hints_issue1393(quteproc, tmpdir):
         ('epsi', 'l33t.txt'),
     ]
 
-    quteproc.set_setting('hints.mode', 'word')
-    quteproc.set_setting('hints.dictionary', str(dict_file))
+    glimpseproc.set_setting('hints.mode', 'word')
+    glimpseproc.set_setting('hints.dictionary', str(dict_file))
 
     for hint, target in targets:
-        quteproc.open_path('data/hints/issue1393.html')
-        quteproc.send_cmd(':hint')
-        quteproc.wait_for(message='hints: *', category='hints')
-        quteproc.send_cmd(':follow-hint {}'.format(hint))
-        quteproc.wait_for_load_finished('data/{}'.format(target))
+        glimpseproc.open_path('data/hints/issue1393.html')
+        glimpseproc.send_cmd(':hint')
+        glimpseproc.wait_for(message='hints: *', category='hints')
+        glimpseproc.send_cmd(':follow-hint {}'.format(hint))
+        glimpseproc.wait_for_load_finished('data/{}'.format(target))

@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Tests for the webelement utils."""
 
@@ -29,10 +29,10 @@ import pytest
 from PyQt5.QtCore import QRect, QPoint, QUrl
 QWebElement = pytest.importorskip('PyQt5.QtWebKit').QWebElement
 
-from qutebrowser.browser import browsertab
-from qutebrowser.browser.webkit import webkitelem
-from qutebrowser.misc import objects
-from qutebrowser.utils import usertypes
+from glimpsebrowser.browser import browsertab
+from glimpsebrowser.browser.webkit import webkitelem
+from glimpsebrowser.misc import objects
+from glimpsebrowser.utils import usertypes
 
 
 def get_webelem(geometry=None, frame=None, *, null=False, style=None,
@@ -277,7 +277,7 @@ class TestWebKitElement:
     def test_str(self, elem):
         assert str(elem) == 'text'
 
-    wke_qualname = 'qutebrowser.browser.webkit.webkitelem.WebKitElement'
+    wke_qualname = 'glimpsebrowser.browser.webkit.webkitelem.WebKitElement'
 
     @pytest.mark.parametrize('is_null, xml, expected', [
         (False, '<fakeelem/>', "<{} html='<fakeelem/>'>".format(wke_qualname)),

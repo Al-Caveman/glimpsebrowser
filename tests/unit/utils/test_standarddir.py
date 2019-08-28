@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.standarddir."""
+"""Tests for glimpsebrowser.utils.standarddir."""
 
 import os
 import os.path
@@ -32,12 +32,12 @@ import attr
 from PyQt5.QtCore import QStandardPaths
 import pytest
 
-from qutebrowser.utils import standarddir, utils
+from glimpsebrowser.utils import standarddir, utils
 
 
 # Use a different application name for tests to make sure we don't change real
-# qutebrowser data if we accidentally access the real path in a test.
-APPNAME = 'qute_test'
+# glimpsebrowser data if we accidentally access the real path in a test.
+APPNAME = 'glimpse_test'
 
 
 pytestmark = pytest.mark.usefixtures('qapp')
@@ -47,7 +47,7 @@ pytestmark = pytest.mark.usefixtures('qapp')
 def clear_standarddir_cache_and_patch(qapp, monkeypatch):
     """Make sure the standarddir cache is cleared before/after each test.
 
-    Also, patch APPNAME to qute_test.
+    Also, patch APPNAME to glimpse_test.
     """
     assert qapp.applicationName() == APPNAME
     monkeypatch.setattr(standarddir, '_locations', {})
@@ -82,7 +82,7 @@ def test_unset_organization_no_qapp(monkeypatch):
 def test_fake_mac_config(tmpdir, monkeypatch):
     """Test standardir.config on a fake Mac."""
     monkeypatch.setenv('HOME', str(tmpdir))
-    expected = str(tmpdir) + '/.qute_test'  # always with /
+    expected = str(tmpdir) + '/.glimpse_test'  # always with /
     standarddir._init_config(args=None)
     assert standarddir.config() == expected
 
@@ -125,7 +125,7 @@ class TestWritableLocation:
     def test_empty(self, monkeypatch):
         """Test QStandardPaths returning an empty value."""
         monkeypatch.setattr(
-            'qutebrowser.utils.standarddir.QStandardPaths.writableLocation',
+            'glimpsebrowser.utils.standarddir.QStandardPaths.writableLocation',
             lambda typ: '')
         with pytest.raises(standarddir.EmptyValueError):
             standarddir._writable_location(QStandardPaths.DataLocation)
@@ -215,7 +215,7 @@ class TestStandardDir:
         (standarddir.data, 2, ['Application Support', APPNAME]),
         (lambda: standarddir.config(auto=True), 1, [APPNAME]),
         (standarddir.config, 0,
-         os.path.expanduser('~').split(os.sep) + ['.qute_test']),
+         os.path.expanduser('~').split(os.sep) + ['.glimpse_test']),
         (standarddir.cache, 2, ['Caches', APPNAME]),
         (standarddir.download, 1, ['Downloads']),
     ])
@@ -280,7 +280,7 @@ class TestInitCacheDirTag:
         """Test with an existent CACHEDIR.TAG."""
         monkeypatch.setattr(standarddir, 'cache', lambda: str(tmpdir))
         mocker.patch('builtins.open', side_effect=AssertionError)
-        m = mocker.patch('qutebrowser.utils.standarddir.os')
+        m = mocker.patch('glimpsebrowser.utils.standarddir.os')
         m.path.join.side_effect = os.path.join
         m.path.exists.return_value = True
         standarddir._init_cachedir_tag()
@@ -295,7 +295,7 @@ class TestInitCacheDirTag:
         data = (tmpdir / 'CACHEDIR.TAG').read_text('utf-8')
         assert data == textwrap.dedent("""
             Signature: 8a477f597d28d172789f06886806bc55
-            # This file is a cache directory tag created by qutebrowser.
+            # This file is a cache directory tag created by glimpsebrowser.
             # For information about cache directory tags, see:
             #  http://www.brynosaurus.com/cachedir/
         """).lstrip()
@@ -342,11 +342,11 @@ class TestCreatingDir:
     def test_exists_race_condition(self, mocker, tmpdir, typ):
         """Make sure there can't be a TOCTOU issue when creating the file.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/942.
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/942.
         """
         (tmpdir / typ).ensure(dir=True)
 
-        m = mocker.patch('qutebrowser.utils.standarddir.os')
+        m = mocker.patch('glimpsebrowser.utils.standarddir.os')
         m.makedirs = os.makedirs
         m.sep = os.sep
         m.path.join = os.path.join
@@ -367,10 +367,10 @@ class TestSystemData:
 
     @pytest.mark.linux
     def test_system_datadir_exist_linux(self, monkeypatch):
-        """Test that /usr/share/qute_test is used if path exists."""
+        """Test that /usr/share/glimpse_test is used if path exists."""
         monkeypatch.setattr(os.path, 'exists', lambda path: True)
         standarddir._init_dirs()
-        assert standarddir.data(system=True) == "/usr/share/qute_test"
+        assert standarddir.data(system=True) == "/usr/share/glimpse_test"
 
     @pytest.mark.linux
     def test_system_datadir_not_exist_linux(self, monkeypatch, tmpdir,
@@ -440,14 +440,14 @@ class TestMoveWindowsAndMacOS:
     def test_move_windows(self, files):
         """Test moving configs on Windows."""
         (files.local_data_dir / 'data' / 'blocked-hosts').ensure()
-        (files.local_data_dir / 'qutebrowser.conf').ensure()
+        (files.local_data_dir / 'glimpsebrowser.conf').ensure()
         (files.local_data_dir / 'cache' / 'cachefile').ensure()
 
         standarddir._move_windows()
 
         assert (files.roaming_data_dir / 'data' / 'blocked-hosts').exists()
         assert (files.roaming_data_dir / 'config' /
-                'qutebrowser.conf').exists()
+                'glimpsebrowser.conf').exists()
         assert not (files.roaming_data_dir / 'cache').exists()
         assert (files.local_data_dir / 'cache' / 'cachefile').exists()
 
@@ -518,8 +518,8 @@ def test_init(mocker, tmpdir, args_kind):
     """
     assert standarddir._locations == {}
 
-    m_windows = mocker.patch('qutebrowser.utils.standarddir._move_windows')
-    m_mac = mocker.patch('qutebrowser.utils.standarddir._move_macos')
+    m_windows = mocker.patch('glimpsebrowser.utils.standarddir._move_windows')
+    m_mac = mocker.patch('glimpsebrowser.utils.standarddir._move_macos')
     if args_kind == 'normal':
         args = types.SimpleNamespace(basedir=None)
     elif args_kind == 'basedir':
@@ -566,11 +566,11 @@ def test_no_qapplication(qapp, tmpdir):
         sys.path = sys.argv[1:]  # make sure we have the same python path
 
         from PyQt5.QtWidgets import QApplication
-        from qutebrowser.utils import standarddir
+        from glimpsebrowser.utils import standarddir
 
         assert QApplication.instance() is None
 
-        standarddir.APPNAME = 'qute_test'
+        standarddir.APPNAME = 'glimpse_test'
         standarddir._init_dirs()
 
         locations = {k.name: v for k, v in standarddir._locations.items()}

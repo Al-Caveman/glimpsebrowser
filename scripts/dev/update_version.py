@@ -2,22 +2,22 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
 # Copyright 2018-2019 Andy Mender <andymenderunix@gmail.com>
-# Copyright 2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Update version numbers using bump2version."""
 
@@ -33,7 +33,7 @@ from scripts import utils
 
 
 def bump_version(version_leap="patch"):
-    """Update qutebrowser release version.
+    """Update glimpsebrowser release version.
 
     Args:
         version_leap: define the jump between versions
@@ -58,9 +58,9 @@ if __name__ == "__main__":
     bump_version(args.bump)
     show_commit()
 
-    import qutebrowser
-    version = qutebrowser.__version__
-    x_version = '.'.join([str(p) for p in qutebrowser.__version_info__[:-1]] +
+    import glimpsebrowser
+    version = glimpsebrowser.__version__
+    x_version = '.'.join([str(p) for p in glimpsebrowser.__version_info__[:-1]] +
                          ['x'])
 
     print("Run the following commands to create a new release:")
@@ -89,4 +89,4 @@ if __name__ == "__main__":
     print("- Run `python3 scripts/dev/download_release.py {v}`."
           .format(v=version))
     print("- Run `git pull github master && sudo python3 "
-          "scripts/asciidoc2html.py --website /srv/http/qutebrowser`")
+          "scripts/asciidoc2html.py --website /srv/http/glimpsebrowser`")

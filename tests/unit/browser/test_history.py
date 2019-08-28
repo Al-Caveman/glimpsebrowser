@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Tests for the global page history."""
 
@@ -24,10 +24,10 @@ import logging
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.browser import history
-from qutebrowser.utils import objreg, urlutils, usertypes
-from qutebrowser.api import cmdutils
-from qutebrowser.misc import sql
+from glimpsebrowser.browser import history
+from glimpsebrowser.utils import objreg, urlutils, usertypes
+from glimpsebrowser.api import cmdutils
+from glimpsebrowser.misc import sql
 
 
 @pytest.fixture(autouse=True)
@@ -66,10 +66,10 @@ class TestSpecialMethods:
 class TestGetting:
 
     def test_get_recent(self, web_history):
-        web_history.add_url(QUrl('http://www.qutebrowser.org/'), atime=67890)
+        web_history.add_url(QUrl('http://www.glimpsebrowser.org/'), atime=67890)
         web_history.add_url(QUrl('http://example.com/'), atime=12345)
         assert list(web_history.get_recent()) == [
-            ('http://www.qutebrowser.org/', '', 67890, False),
+            ('http://www.glimpsebrowser.org/', '', 67890, False),
             ('http://example.com/', '', 12345, False),
         ]
 
@@ -104,16 +104,16 @@ class TestDelete:
 
     def test_clear(self, qtbot, tmpdir, web_history, mocker):
         web_history.add_url(QUrl('http://example.com/'))
-        web_history.add_url(QUrl('http://www.qutebrowser.org/'))
+        web_history.add_url(QUrl('http://www.glimpsebrowser.org/'))
 
-        m = mocker.patch('qutebrowser.browser.history.message.confirm_async',
+        m = mocker.patch('glimpsebrowser.browser.history.message.confirm_async',
                          new=mocker.Mock, spec=[])
         web_history.clear()
         assert m.called
 
     def test_clear_force(self, qtbot, tmpdir, web_history):
         web_history.add_url(QUrl('http://example.com/'))
-        web_history.add_url(QUrl('http://www.qutebrowser.org/'))
+        web_history.add_url(QUrl('http://www.glimpsebrowser.org/'))
         web_history.clear(force=True)
         assert not len(web_history)
         assert not len(web_history.completion)
@@ -144,7 +144,7 @@ class TestAdd:
 
     @pytest.fixture()
     def mock_time(self, mocker):
-        m = mocker.patch('qutebrowser.browser.history.time')
+        m = mocker.patch('glimpsebrowser.browser.history.time')
         m.time.return_value = 12345
         return 12345
 
@@ -267,7 +267,7 @@ class TestHistoryInterface:
     def hist_interface(self, web_history):
         # pylint: disable=invalid-name
         QtWebKit = pytest.importorskip('PyQt5.QtWebKit')
-        from qutebrowser.browser.webkit import webkithistory
+        from glimpsebrowser.browser.webkit import webkithistory
         QWebHistoryInterface = QtWebKit.QWebHistoryInterface
         # pylint: enable=invalid-name
         web_history.add_url(url=QUrl('http://www.example.com/'),

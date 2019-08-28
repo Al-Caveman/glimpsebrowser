@@ -3,7 +3,7 @@
  * Note: Does not work for <textarea>.
  *
  * Example keybind:
- * CYCLE_INPUTS = "jseval -q -f ~/.config/qutebrowser/cycle-inputs.js"
+ * CYCLE_INPUTS = "jseval -q -f ~/.config/glimpsebrowser/cycle-inputs.js"
  * config.bind('gi', CYCLE_INPUTS)
  *
  * By dive on freenode <dave@dawoodfall.net>

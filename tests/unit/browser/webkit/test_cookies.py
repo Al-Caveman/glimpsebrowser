@@ -1,30 +1,30 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # Copyright 2015-2018 Alexander Cogneau (acogneau) <alexander.cogneau@gmail.com>:
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt5.QtNetwork import QNetworkCookie
 from PyQt5.QtCore import QUrl
 import pytest
 
-from qutebrowser.browser.webkit import cookies
-from qutebrowser.utils import usertypes
-from qutebrowser.misc import lineparser, objects
+from glimpsebrowser.browser.webkit import cookies
+from glimpsebrowser.utils import usertypes
+from glimpsebrowser.misc import lineparser, objects
 
 pytestmark = pytest.mark.usefixtures('data_tmpdir')
 

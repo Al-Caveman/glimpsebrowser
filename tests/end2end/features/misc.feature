@@ -170,7 +170,7 @@ Feature: Various utility commands.
     @qtwebkit_skip @qt<5.11
     Scenario: Inspector without --enable-webengine-inspector
         When I run :inspector
-        Then the error "QtWebEngine inspector is not enabled. See 'qutebrowser --help' for details." should be shown
+        Then the error "QtWebEngine inspector is not enabled. See 'glimpsebrowser --help' for details." should be shown
 
     @no_xvfb @posix @qtwebengine_skip
     Scenario: Inspector smoke test
@@ -302,7 +302,7 @@ Feature: Various utility commands.
         And I wait for "Print to file: *" in the log or skip the test
         Then the PDF hello.pdf should exist in the tmpdir
 
-    ## https://github.com/qutebrowser/qutebrowser/issues/504
+    ## https://github.com/glimpsebrowser/glimpsebrowser/issues/504
 
     Scenario: Focusing download widget via Tab
         When I open about:blank
@@ -323,9 +323,9 @@ Feature: Various utility commands.
     ## Custom headers
 
     Scenario: Setting a custom header
-        When I set content.headers.custom to {"X-Qute-Test": "testvalue"}
+        When I set content.headers.custom to {"X-Glimpse-Test": "testvalue"}
         And I open headers
-        Then the header X-Qute-Test should be set to testvalue
+        Then the header X-Glimpse-Test should be set to testvalue
 
     Scenario: DNT header
         When I set content.headers.do_not_track to true
@@ -369,13 +369,13 @@ Feature: Various utility commands.
         Then the header User-Agent should be set to Mozilla/5.0 *
         And the javascript message "Mozilla/5.0 *" should be logged
 
-    ## https://github.com/qutebrowser/qutebrowser/issues/1523
+    ## https://github.com/glimpsebrowser/glimpsebrowser/issues/1523
 
     Scenario: Completing a single option argument
         When I run :set-cmd-text -s :--
         Then no crash should happen
 
-    ## https://github.com/qutebrowser/qutebrowser/issues/1386
+    ## https://github.com/glimpsebrowser/glimpsebrowser/issues/1386
 
     Scenario: Partial commandline matching with startup command
         When I run :message-i "Hello World" (invalid command)
@@ -391,7 +391,7 @@ Feature: Various utility commands.
         And I run :command-accept
         Then the message "Hello World" should be shown
 
-    ## https://github.com/qutebrowser/qutebrowser/issues/4720
+    ## https://github.com/glimpsebrowser/glimpsebrowser/issues/4720
     Scenario: Chaining failing commands
         When I run :scroll x ;; message-info foo
         Then the error "Invalid value 'x' for direction - *" should be shown
@@ -430,7 +430,7 @@ Feature: Various utility commands.
 
     Scenario: Clicking an element by ID
         When I open data/click_element.html
-        And I run :click-element id qute-input
+        And I run :click-element id glimpse-input
         Then "Entering mode KeyMode.insert (reason: clicking input)" should be logged
 
     Scenario: Clicking an element by ID with dot
@@ -526,7 +526,7 @@ Feature: Various utility commands.
         Then "Renderer process was killed" should be logged
         And "* 'Error loading chrome://kill/'" should be logged
 
-    # https://github.com/qutebrowser/qutebrowser/issues/2290
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/2290
     @qtwebkit_skip @no_invalid_lines @flaky
     Scenario: Navigating to URL after renderer process is gone
         When I run :tab-only

@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2016-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import sys
 import json
@@ -27,12 +27,12 @@ import time
 import pytest_bdd as bdd
 bdd.scenarios('editor.feature')
 
-from qutebrowser.utils import utils
+from glimpsebrowser.utils import utils
 
 
 @bdd.when(bdd.parsers.parse('I set up a fake editor replacing "{text}" by '
                             '"{replacement}"'))
-def set_up_editor_replacement(quteproc, server, tmpdir, text, replacement):
+def set_up_editor_replacement(glimpseproc, server, tmpdir, text, replacement):
     """Set up editor.command to a small python script doing a replacement."""
     text = text.replace('(port)', str(server.port))
     script = tmpdir / 'script.py'
@@ -48,11 +48,11 @@ def set_up_editor_replacement(quteproc, server, tmpdir, text, replacement):
             f.write(data)
     """.format(text=text, replacement=replacement)))
     editor = json.dumps([sys.executable, str(script), '{}'])
-    quteproc.set_setting('editor.command', editor)
+    glimpseproc.set_setting('editor.command', editor)
 
 
 @bdd.when(bdd.parsers.parse('I set up a fake editor returning "{text}"'))
-def set_up_editor(quteproc, tmpdir, text):
+def set_up_editor(glimpseproc, tmpdir, text):
     """Set up editor.command to a small python script inserting a text."""
     script = tmpdir / 'script.py'
     script.write(textwrap.dedent("""
@@ -62,18 +62,18 @@ def set_up_editor(quteproc, tmpdir, text):
             f.write({text!r})
     """.format(text=text)))
     editor = json.dumps([sys.executable, str(script), '{}'])
-    quteproc.set_setting('editor.command', editor)
+    glimpseproc.set_setting('editor.command', editor)
 
 
 @bdd.when(bdd.parsers.parse('I set up a fake editor returning empty text'))
-def set_up_editor_empty(quteproc, tmpdir):
+def set_up_editor_empty(glimpseproc, tmpdir):
     """Set up editor.command to a small python script inserting empty text."""
-    set_up_editor(quteproc, tmpdir, "")
+    set_up_editor(glimpseproc, tmpdir, "")
 
 
 @bdd.when(bdd.parsers.parse('I set up a fake editor that writes "{text}" on '
                             'save'))
-def set_up_editor_wait(quteproc, tmpdir, text):
+def set_up_editor_wait(glimpseproc, tmpdir, text):
     """Set up editor.command to a small python script inserting a text."""
     assert not utils.is_windows
     pidfile = tmpdir / 'editor_pid'
@@ -104,7 +104,7 @@ def set_up_editor_wait(quteproc, tmpdir, text):
         time.sleep(100)
     """.format(pidfile=pidfile, text=text)))
     editor = json.dumps([sys.executable, str(script), '{}'])
-    quteproc.set_setting('editor.command', editor)
+    glimpseproc.set_setting('editor.command', editor)
 
 
 @bdd.when(bdd.parsers.parse('I kill the waiting editor'))

@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.misc.sessions."""
+"""Tests for glimpsebrowser.misc.sessions."""
 
 import logging
 
@@ -26,10 +26,10 @@ import yaml
 from PyQt5.QtCore import QUrl, QPoint, QByteArray, QObject
 QWebView = pytest.importorskip('PyQt5.QtWebKitWidgets').QWebView
 
-from qutebrowser.misc import sessions
-from qutebrowser.misc.sessions import TabHistoryItem as Item
-from qutebrowser.utils import objreg, qtutils
-from qutebrowser.browser.webkit import tabhistory
+from glimpsebrowser.misc import sessions
+from glimpsebrowser.misc.sessions import TabHistoryItem as Item
+from glimpsebrowser.utils import objreg, qtutils
+from glimpsebrowser.browser.webkit import tabhistory
 
 
 pytestmark = pytest.mark.qt_log_ignore('QIODevice::read.*: device not open')
@@ -230,7 +230,7 @@ class TestSave:
         OSError('foo'), UnicodeEncodeError('ascii', '', 0, 2, 'foo'),
         yaml.YAMLError('foo')])
     def test_fake_exception(self, mocker, sess_man, tmpdir, exception):
-        mocker.patch('qutebrowser.misc.sessions.yaml.dump',
+        mocker.patch('glimpsebrowser.misc.sessions.yaml.dump',
                      side_effect=exception)
 
         with pytest.raises(sessions.SessionError, match=str(exception)):
@@ -247,7 +247,7 @@ class TestSave:
     def test_utf_8_invalid(self, tmpdir, sess_man, fake_history):
         """Make sure data containing invalid UTF8 raises SessionError."""
         session_path = tmpdir / 'foo.yml'
-        fake_history([Item(QUrl('http://www.qutebrowser.org/'), '\ud800',
+        fake_history([Item(QUrl('http://www.glimpsebrowser.org/'), '\ud800',
                            active=True)])
 
         try:
@@ -321,7 +321,7 @@ class TestLoadTab:
         if in_main_data:
             # This information got saved in the main data instead of saving it
             # per item - make sure the old format can still be read
-            # https://github.com/qutebrowser/qutebrowser/issues/728
+            # https://github.com/glimpsebrowser/glimpsebrowser/issues/728
             d = {'history': [item], key: val}
         else:
             item[key] = val

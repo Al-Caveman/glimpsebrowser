@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Behavior:
-#   Userscript for qutebrowser which adds a task to taskwarrior.
+#   Userscript for glimpsebrowser which adds a task to taskwarrior.
 #   If run as a command (:spawn --userscript taskadd), it creates a new task
 #   with the description equal to the current page title and annotates it with
 #   the current page url. Additional arguments are passed along so you can add

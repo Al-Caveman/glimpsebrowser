@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2018-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Test webenginetab."""
 
@@ -27,10 +27,10 @@ QWebEnginePage = QtWebEngineWidgets.QWebEnginePage
 QWebEngineScriptCollection = QtWebEngineWidgets.QWebEngineScriptCollection
 QWebEngineScript = QtWebEngineWidgets.QWebEngineScript
 
-from qutebrowser.browser import greasemonkey
-from qutebrowser.utils import usertypes
+from glimpsebrowser.browser import greasemonkey
+from glimpsebrowser.utils import usertypes
 webenginetab = pytest.importorskip(
-    "qutebrowser.browser.webengine.webenginetab")
+    "glimpsebrowser.browser.webengine.webenginetab")
 
 pytestmark = pytest.mark.usefixtures('greasemonkey_manager')
 
@@ -47,7 +47,7 @@ class TestWebengineScripts:
         """Make sure scripts with non-existent worlds are rejected."""
         scripts = [
             greasemonkey.GreasemonkeyScript(
-                [('qute-js-world', 'Mars'), ('name', 'test')], None)
+                [('glimpse-js-world', 'Mars'), ('name', 'test')], None)
         ]
 
         with caplog.at_level(logging.ERROR, 'greasemonkey'):
@@ -55,7 +55,7 @@ class TestWebengineScripts:
 
         assert len(caplog.records) == 1
         msg = caplog.messages[0]
-        assert "has invalid value for '@qute-js-world': Mars" in msg
+        assert "has invalid value for '@glimpse-js-world': Mars" in msg
         collection = webengine_scripts._widget.page().scripts().toList()
         assert not any(script.name().startswith('GM-')
                        for script in collection)
@@ -66,7 +66,7 @@ class TestWebengineScripts:
         """Make sure scripts with out-of-range worlds are rejected."""
         scripts = [
             greasemonkey.GreasemonkeyScript(
-                [('qute-js-world', worldid), ('name', 'test')], None)
+                [('glimpse-js-world', worldid), ('name', 'test')], None)
         ]
 
         with caplog.at_level(logging.ERROR, 'greasemonkey'):
@@ -74,7 +74,7 @@ class TestWebengineScripts:
 
         assert len(caplog.records) == 1
         msg = caplog.messages[0]
-        assert "has invalid value for '@qute-js-world': " in msg
+        assert "has invalid value for '@glimpse-js-world': " in msg
         assert "should be between 0 and" in msg
         collection = webengine_scripts._widget.page().scripts().toList()
         assert not any(script.name().startswith('GM-')
@@ -86,7 +86,7 @@ class TestWebengineScripts:
         """Make sure scripts with valid worlds have it set."""
         scripts = [
             greasemonkey.GreasemonkeyScript(
-                [('name', 'foo'), ('qute-js-world', worldid)], None
+                [('name', 'foo'), ('glimpse-js-world', worldid)], None
             )
         ]
 

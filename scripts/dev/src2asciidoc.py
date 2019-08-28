@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Generate asciidoc source for qutebrowser based on docstrings."""
+"""Generate asciidoc source for glimpsebrowser based on docstrings."""
 
 import os
 import os.path
@@ -32,14 +32,14 @@ import argparse
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), os.pardir,
                                 os.pardir))
 
-# We import qutebrowser.app so all @cmdutils-register decorators are run.
-import qutebrowser.app
-from qutebrowser import qutebrowser, commands
-from qutebrowser.extensions import loader
-from qutebrowser.commands import argparser
-from qutebrowser.config import configdata, configtypes
-from qutebrowser.utils import docutils, usertypes
-from qutebrowser.misc import objects
+# We import glimpsebrowser.app so all @cmdutils-register decorators are run.
+import glimpsebrowser.app
+from glimpsebrowser import glimpsebrowser, commands
+from glimpsebrowser.extensions import loader
+from glimpsebrowser.commands import argparser
+from glimpsebrowser.config import configdata, configtypes
+from glimpsebrowser.utils import docutils, usertypes
+from glimpsebrowser.misc import objects
 from scripts import asciidoc2html, utils
 
 FILE_HEADER = """
@@ -383,7 +383,7 @@ def generate_commands(filename):
         f.write("\n")
         f.write("== Debugging commands\n")
         f.write("These commands are mainly intended for debugging. They are "
-                "hidden if qutebrowser was started without the "
+                "hidden if glimpsebrowser was started without the "
                 "`--debug`-flag.\n")
         f.write("\n")
         f.write(".Quick reference\n")
@@ -512,7 +512,7 @@ def _format_block(filename, what, data):
 
 def regenerate_manpage(filename):
     """Update manpage OPTIONS using an argparse parser."""
-    parser = qutebrowser.get_argparser()
+    parser = glimpsebrowser.get_argparser()
     groups = []
     # positionals, optionals and user-defined groups
     # pylint: disable=protected-access
@@ -552,7 +552,7 @@ def main():
     utils.change_cwd()
     loader.load_components(skip_hooks=True)
     print("Generating manpage...")
-    regenerate_manpage('doc/qutebrowser.1.asciidoc')
+    regenerate_manpage('doc/glimpsebrowser.1.asciidoc')
     print("Generating settings help...")
     generate_settings('doc/help/settings.asciidoc')
     print("Generating command help...")

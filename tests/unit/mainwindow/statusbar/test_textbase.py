@@ -1,28 +1,28 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 
 """Test TextBase widget."""
 from PyQt5.QtCore import Qt
 import pytest
 
-from qutebrowser.mainwindow.statusbar.textbase import TextBase
+from glimpsebrowser.mainwindow.statusbar.textbase import TextBase
 
 
 @pytest.mark.parametrize('elidemode, check', [
@@ -79,7 +79,7 @@ def test_text_elide_none(mocker, qtbot):
     label = TextBase()
     qtbot.add_widget(label)
     label.setText('')
-    mocker.patch('qutebrowser.mainwindow.statusbar.textbase.TextBase.'
+    mocker.patch('glimpsebrowser.mainwindow.statusbar.textbase.TextBase.'
                  'fontMetrics')
     label._update_elided_text(20)
 

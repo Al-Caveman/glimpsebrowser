@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """Generate the html documentation based on the asciidoc files."""
 
@@ -55,7 +55,7 @@ class AsciiDoc:
         self._cmd = self._get_asciidoc_cmd()
         self._homedir = tempfile.mkdtemp()
         self._themedir = os.path.join(
-            self._homedir, '.asciidoc', 'themes', 'qute')
+            self._homedir, '.asciidoc', 'themes', 'glimpse')
         self._tempdir = os.path.join(self._homedir, 'tmp')
         os.makedirs(self._tempdir)
         os.makedirs(self._themedir)
@@ -76,19 +76,19 @@ class AsciiDoc:
     def _build_docs(self):
         """Render .asciidoc files to .html sites."""
         files = [('doc/{}.asciidoc'.format(f),
-                  'qutebrowser/html/doc/{}.html'.format(f))
+                  'glimpsebrowser/html/doc/{}.html'.format(f))
                  for f in self.FILES]
         for src in glob.glob('doc/help/*.asciidoc'):
             name, _ext = os.path.splitext(os.path.basename(src))
-            dst = 'qutebrowser/html/doc/{}.html'.format(name)
+            dst = 'glimpsebrowser/html/doc/{}.html'.format(name)
             files.append((src, dst))
 
         # patch image links to use local copy
         replacements = [
-            ("https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-big.png",
-             "qute://help/img/cheatsheet-big.png"),
-            ("https://raw.githubusercontent.com/qutebrowser/qutebrowser/master/doc/img/cheatsheet-small.png",
-             "qute://help/img/cheatsheet-small.png")
+            ("https://raw.githubusercontent.com/glimpsebrowser/glimpsebrowser/master/doc/img/cheatsheet-big.png",
+             "glimpse://help/img/cheatsheet-big.png"),
+            ("https://raw.githubusercontent.com/glimpsebrowser/glimpsebrowser/master/doc/img/cheatsheet-small.png",
+             "glimpse://help/img/cheatsheet-small.png")
         ]
         asciidoc_args = ['-a', 'source-highlighter=pygments']
 
@@ -104,9 +104,9 @@ class AsciiDoc:
             self.call(modified_src, dst, *asciidoc_args)
 
     def _copy_images(self):
-        """Copy image files to qutebrowser/html/doc."""
+        """Copy image files to glimpsebrowser/html/doc."""
         print("Copying files...")
-        dst_path = os.path.join('qutebrowser', 'html', 'doc', 'img')
+        dst_path = os.path.join('glimpsebrowser', 'html', 'doc', 'img')
         try:
             os.mkdir(dst_path)
         except FileExistsError:
@@ -154,7 +154,7 @@ class AsciiDoc:
                 elif line == '// QUTE_WEB_HIDE_END':
                     assert hidden
                     hidden = False
-                elif line == "The Compiler <mail@qutebrowser.org>":
+                elif line == "The Compiler <mail@glimpsebrowser.org>":
                     continue
                 elif re.fullmatch(r':\w+:.*', line):
                     # asciidoc field
@@ -164,12 +164,12 @@ class AsciiDoc:
                     if re.fullmatch(r'=+', line):
                         line = line.replace('=', '-')
                         found_title = True
-                        title = last_line + " | qutebrowser\n"
+                        title = last_line + " | glimpsebrowser\n"
                         title += "=" * (len(title) - 1)
                     elif re.fullmatch(r'= .+', line):
                         line = '==' + line[1:]
                         found_title = True
-                        title = last_line + " | qutebrowser\n"
+                        title = last_line + " | glimpsebrowser\n"
                         title += "=" * (len(title) - 1)
 
                 if not hidden:
@@ -182,13 +182,13 @@ class AsciiDoc:
         with open(modified_src, 'w+', encoding='utf-8') as final_version:
             final_version.write(title + "\n\n" + header + current_lines)
 
-        asciidoc_args = ['--theme=qute', '-a toc', '-a toc-placement=manual',
+        asciidoc_args = ['--theme=glimpse', '-a toc', '-a toc-placement=manual',
                          '-a', 'source-highlighter=pygments']
         self.call(modified_src, dst, *asciidoc_args)
 
     def _build_website(self):
         """Prepare and build the website."""
-        theme_file = os.path.abspath(os.path.join('www', 'qute.css'))
+        theme_file = os.path.abspath(os.path.join('www', 'glimpse.css'))
         shutil.copy(theme_file, self._themedir)
 
         outdir = self._args.website[0]
@@ -280,7 +280,7 @@ def main(colors=False):
                         metavar=('PYTHON', 'ASCIIDOC'))
     args = parser.parse_args()
     try:
-        os.mkdir('qutebrowser/html/doc')
+        os.mkdir('glimpsebrowser/html/doc')
     except FileExistsError:
         pass
 

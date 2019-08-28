@@ -2,14 +2,14 @@
 set -euo pipefail
 #
 # Behavior:
-#   Userscript for qutebrowser which will take the raw JSON text of the current
+#   Userscript for glimpsebrowser which will take the raw JSON text of the current
 #   page, format it using `jq`, will add syntax highlighting using `pygments`,
 #   and open the syntax highlighted pretty printed html in a new tab. If the file
 #   is larger than 10MB then this script will only indent the json and will forego
 #   syntax highlighting using pygments.
 #
 #   In order to use this script, just start it using `spawn --userscript` from
-#   qutebrowser. I recommend using an alias, e.g.
+#   glimpsebrowser. I recommend using an alias, e.g.
 #
 #     :config-dict-add aliases json "spawn --userscript /path/to/json_format"
 #
@@ -37,5 +37,5 @@ if [ "$FILE_SIZE" -lt "$MAX_SIZE_PRETTIFY" ]; then
     mv -f "${TEMP_FILE}_" "$TEMP_FILE"
 fi
 
-# send the command to qutebrowser to open the new file containing the formatted json
+# send the command to glimpsebrowser to open the new file containing the formatted json
 echo "open -t file://$TEMP_FILE" >> "$QUTE_FIFO"

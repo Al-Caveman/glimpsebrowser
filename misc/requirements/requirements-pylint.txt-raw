@@ -3,5 +3,5 @@ pylint
 requests
 github3.py
 
-# fix qute-pylint location
-#@ replace: qute-pylint==.* ./scripts/dev/pylint_checkers
+# fix glimpse-pylint location
+#@ replace: glimpse-pylint==.* ./scripts/dev/pylint_checkers

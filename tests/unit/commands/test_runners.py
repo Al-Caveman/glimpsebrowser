@@ -1,28 +1,28 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.commands.runners."""
+"""Tests for glimpsebrowser.commands.runners."""
 
 import pytest
 
-from qutebrowser.misc import objects
-from qutebrowser.commands import runners, cmdexc
+from glimpsebrowser.misc import objects
+from glimpsebrowser.commands import runners, cmdexc
 
 
 class TestCommandParser:
@@ -30,7 +30,7 @@ class TestCommandParser:
     def test_parse_all(self, cmdline_test):
         """Test parsing of commands.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/615
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/615
 
         Args:
             cmdline_test: A pytest fixture which provides testcases.
@@ -60,8 +60,8 @@ class TestCommandParser:
     def test_parse_empty_with_alias(self, command):
         """An empty command should not crash.
 
-        See https://github.com/qutebrowser/qutebrowser/issues/1690
-        and https://github.com/qutebrowser/qutebrowser/issues/1773
+        See https://github.com/glimpsebrowser/glimpsebrowser/issues/1690
+        and https://github.com/glimpsebrowser/glimpsebrowser/issues/1773
         """
         parser = runners.CommandParser()
         with pytest.raises(cmdexc.NoSuchCommandError):

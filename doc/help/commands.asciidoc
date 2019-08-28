@@ -5,7 +5,7 @@
 
 = Commands
 
-In qutebrowser, all keybindings are mapped to commands.
+In glimpsebrowser, all keybindings are mapped to commands.
 
 Some commands are hidden, which means they don't show up in the command
 completion when pressing `:`, as they're typically not useful to run by hand.
@@ -60,7 +60,7 @@ possible to run or bind multiple commands by separating them with `;;`.
 |<<edit-command,edit-command>>|Open an editor to modify the current command.
 |<<edit-url,edit-url>>|Navigate to a url formed in an external editor.
 |<<enter-mode,enter-mode>>|Enter a key mode.
-|<<fake-key,fake-key>>|Send a fake keypress or key string to the website or qutebrowser.
+|<<fake-key,fake-key>>|Send a fake keypress or key string to the website or glimpsebrowser.
 |<<follow-selected,follow-selected>>|Follow the selected text.
 |<<forward,forward>>|Go forward in the history of the current tab.
 |<<fullscreen,fullscreen>>|Toggle fullscreen mode.
@@ -88,13 +88,13 @@ possible to run or bind multiple commands by separating them with `;;`.
 |<<quickmark-del,quickmark-del>>|Delete a quickmark.
 |<<quickmark-load,quickmark-load>>|Load a quickmark.
 |<<quickmark-save,quickmark-save>>|Save the current page as a quickmark.
-|<<quit,quit>>|Quit qutebrowser.
+|<<quit,quit>>|Quit glimpsebrowser.
 |<<record-macro,record-macro>>|Start or stop recording a macro.
 |<<reload,reload>>|Reload the current/[count]th tab.
 |<<repeat,repeat>>|Repeat a given command.
 |<<repeat-command,repeat-command>>|Repeat the last executed command.
-|<<report,report>>|Report a bug in qutebrowser.
-|<<restart,restart>>|Restart qutebrowser while keeping existing tabs open.
+|<<report,report>>|Report a bug in glimpsebrowser.
+|<<restart,restart>>|Restart glimpsebrowser while keeping existing tabs open.
 |<<run-macro,run-macro>>|Run a recorded macro.
 |<<run-with-count,run-with-count>>|Run a command with the given count.
 |<<save,save>>|Save configs and state.
@@ -139,7 +139,7 @@ possible to run or bind multiple commands by separating them with `;;`.
 === adblock-update
 Update the adblock block lists.
 
-This updates `~/.local/share/qutebrowser/blocked-hosts` with downloaded host lists and re-reads `~/.config/qutebrowser/blocked-hosts`.
+This updates `~/.local/share/glimpsebrowser/blocked-hosts` with downloaded host lists and re-reads `~/.config/glimpsebrowser/blocked-hosts`.
 
 [[back]]
 === back
@@ -184,7 +184,7 @@ Syntax: +:bookmark-add [*--toggle*] ['url'] ['title']+
 
 Save the current page as a bookmark, or a specific url.
 
-If no url and title are provided, then save the current page as a bookmark. If a url and title have been provided, then save the given url as a bookmark with the provided title. You can view all saved bookmarks on the link:qute://bookmarks[bookmarks page].
+If no url and title are provided, then save the current page as a bookmark. If a url and title have been provided, then save the given url as a bookmark with the provided title. You can view all saved bookmarks on the link:glimpse://bookmarks[bookmarks page].
 
 ==== positional arguments
 * +'url'+: url to save as a bookmark. If not given, use url of current page.
@@ -232,7 +232,7 @@ Syntax: +:buffer ['index']+
 
 Select tab by index or url/title best match.
 
-Focuses window if necessary when index is given. If both index and count are given, use count. With neither index nor count given, open the qute://tabs page.
+Focuses window if necessary when index is given. If both index and count are given, use count. With neither index nor count given, open the glimpse://tabs page.
 
 ==== positional arguments
 * +'index'+: The [win_id/]index of the tab to focus. Or a substring in which case the closest match will be focused.
@@ -296,7 +296,7 @@ Cycle an option between multiple values.
 
 ==== optional arguments
 * +*-u*+, +*--pattern*+: The URL pattern to use.
-* +*-t*+, +*--temp*+: Set value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Set value temporarily until glimpsebrowser is closed.
 * +*-p*+, +*--print*+: Print the value after setting.
 
 [[config-dict-add]]
@@ -311,7 +311,7 @@ Add a key/value pair to a dictionary option.
 * +'value'+: The value to place in the dictionary.
 
 ==== optional arguments
-* +*-t*+, +*--temp*+: Add value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Add value temporarily until glimpsebrowser is closed.
 * +*-r*+, +*--replace*+: Replace existing values. By default, existing values are not overwritten.
 
 
@@ -326,7 +326,7 @@ Remove a key from a dict.
 * +'key'+: The key to remove from the dict.
 
 ==== optional arguments
-* +*-t*+, +*--temp*+: Remove value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Remove value temporarily until glimpsebrowser is closed.
 
 [[config-edit]]
 === config-edit
@@ -348,7 +348,7 @@ Append a value to a config option that is a list.
 * +'value'+: The value to append to the end of the list.
 
 ==== optional arguments
-* +*-t*+, +*--temp*+: Add value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Add value temporarily until glimpsebrowser is closed.
 
 [[config-list-remove]]
 === config-list-remove
@@ -361,7 +361,7 @@ Remove a value from a list.
 * +'value'+: The value to remove from the list.
 
 ==== optional arguments
-* +*-t*+, +*--temp*+: Remove value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Remove value temporarily until glimpsebrowser is closed.
 
 [[config-source]]
 === config-source
@@ -388,7 +388,7 @@ This sets an option back to its default and removes it from autoconfig.yml.
 * +'option'+: The name of the option.
 
 ==== optional arguments
-* +*-t*+, +*--temp*+: Set value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Set value temporarily until glimpsebrowser is closed.
 
 [[config-write-py]]
 === config-write-py
@@ -521,7 +521,7 @@ Enter a key mode.
 === fake-key
 Syntax: +:fake-key [*--global*] 'keystring'+
 
-Send a fake keypress or key string to the website or qutebrowser.
+Send a fake keypress or key string to the website or glimpsebrowser.
 
 :fake-key xy - sends the keychain 'xy' :fake-key <Ctrl-x> - sends Ctrl-x :fake-key <Escape> - sends the escape key
 
@@ -529,7 +529,7 @@ Send a fake keypress or key string to the website or qutebrowser.
 * +'keystring'+: The keystring to send.
 
 ==== optional arguments
-* +*-g*+, +*--global*+: If given, the keys are sent to the qutebrowser UI.
+* +*-g*+, +*--global*+: If given, the keys are sent to the glimpsebrowser UI.
 
 [[follow-selected]]
 === follow-selected
@@ -571,7 +571,7 @@ Syntax: +:greasemonkey-reload [*--force*]+
 
 Re-read Greasemonkey scripts from disk.
 
-The scripts are read from a 'greasemonkey' subdirectory in qutebrowser's data directory (see `:version`).
+The scripts are read from a 'greasemonkey' subdirectory in glimpsebrowser's data directory (see `:version`).
 
 ==== optional arguments
 * +*-f*+, +*--force*+: For any scripts that have required dependencies, re-download them.
@@ -646,7 +646,7 @@ Start hinting.
  URL.
  - With `userscript`: The userscript to execute. Either store
  the userscript in
- `~/.local/share/qutebrowser/userscripts`
+ `~/.local/share/glimpsebrowser/userscripts`
  (or `$XDG_DATA_HOME`), or use an absolute
  path.
  - With `fill`: The command to fill the statusbar with.
@@ -694,7 +694,7 @@ Syntax: +:history-clear [*--force*]+
 
 Clear all browsing history.
 
-Note this only clears the global history (e.g. `~/.local/share/qutebrowser/history` on Linux) but not cookies, the back/forward history of a tab, cache or other persistent data.
+Note this only clears the global history (e.g. `~/.local/share/glimpsebrowser/history` on Linux) but not cookies, the back/forward history of a tab, cache or other persistent data.
 
 ==== optional arguments
 * +*-f*+, +*--force*+: Don't ask for confirmation.
@@ -732,8 +732,8 @@ Evaluate a JavaScript string.
 
 ==== optional arguments
 * +*-f*+, +*--file*+: Interpret js-code as a path to a file. If the path is relative, the file is searched in a js/ subdir
- in qutebrowser's data dir, e.g.
- `~/.local/share/qutebrowser/js`.
+ in glimpsebrowser's data dir, e.g.
+ `~/.local/share/glimpsebrowser/js`.
 
 * +*-q*+, +*--quiet*+: Don't show resulting JS object.
 * +*-w*+, +*--world*+: Ignored on QtWebKit. On QtWebEngine, a world ID or name to run the snippet in.
@@ -904,7 +904,7 @@ Syntax: +:quickmark-add 'url' 'name'+
 
 Add a new quickmark.
 
-You can view all saved quickmarks on the link:qute://bookmarks[bookmarks page].
+You can view all saved quickmarks on the link:glimpse://bookmarks[bookmarks page].
 
 ==== positional arguments
 * +'url'+: The url to add as quickmark.
@@ -949,7 +949,7 @@ Save the current page as a quickmark.
 === quit
 Syntax: +:quit [*--save*] ['session']+
 
-Quit qutebrowser.
+Quit glimpsebrowser.
 
 ==== positional arguments
 * +'session'+: The name of the session to save.
@@ -1006,11 +1006,11 @@ Which count to pass the command.
 
 [[report]]
 === report
-Report a bug in qutebrowser.
+Report a bug in glimpsebrowser.
 
 [[restart]]
 === restart
-Restart qutebrowser while keeping existing tabs open.
+Restart glimpsebrowser while keeping existing tabs open.
 
 [[run-macro]]
 === run-macro
@@ -1217,7 +1217,7 @@ If the option name ends with '?' or no value is provided, the value of the optio
 * +'value'+: The value to set.
 
 ==== optional arguments
-* +*-t*+, +*--temp*+: Set value temporarily until qutebrowser is closed.
+* +*-t*+, +*--temp*+: Set value temporarily until glimpsebrowser is closed.
 * +*-p*+, +*--print*+: Print the value after setting.
 * +*-u*+, +*--pattern*+: The URL pattern to use.
 
@@ -1263,13 +1263,13 @@ Spawn a command in a shell.
 ==== optional arguments
 * +*-u*+, +*--userscript*+: Run the command as a userscript. You can use an absolute path, or store the userscript in one of those
  locations:
- - `~/.local/share/qutebrowser/userscripts`
+ - `~/.local/share/glimpsebrowser/userscripts`
  (or `$XDG_DATA_HOME`)
- - `/usr/share/qutebrowser/userscripts`
+ - `/usr/share/glimpsebrowser/userscripts`
 
 * +*-v*+, +*--verbose*+: Show notifications when the command started/exited.
 * +*-o*+, +*--output*+: Whether the output should be shown in a new tab.
-* +*-d*+, +*--detach*+: Whether the command should be detached from qutebrowser.
+* +*-d*+, +*--detach*+: Whether the command should be detached from glimpsebrowser.
 
 ==== count
 Given to userscripts as $QUTE_COUNT.
@@ -1893,7 +1893,7 @@ Toggle caret selection mode.
 
 
 == Debugging commands
-These commands are mainly intended for debugging. They are hidden if qutebrowser was started without the `--debug`-flag.
+These commands are mainly intended for debugging. They are hidden if glimpsebrowser was started without the `--debug`-flag.
 
 .Quick reference
 [options="header",width="75%",cols="25%,75%"]

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
 # Behaviour
-#   Userscript for qutebrowser which casts the url passed in $1 to the default
+#   Userscript for glimpsebrowser which casts the url passed in $1 to the default
 #   ChromeCast device in the network using the program `castnow`
 #
 # Usage
-#   You can launch the script from qutebrowser as follows:
+#   You can launch the script from glimpsebrowser as follows:
 #       spawn --userscript ${PATH_TO_FILE} {url}
 #
 #   Then, you can control the chromecast by launching the simple command
@@ -28,8 +28,8 @@ if [ -z "$QUTE_FIFO" ] ; then
     cat 1>&2 <<EOF
 Error: $0 can not be run as a standalone script.
 
-It is a qutebrowser userscript. In order to use it, call it using
-'spawn --userscript' as described in qute://help/userscripts.html
+It is a glimpsebrowser userscript. In order to use it, call it using
+'spawn --userscript' as described in glimpse://help/userscripts.html
 EOF
     exit 1
 fi
@@ -132,7 +132,7 @@ printjs() {
 echo "jseval -q $(printjs)" >> "$QUTE_FIFO"
 
 tmpdir=$(mktemp -d)
-file_to_cast=${tmpdir}/qutecast
+file_to_cast=${tmpdir}/glimpsecast
 program_=$(command -v castnow)
 
 if [[ "${program_}" == "" ]]; then

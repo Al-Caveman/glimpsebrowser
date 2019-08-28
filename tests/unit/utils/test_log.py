@@ -1,23 +1,23 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.log."""
+"""Tests for glimpsebrowser.utils.log."""
 
 import logging
 import argparse
@@ -30,8 +30,8 @@ import pytest
 import _pytest.logging
 from PyQt5 import QtCore
 
-from qutebrowser.utils import log
-from qutebrowser.misc import utilcmds
+from glimpsebrowser.utils import log
+from glimpsebrowser.misc import utilcmds
 
 
 @pytest.fixture(autouse=True)
@@ -70,7 +70,7 @@ def restore_loggers():
     root_logger.setLevel(original_logging_level)
     for h in root_handlers:
         if not isinstance(h, _pytest.logging.LogCaptureHandler):
-            # https://github.com/qutebrowser/qutebrowser/issues/856
+            # https://github.com/glimpsebrowser/glimpsebrowser/issues/856
             root_logger.addHandler(h)
     logging._acquireLock()
     try:
@@ -106,7 +106,7 @@ def logger(log_counter):
     each other.
     """
     i = next(log_counter)
-    return logging.getLogger('qutebrowser-unittest-logger-{}'.format(i))
+    return logging.getLogger('glimpsebrowser-unittest-logger-{}'.format(i))
 
 
 class TestLogFilter:
@@ -200,7 +200,7 @@ class TestInitLog:
     @pytest.fixture(autouse=True)
     def setup(self, mocker):
         """Mock out qInstallMessageHandler."""
-        mocker.patch('qutebrowser.utils.log.QtCore.qInstallMessageHandler',
+        mocker.patch('glimpsebrowser.utils.log.QtCore.qInstallMessageHandler',
                      autospec=True)
 
     @pytest.fixture
@@ -226,7 +226,7 @@ class TestInitLog:
     def test_negation_parser(self, args, mocker,
                              logfilter, expected_names, negated):
         """Test parsing the --logfilter argument."""
-        filter_mock = mocker.patch('qutebrowser.utils.log.LogFilter',
+        filter_mock = mocker.patch('glimpsebrowser.utils.log.LogFilter',
                                    autospec=True)
         args.logfilter = logfilter
         log.init_log(args)

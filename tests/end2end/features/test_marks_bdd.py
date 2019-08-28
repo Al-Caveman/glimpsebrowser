@@ -2,20 +2,20 @@
 
 # Copyright 2016-2019 Ryan Roden-Corrent (rcorre) <ryan@rcorre.net>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import pytest
 
@@ -24,15 +24,15 @@ bdd.scenarios('marks.feature')
 
 
 @pytest.fixture(autouse=True)
-def turn_on_scroll_logging(quteproc):
+def turn_on_scroll_logging(glimpseproc):
     """Make sure all scrolling changes are logged."""
-    quteproc.send_cmd(":debug-pyeval -q objreg.get('args')."
+    glimpseproc.send_cmd(":debug-pyeval -q objreg.get('args')."
                       "debug_flags.append('no-scroll-filtering')")
 
 
 @bdd.then(bdd.parsers.parse("the page should be scrolled to {x} {y}"))
-def check_y(request, quteproc, x, y):
-    data = quteproc.get_session()
+def check_y(request, glimpseproc, x, y):
+    data = glimpseproc.get_session()
     pos = data['windows'][0]['tabs'][0]['history'][-1]['scroll-pos']
     assert int(x) == pos['x']
     assert int(y) == pos['y']

@@ -103,7 +103,7 @@ Feature: Miscellaneous utility commands exposed to the user.
     @no_xvfb
     Scenario: :debug-console smoke test
         When I run :debug-console
-        And I wait for "Focus object changed: <qutebrowser.misc.consolewidget.ConsoleLineEdit *>" in the log
+        And I wait for "Focus object changed: <glimpsebrowser.misc.consolewidget.ConsoleLineEdit *>" in the log
         And I run :debug-console
         And I wait for "Focus object changed: *" in the log
         Then "initializing debug console" should be logged
@@ -154,7 +154,7 @@ Feature: Miscellaneous utility commands exposed to the user.
         And I run :message-info oldstuff
         And I run :repeat 20 message-info otherstuff
         And I run :message-info newstuff
-        And I open qute://log
+        And I open glimpse://log
         Then the page should contain the plaintext "newstuff"
         And the page should not contain the plaintext "oldstuff"
 

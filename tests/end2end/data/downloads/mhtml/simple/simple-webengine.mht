@@ -5,9 +5,9 @@ Date: today
 MIME-Version: 1.0
 Content-Type: multipart/related;
 	type="text/html";
-	boundary="---=_qute-UUID"
+	boundary="---=_glimpse-UUID"
 
------=_qute-UUID
+-----=_glimpse-UUID
 Content-Type: text/html
 Content-ID: 42
 Content-Transfer-Encoding: quoted-printable
@@ -24,4 +24,4 @@ t/html; charset=3DUTF-8">
 
 </body><style>
 html > ::-webkit-scrollbar { width: 0px; height: 0px; }</style></html>
------=_qute-UUID
+-----=_glimpse-UUID

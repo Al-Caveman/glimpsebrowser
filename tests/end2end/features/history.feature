@@ -100,31 +100,31 @@ Feature: Page history
     Scenario: Listing history
         When I open data/numbers/3.txt
         And I open data/numbers/4.txt
-        And I open qute://history
+        And I open glimpse://history
         And I wait 2s
         Then the page should contain the plaintext "3.txt"
         Then the page should contain the plaintext "4.txt"
 
     # Hangs a lot on AppVeyor
     @posix @flaky
-    Scenario: Listing history with qute:history redirect
+    Scenario: Listing history with glimpse:history redirect
         When I open data/numbers/3.txt
         And I open data/numbers/4.txt
-        And I open qute:history without waiting
-        And I wait until qute://history is loaded
+        And I open glimpse:history without waiting
+        And I wait until glimpse://history is loaded
         And I wait 2s
         Then the page should contain the plaintext "3.txt"
         Then the page should contain the plaintext "4.txt"
 
     Scenario: XSS in :history
         When I open data/issue4011.html
-        And I open qute://history
+        And I open glimpse://history
         Then the javascript message "XSS" should not be logged
 
     @skip  # Too flaky
     Scenario: Escaping of URLs in :history
         When I open query?one=1&two=2
-        And I open qute://history
+        And I open glimpse://history
         And I wait 2s  # JS loads the history async
         And I hint with args "links normal" and follow a
         And I wait until query?one=1&two=2 is loaded

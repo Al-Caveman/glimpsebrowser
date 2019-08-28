@@ -1,6 +1,6 @@
-Contributing to qutebrowser
+Contributing to glimpsebrowser
 ===========================
-The Compiler <mail@qutebrowser.org>
+The Compiler <mail@glimpsebrowser.org>
 :icons:
 :data-uri:
 :toc:
@@ -11,7 +11,7 @@ open pull requests.
 
 I `&lt;3` footnote:[Of course, that says `<3` in HTML.] contributors!
 
-This document contains guidelines for contributing to qutebrowser, as well as
+This document contains guidelines for contributing to glimpsebrowser, as well as
 useful hints when doing so.
 
 If anything mentioned here would prevent you from contributing, please let me
@@ -22,13 +22,13 @@ fact, I will probably change it for you.
 If you have any problems, I'm more than happy to help! You can get help in
 several ways:
 
-* Send a mail to the mailing list at mailto:qutebrowser@lists.qutebrowser.org[]
+* Send a mail to the mailing list at mailto:glimpsebrowser@lists.glimpsebrowser.org[]
 (optionally
-https://lists.schokokeks.org/mailman/listinfo.cgi/qutebrowser[subscribe]
+https://lists.schokokeks.org/mailman/listinfo.cgi/glimpsebrowser[subscribe]
 first).
-* Join the IRC channel irc://irc.freenode.org/#qutebrowser[`#qutebrowser`] on
+* Join the IRC channel irc://irc.freenode.org/#glimpsebrowser[`#glimpsebrowser`] on
 http://freenode.net/[Freenode]
-(https://webchat.freenode.net/?channels=#qutebrowser[webchat]).
+(https://webchat.freenode.net/?channels=#glimpsebrowser[webchat]).
 
 Finding something to work on
 ----------------------------
@@ -38,18 +38,18 @@ this. It might be a good idea to ask on the mailing list or IRC channel to make
 sure nobody else started working on the same thing already.
 
 If you want to find something useful to do, check the
-https://github.com/qutebrowser/qutebrowser/issues[issue tracker]. Some
+https://github.com/glimpsebrowser/glimpsebrowser/issues[issue tracker]. Some
 pointers:
 
-* https://github.com/qutebrowser/qutebrowser/labels/easy[Issues which should
+* https://github.com/glimpsebrowser/glimpsebrowser/labels/easy[Issues which should
 be easy to solve]
-* https://github.com/qutebrowser/qutebrowser/labels/component%3A%20docs[Documentation issues which require little/no coding]
+* https://github.com/glimpsebrowser/glimpsebrowser/labels/component%3A%20docs[Documentation issues which require little/no coding]
 
 If you prefer C++ or Javascript to Python, see the relevant issues which involve
 work in those languages:
 
-* https://github.com/qutebrowser/qutebrowser/issues?q=is%3Aopen+is%3Aissue+label%3A%22language%3A+c%2B%2B%22[C++] (mostly work on Qt, the library behind qutebrowser)
-* https://github.com/qutebrowser/qutebrowser/issues?q=is%3Aopen+is%3Aissue+label%3A%22language%3A+javascript%22[JavaScript]
+* https://github.com/glimpsebrowser/glimpsebrowser/issues?q=is%3Aopen+is%3Aissue+label%3A%22language%3A+c%2B%2B%22[C++] (mostly work on Qt, the library behind glimpsebrowser)
+* https://github.com/glimpsebrowser/glimpsebrowser/issues?q=is%3Aopen+is%3Aissue+label%3A%22language%3A+javascript%22[JavaScript]
 
 There are also some things to do if you don't want to write code:
 
@@ -60,11 +60,11 @@ There are also some things to do if you don't want to write code:
 Using git
 ---------
 
-qutebrowser uses http://git-scm.com/[git] for its development. You can clone
+glimpsebrowser uses http://git-scm.com/[git] for its development. You can clone
 the repo like this:
 
 ----
-git clone https://github.com/qutebrowser/qutebrowser.git
+git clone https://github.com/glimpsebrowser/glimpsebrowser.git
 ----
 
 If you don't know git, a http://git-scm.com/[git cheatsheet] might come in
@@ -89,15 +89,15 @@ git format-patch origin/master <1>
 <1> Replace `master` by the branch your work was based on, e.g.,
 `origin/develop`.
 
-Running qutebrowser
+Running glimpsebrowser
 -------------------
 
-After link:install{outfilesuffix}#tox[installing qutebrowser via tox], you can run
-`.venv/bin/qutebrowser --debug --temp-basedir` to test your changes with debug
+After link:install{outfilesuffix}#tox[installing glimpsebrowser via tox], you can run
+`.venv/bin/glimpsebrowser --debug --temp-basedir` to test your changes with debug
 logging enabled and without affecting existing running instances.
 
-Alternatively, you can install qutebrowser's dependencies system-wide and run
-`python3 -m qutebrowser --debug --temp-basedir`.
+Alternatively, you can install glimpsebrowser's dependencies system-wide and run
+`python3 -m glimpsebrowser --debug --temp-basedir`.
 
 Useful utilities
 ----------------
@@ -105,7 +105,7 @@ Useful utilities
 Checkers
 ~~~~~~~~
 
-qutebrowser uses http://tox.readthedocs.org/en/latest/[tox] to run its
+glimpsebrowser uses http://tox.readthedocs.org/en/latest/[tox] to run its
 unittests and several linters/checkers.
 
 Currently, the following tox environments are available:
@@ -198,10 +198,10 @@ the output in four different ways:
 Debugging
 ~~~~~~~~~
 
-There are some useful functions for debugging in the `qutebrowser.utils.debug`
+There are some useful functions for debugging in the `glimpsebrowser.utils.debug`
 module.
 
-When starting qutebrowser with the `--debug` flag, you also get useful debug
+When starting glimpsebrowser with the `--debug` flag, you also get useful debug
 logs. You can add +--logfilter _[!]category[,category,...]_+ to restrict
 logging to the given categories.
 
@@ -291,7 +291,7 @@ Python and Qt objects
 For many tasks, there are solutions available in both Qt and the Python
 standard library.
 
-In qutebrowser, the policy is usually to use the Python libraries, as they
+In glimpsebrowser, the policy is usually to use the Python libraries, as they
 provide exceptions and other benefits.
 
 There are some exceptions to that:
@@ -309,9 +309,9 @@ instead of using exceptions.
 +
 If a function gets or returns a Qt object which has an `.isValid()`
 method such as `QUrl` or `QModelIndex`, there's a helper function
-`ensure_valid` in `qutebrowser.utils.qtutils` which should get called
+`ensure_valid` in `glimpsebrowser.utils.qtutils` which should get called
 on all such objects. It will raise
-`qutebrowser.utils.qtutils.QtValueError` if the value is not valid.
+`glimpsebrowser.utils.qtutils.QtValueError` if the value is not valid.
 +
 If a function returns something else on error, the return value should
 carefully be checked.
@@ -320,14 +320,14 @@ carefully be checked.
 underlying C++ types.
 +
 To avoid passing too large of a numeric parameter to a Qt function, all
-numbers should be range-checked using `qutebrowser.qtutils.check_overflow`,
+numbers should be range-checked using `glimpsebrowser.qtutils.check_overflow`,
 or by other means (e.g. by setting a maximum value for a config object).
 
 [[object-registry]]
 The object registry
 ~~~~~~~~~~~~~~~~~~~
 
-The object registry in `qutebrowser.utils.objreg` is a collection of
+The object registry in `glimpsebrowser.utils.objreg` is a collection of
 dictionaries which map object names to the actual long-living objects.
 
 There are currently these object registries, also called 'scopes':
@@ -358,13 +358,13 @@ be difficult.
 Logging
 ~~~~~~~
 
-Logging is used at various places throughout the qutebrowser code. If you add a
+Logging is used at various places throughout the glimpsebrowser code. If you add a
 new feature, you should also add some strategic debug logging.
 
-Unlike other Python projects, qutebrowser doesn't use a logger per file,
+Unlike other Python projects, glimpsebrowser doesn't use a logger per file,
 instead it uses custom-named loggers.
 
-The existing loggers are defined in `qutebrowser.utils.log`. If your feature
+The existing loggers are defined in `glimpsebrowser.utils.log`. If your feature
 doesn't fit in any of the logging categories, simply add a new line like this:
 
 [source,python]
@@ -376,7 +376,7 @@ Then in your source files, do this:
 
 [source,python]
 ----
-from qutebrowser.utils import log
+from glimpsebrowser.utils import log
 ...
 log.foo.debug("Hello World")
 ----
@@ -385,7 +385,7 @@ The following logging levels are available for every logger:
 
 [width="75%",cols="25%,75%"]
 |=======================================================================
-|critical  |Critical issue, qutebrowser can't continue to run.
+|critical  |Critical issue, glimpsebrowser can't continue to run.
 |error     |There was an issue and some kind of operation was abandoned.
 |warning   |There was an issue but the operation can continue running.
 |info      |General informational messages.
@@ -396,14 +396,14 @@ The following logging levels are available for every logger:
 Commands
 ~~~~~~~~
 
-qutebrowser has the concept of functions which are exposed to the user as
+glimpsebrowser has the concept of functions which are exposed to the user as
 commands.
 
 Creating a new command is straightforward:
 
 [source,python]
 ----
-from qutebrowser.api import cmdutils
+from glimpsebrowser.api import cmdutils
 
 ...
 
@@ -425,11 +425,11 @@ selects which object registry (global, per-tab, etc.) to use.  See the
 
 There are also other arguments to customize the way the command is
 registered; see the class documentation for `register` in
-`qutebrowser.api.cmdutils` for details.
+`glimpsebrowser.api.cmdutils` for details.
 
 The types of the function arguments are inferred based on their default values,
 e.g., an argument `foo=True` will be converted to a flag `-f`/`--foo` in
-qutebrowser's commandline.
+glimpsebrowser's commandline.
 
 The type can be overridden using Python's
 http://legacy.python.org/dev/peps/pep-3107/[function annotations]:
@@ -476,11 +476,11 @@ For `typing.Union` types, the given `choices` are only checked if other types
 The following arguments are supported for `@cmdutils.argument`:
 
 - `flag`: Customize the short flag (`-x`) the argument will get.
-- `value`: Tell qutebrowser to fill the argument with special values:
+- `value`: Tell glimpsebrowser to fill the argument with special values:
    - `value=cmdutils.Value.count`: The `count` given by the user to the command.
    - `value=cmdutils.Value.win_id`: The window ID of the current window.
    - `value=cmdutils.Value.cur_tab`: The tab object which is currently focused.
-- `completion`: A completion function (see `qutebrowser.completions.models.*`)
+- `completion`: A completion function (see `glimpsebrowser.completions.models.*`)
   to use when completing arguments for the given command.
 - `choices`: The allowed string choices for the argument.
 
@@ -491,7 +491,7 @@ underscores stripped and underscores replaced by dashes.
 Handling URLs
 ~~~~~~~~~~~~~
 
-qutebrowser handles two different types of URLs: URLs as a string, and URLs as
+glimpsebrowser handles two different types of URLs: URLs as a string, and URLs as
 the Qt `QUrl` type. As this can get confusing quickly, please follow the
 following guidelines:
 
@@ -518,7 +518,7 @@ always could be an invalid QUrl (if nothing is loaded yet).
 Running valgrind on QtWebKit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to run qutebrowser (and thus QtWebKit) with
+If you want to run glimpsebrowser (and thus QtWebKit) with
 http://valgrind.org/[valgrind], you'll need to pass `--smc-check=all` to it or
 recompile QtWebKit with the Javascript JIT disabled.
 
@@ -550,7 +550,7 @@ Setting up a Windows Development Environment
   This will make the Python 3.6 interpreter available as `python3`, which is used by various development scripts.
 * Install git from the https://git-scm.com/download/win[git-scm downloads page].
   Try not to enable `core.autocrlf`, since that will cause `flake8` to complain a lot. Use an editor that can deal with plain line feeds instead.
-* Clone your favourite qutebrowser repository.
+* Clone your favourite glimpsebrowser repository.
 * To install tox, open an elevated cmd, enter your working directory and run `pip install -rmisc/requirements/requirements-tox.txt`.
 
 Note that the `flake8` tox env might not run due to encoding errors despite having LANG/LC_* set correctly.
@@ -563,7 +563,7 @@ If you want to rebuild the website, run `./scripts/asciidoc2html.py --website <o
 Chrome URLs
 ~~~~~~~~~~~
 
-With the QtWebEngine backend, qutebrowser supports several chrome:// urls which
+With the QtWebEngine backend, glimpsebrowser supports several chrome:// urls which
 can be useful for debugging:
 
 - chrome://appcache-internals/
@@ -577,8 +577,8 @@ can be useful for debugging:
 - chrome://webrtc-internals/
 - chrome://crash/ (crashes the current renderer process!)
 - chrome://kill/ (kills the current renderer process!)
-- chrome://gpucrash/ (crashes qutebrowser!)
-- chrome://gpuhang/ (hangs qutebrowser!)
+- chrome://gpucrash/ (crashes glimpsebrowser!)
+- chrome://gpuhang/ (hangs glimpsebrowser!)
 - chrome://gpuclean/ (crashes the current renderer process!)
 - chrome://ppapiflashcrash/
 - chrome://ppapiflashhang/
@@ -589,11 +589,11 @@ can be useful for debugging:
 QtWebEngine internals
 ~~~~~~~~~~~~~~~~~~~~~
 
-This is mostly useful for qutebrowser maintainers to work around issues in Qt - if you don't understand it, don't worry, just ignore it.
+This is mostly useful for glimpsebrowser maintainers to work around issues in Qt - if you don't understand it, don't worry, just ignore it.
 
 The hierarchy of widgets when QtWebEngine is involved looks like this:
 
-- qutebrowser has a `WebEngineTab` object, which is its abstraction over QtWebKit/QtWebEngine.
+- glimpsebrowser has a `WebEngineTab` object, which is its abstraction over QtWebKit/QtWebEngine.
 - The `WebEngineTab` has a `_widget` attribute, which is the https://doc.qt.io/qt-5/qwebengineview.html[QWebEngineView]
 - That view has a https://doc.qt.io/qt-5/qwebenginepage.html[QWebEnginePage] for everything which doesn't require rendering.
 - The view also has a layout with exactly one element (which also is its `focusProxy()`)
@@ -603,7 +603,7 @@ The hierarchy of widgets when QtWebEngine is involved looks like this:
 Style conventions
 -----------------
 
-qutebrowser's coding conventions are based on
+glimpsebrowser's coding conventions are based on
 http://legacy.python.org/dev/peps/pep-0008/[PEP8] and the https://google.github.io/styleguide/pyguide.html[Google Python style guidelines] with some additions:
 
 * The _Raise:_ section is not added to the docstring.
@@ -662,7 +662,7 @@ Return:
   - Module docstring
   - Python standard library imports
   - PyQt imports
-  - qutebrowser imports
+  - glimpsebrowser imports
   - functions
   - classes
 * The layout of a class should be like this:
@@ -688,7 +688,7 @@ and make sure all bugs marked as resolved are actually fixed.
 * Grep for `WORKAROUND` in the code and test if fixed stuff works without the
 workaround.
 * Check relevant
-https://github.com/qutebrowser/qutebrowser/issues?q=is%3Aopen+is%3Aissue+label%3Aqt[qutebrowser
+https://github.com/glimpsebrowser/glimpsebrowser/issues?q=is%3Aopen+is%3Aissue+label%3Aqt[glimpsebrowser
 bugs] and check if they're fixed.
 
 New PyQt release
@@ -697,15 +697,15 @@ New PyQt release
 * See above.
 * Update `tox.ini`/`.travis.yml`/`.appveyor.yml` to test new versions.
 
-qutebrowser release
+glimpsebrowser release
 ~~~~~~~~~~~~~~~~~~~
 
 * Make sure there are no unstaged changes and the tests are green.
 * Make sure all issues with the related milestone are closed.
 * Consider updating the completions for `content.headers.user_agent` in `configdata.yml`.
 * Make sure Python is up-to-date on build machines.
-* Mark the milestone at https://github.com/qutebrowser/qutebrowser/milestones as closed.
+* Mark the milestone at https://github.com/glimpsebrowser/glimpsebrowser/milestones as closed.
 * Run `./.venv/bin/python3 scripts/dev/update_version.py {major,minor,patch}`.
 * Run the printed instructions accordingly.
-* Update `qutebrowser-git` PKGBUILD if dependencies/install changed.
-* Announce to qutebrowser and qutebrowser-announce mailinglist.
+* Update `glimpsebrowser-git` PKGBUILD if dependencies/install changed.
+* Announce to glimpsebrowser and glimpsebrowser-announce mailinglist.

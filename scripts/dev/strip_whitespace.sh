@@ -2,7 +2,7 @@
 
 # Strip trailing whitespace from files in this repo
 
-find qutebrowser scripts tests \
+find glimpsebrowser scripts tests \
     -type f \( \
         -name '*.py' -o \
         -name '*.feature' -o \

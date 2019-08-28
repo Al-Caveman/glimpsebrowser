@@ -1,23 +1,23 @@
-# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2014-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Tests for qutebrowser.utils.jinja."""
+"""Tests for glimpsebrowser.utils.jinja."""
 
 import os
 import os.path
@@ -27,8 +27,8 @@ import jinja2.exceptions
 import pytest
 from PyQt5.QtCore import QUrl
 
-from qutebrowser.utils import utils, jinja
-from qutebrowser.config import configexc
+from glimpsebrowser.utils import utils, jinja
+from glimpsebrowser.config import configexc
 
 
 @pytest.fixture(autouse=True)
@@ -120,7 +120,7 @@ def test_utf8():
     This was an attempt to get a failing test case for #127 but it seems
     the issue is elsewhere.
 
-    https://github.com/qutebrowser/qutebrowser/issues/127
+    https://github.com/glimpsebrowser/glimpsebrowser/issues/127
     """
     data = jinja.render('test.html', var='\u2603')
     assert data == "Hello \u2603"

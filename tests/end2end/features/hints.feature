@@ -230,7 +230,7 @@ Feature: Using hints
         And I run :hint custom
         Then the error "SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '@' is not a valid selector." should be shown
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1613
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1613
     Scenario: Hinting inputs with padding
         When I open data/hints/input.html
         And I hint with args "inputs" and follow s
@@ -254,7 +254,7 @@ Feature: Using hints
 
     Scenario: Clicking input with existing text
         When I open data/hints/input.html
-        And I run :click-element id qute-input-existing
+        And I run :click-element id glimpse-input-existing
         And I wait for "Entering mode KeyMode.insert *" in the log
         And I run :fake-key new
         Then the javascript message "contents: existingnew" should be logged
@@ -278,7 +278,7 @@ Feature: Using hints
         # The actual check is already done above
         Then no crash should happen
 
-    @flaky  # FIXME https://github.com/qutebrowser/qutebrowser/issues/1525
+    @flaky  # FIXME https://github.com/glimpsebrowser/glimpsebrowser/issues/1525
     Scenario: Using :follow-hint inside a scrolled iframe
         When I open data/hints/iframe_scroll.html
         And I hint with args "all normal" and follow a
@@ -359,7 +359,7 @@ Feature: Using hints
 
     ### Number hint mode
 
-    # https://github.com/qutebrowser/qutebrowser/issues/308
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/308
     Scenario: Renumbering hints when filtering
         When I open data/hints/number.html
         And I set hints.mode to number
@@ -369,7 +369,7 @@ Feature: Using hints
         And I run :follow-hint 1
         Then data/numbers/7.txt should be loaded
 
-    # https://github.com/qutebrowser/qutebrowser/issues/576
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/576
     @qtwebengine_flaky
     Scenario: Keeping hint filter in rapid mode
         When I open data/hints/number.html
@@ -381,7 +381,7 @@ Feature: Using hints
         Then data/numbers/2.txt should be loaded
         And data/numbers/3.txt should be loaded
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1186
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1186
     Scenario: Keeping hints filter when using backspace
         When I open data/hints/issue1186.html
         And I set hints.mode to number
@@ -392,7 +392,7 @@ Feature: Using hints
         And I run :follow-hint 11
         Then the error "No hint 11!" should be shown
 
-    # https://github.com/qutebrowser/qutebrowser/issues/674#issuecomment-165096744
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/674#issuecomment-165096744
     Scenario: Multi-word matching
         When I open data/hints/number.html
         And I set hints.mode to number
@@ -409,7 +409,7 @@ Feature: Using hints
         And I hint with args "all" and follow 00
         Then data/numbers/1.txt should be loaded
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1559
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1559
     Scenario: Filtering all hints in number mode
         When I open data/hints/number.html
         And I set hints.mode to number
@@ -418,7 +418,7 @@ Feature: Using hints
         And I wait for "Leaving mode KeyMode.hint (reason: all filtered)" in the log
         Then no crash should happen
 
-    # https://github.com/qutebrowser/qutebrowser/issues/1657
+    # https://github.com/glimpsebrowser/glimpsebrowser/issues/1657
     Scenario: Using rapid number hinting twice
         When I open data/hints/number.html
         And I set hints.mode to number
@@ -591,7 +591,7 @@ Feature: Using hints
         And I hint with args "inputs --first"
         And I wait for "Entering mode KeyMode.insert (reason: clicking input)" in the log
         # ensure we clicked the first element
-        And I run :jseval console.log(document.activeElement.id == "qute-input");
+        And I run :jseval console.log(document.activeElement.id == "glimpse-input");
         And I run :leave-mode
         Then the javascript message "true" should be logged
 

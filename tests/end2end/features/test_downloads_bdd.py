@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
 import sys
@@ -27,18 +27,18 @@ from PyQt5.QtNetwork import QSslSocket
 bdd.scenarios('downloads.feature')
 
 
-PROMPT_MSG = ("Asking question <qutebrowser.utils.usertypes.Question "
+PROMPT_MSG = ("Asking question <glimpsebrowser.utils.usertypes.Question "
               "default={!r} mode=<PromptMode.download: 5> option=None "
               "text=* title='Save file to:'>, *")
 
 
 @bdd.given("I set up a temporary download dir")
-def temporary_download_dir(quteproc, tmpdir):
+def temporary_download_dir(glimpseproc, tmpdir):
     download_dir = tmpdir / 'downloads'
     download_dir.ensure(dir=True)
-    quteproc.set_setting('downloads.location.prompt', 'false')
-    quteproc.set_setting('downloads.location.remember', 'false')
-    quteproc.set_setting('downloads.location.directory', str(download_dir))
+    glimpseproc.set_setting('downloads.location.prompt', 'false')
+    glimpseproc.set_setting('downloads.location.remember', 'false')
+    glimpseproc.set_setting('downloads.location.directory', str(download_dir))
     (download_dir / 'subdir').ensure(dir=True)
     try:
         os.mkfifo(str(download_dir / 'fifo'))
@@ -50,9 +50,9 @@ def temporary_download_dir(quteproc, tmpdir):
 
 
 @bdd.given("I clean old downloads")
-def clean_old_downloads(quteproc):
-    quteproc.send_cmd(':download-cancel --all')
-    quteproc.send_cmd(':download-clear')
+def clean_old_downloads(glimpseproc):
+    glimpseproc.send_cmd(':download-cancel --all')
+    glimpseproc.send_cmd(':download-clear')
 
 
 @bdd.when("SSL is supported")
@@ -70,27 +70,27 @@ def check_unwritable(tmpdir):
 
 
 @bdd.when("I wait until the download is finished")
-def wait_for_download_finished(quteproc):
-    quteproc.wait_for(category='downloads', message='Download * finished')
+def wait_for_download_finished(glimpseproc):
+    glimpseproc.wait_for(category='downloads', message='Download * finished')
 
 
 @bdd.when(bdd.parsers.parse("I wait until the download {name} is finished"))
-def wait_for_download_finished_name(quteproc, name):
-    quteproc.wait_for(category='downloads',
+def wait_for_download_finished_name(glimpseproc, name):
+    glimpseproc.wait_for(category='downloads',
                       message='Download {} finished'.format(name))
 
 
 @bdd.when(bdd.parsers.parse('I wait for the download prompt for "{path}"'))
-def wait_for_download_prompt(tmpdir, quteproc, path):
+def wait_for_download_prompt(tmpdir, glimpseproc, path):
     full_path = path.replace('(tmpdir)', str(tmpdir)).replace('/', os.sep)
-    quteproc.wait_for(message=PROMPT_MSG.format(full_path))
-    quteproc.wait_for(message="Entering mode KeyMode.prompt "
+    glimpseproc.wait_for(message=PROMPT_MSG.format(full_path))
+    glimpseproc.wait_for(message="Entering mode KeyMode.prompt "
                       "(reason: question asked)")
 
 
 @bdd.when("I download an SSL page")
-def download_ssl_page(quteproc, ssl_server):
-    quteproc.send_cmd(':download https://localhost:{}/'
+def download_ssl_page(glimpseproc, ssl_server):
+    glimpseproc.send_cmd(':download https://localhost:{}/'
                       .format(ssl_server.port))
 
 
@@ -122,37 +122,37 @@ def download_contents(filename, text, tmpdir):
 
 @bdd.then(bdd.parsers.parse('The download prompt should be shown with '
                             '"{path}"'))
-def download_prompt(tmpdir, quteproc, path):
+def download_prompt(tmpdir, glimpseproc, path):
     full_path = path.replace('(tmpdir)', str(tmpdir)).replace('/', os.sep)
-    quteproc.wait_for(message=PROMPT_MSG.format(full_path))
-    quteproc.send_cmd(':leave-mode')
+    glimpseproc.wait_for(message=PROMPT_MSG.format(full_path))
+    glimpseproc.send_cmd(':leave-mode')
 
 
 @bdd.when("I set a test python open_dispatcher")
-def default_open_dispatcher_python(quteproc, tmpdir):
+def default_open_dispatcher_python(glimpseproc, tmpdir):
     cmd = '{} -c "import sys; print(sys.argv[1])"'.format(
         shlex.quote(sys.executable))
-    quteproc.set_setting('downloads.open_dispatcher', cmd)
+    glimpseproc.set_setting('downloads.open_dispatcher', cmd)
 
 
 @bdd.when("I open the download")
-def download_open(quteproc):
+def download_open(glimpseproc):
     cmd = '{} -c "import sys; print(sys.argv[1])"'.format(
         shlex.quote(sys.executable))
-    quteproc.send_cmd(':download-open {}'.format(cmd))
+    glimpseproc.send_cmd(':download-open {}'.format(cmd))
 
 
 @bdd.when("I open the download with a placeholder")
-def download_open_placeholder(quteproc):
+def download_open_placeholder(glimpseproc):
     cmd = '{} -c "import sys; print(sys.argv[1])"'.format(
         shlex.quote(sys.executable))
-    quteproc.send_cmd(':download-open {} {{}}'.format(cmd))
+    glimpseproc.send_cmd(':download-open {} {{}}'.format(cmd))
 
 
 @bdd.when("I directly open the download")
-def download_open_with_prompt(quteproc):
+def download_open_with_prompt(glimpseproc):
     cmd = '{} -c pass'.format(shlex.quote(sys.executable))
-    quteproc.send_cmd(':prompt-open-download {}'.format(cmd))
+    glimpseproc.send_cmd(':prompt-open-download {}'.format(cmd))
 
 
 @bdd.when(bdd.parsers.parse("I delete the downloaded file {filename}"))

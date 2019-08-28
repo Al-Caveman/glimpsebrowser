@@ -1,21 +1,21 @@
 # vim: ft=python fileencoding=utf-8 sts=4 sw=4 et:
 
-# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@qutebrowser.org>
+# Copyright 2015-2019 Florian Bruhin (The Compiler) <mail@glimpsebrowser.org>
 #
-# This file is part of qutebrowser.
+# This file is part of glimpsebrowser.
 #
-# qutebrowser is free software: you can redistribute it and/or modify
+# glimpsebrowser is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
 #
-# qutebrowser is distributed in the hope that it will be useful,
+# glimpsebrowser is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with qutebrowser.  If not, see <http://www.gnu.org/licenses/>.
+# along with glimpsebrowser.  If not, see <http://www.gnu.org/licenses/>.
 
 """pytest conftest file for javascript tests."""
 
@@ -27,7 +27,7 @@ import jinja2
 
 from PyQt5.QtCore import QUrl
 
-import qutebrowser
+import glimpsebrowser
 
 
 class JSTester:
@@ -94,10 +94,10 @@ class JSTester:
         """Run a javascript file.
 
         Args:
-            path: The path to the JS file, relative to the qutebrowser package.
+            path: The path to the JS file, relative to the glimpsebrowser package.
             expected: The value expected return from the javascript execution
         """
-        base_path = os.path.dirname(os.path.abspath(qutebrowser.__file__))
+        base_path = os.path.dirname(os.path.abspath(glimpsebrowser.__file__))
         with open(os.path.join(base_path, path), 'r', encoding='utf-8') as f:
             source = f.read()
         self.run(source, expected)
